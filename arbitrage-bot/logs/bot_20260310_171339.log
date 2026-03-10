@@ -1,0 +1,3 @@
+2026-03-10 17:13:39,272 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-10 17:13:39,291 [INFO] Server listening on port 8888
+2026-03-10 17:14:43,635 [WARNING] Order execution failed on bybit (XRP/USDT)

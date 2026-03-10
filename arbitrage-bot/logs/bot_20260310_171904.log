@@ -1,0 +1,4 @@
+2026-03-10 17:19:04,369 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-10 17:19:04,386 [INFO] Real price feeds: ccxt (binance, bybit, okx, kucoin)
+2026-03-10 17:19:04,399 [INFO] Server listening on port 8888
+2026-03-10 17:44:07,566 [INFO] Shutting down...

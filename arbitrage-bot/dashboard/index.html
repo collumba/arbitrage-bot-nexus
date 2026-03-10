@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARBITRAGE NEXUS v3 — Real Market Hunter</title>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ARBITRAGE NEXUS — FUTURISTIC DARK THEME
+   ═══════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0d1117;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --border: #1e293b;
+  --border-glow: #00f0ff30;
+  --cyan: #00f0ff;
+  --cyan-dim: #00f0ff80;
+  --green: #00ff88;
+  --green-dim: #00ff8860;
+  --red: #ff3366;
+  --red-dim: #ff336660;
+  --purple: #a855f7;
+  --purple-dim: #a855f760;
+  --yellow: #fbbf24;
+  --orange: #f97316;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-dim: #475569;
+  --gradient-cyan: linear-gradient(135deg, #00f0ff, #0090ff);
+  --gradient-green: linear-gradient(135deg, #00ff88, #00cc66);
+  --gradient-red: linear-gradient(135deg, #ff3366, #ff1744);
+  --gradient-purple: linear-gradient(135deg, #a855f7, #7c3aed);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Animated background grid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, var(--bg-primary), var(--bg-primary)ee);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-cyan);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  animation: logoPulse 3s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 15px var(--cyan-dim); }
+  50% { box-shadow: 0 0 30px var(--cyan), 0 0 60px var(--cyan-dim); }
+}
+
+.logo h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  background: var(--gradient-cyan);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.status-badge.paper {
+  background: var(--purple-dim);
+  border: 1px solid var(--purple);
+  color: var(--purple);
+}
+.status-badge.live {
+  background: var(--green-dim);
+  border: 1px solid var(--green);
+  color: var(--green);
+  animation: livePulse 1.5s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 10px var(--green-dim); }
+  50% { box-shadow: 0 0 20px var(--green), 0 0 40px var(--green-dim); }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dotBlink 1s ease-in-out infinite;
+}
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.ws-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* ─── MAIN LAYOUT ────────────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  padding: 20px 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ─── KPI ROW ────────────────────────────────────────── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.kpi-card:hover {
+  border-color: var(--cyan-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient-cyan);
+  opacity: 0.6;
+}
+.kpi-card.green::before { background: var(--gradient-green); }
+.kpi-card.red::before { background: var(--gradient-red); }
+.kpi-card.purple::before { background: var(--gradient-purple); }
+
+.kpi-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.kpi-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+.kpi-value.positive { color: var(--green); }
+.kpi-value.negative { color: var(--red); }
+
+.kpi-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── GRID LAYOUT ────────────────────────────────────── */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ─── PANEL ──────────────────────────────────────────── */
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.panel-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.panel-body {
+  padding: 16px 18px;
+}
+
+/* ─── CHART (Canvas) ─────────────────────────────────── */
+.chart-container {
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ─── STRATEGY CARDS ─────────────────────────────────── */
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.strategy-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+.strategy-card:hover {
+  border-color: var(--cyan-dim);
+  box-shadow: 0 0 20px rgba(0,240,255,0.1);
+}
+.strategy-card.active {
+  border-color: var(--green);
+  box-shadow: 0 0 15px var(--green-dim);
+}
+.strategy-card.inactive {
+  opacity: 0.5;
+  border-color: var(--red-dim);
+}
+
+.strategy-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.strategy-icon.s1 { background: linear-gradient(135deg, #00f0ff30, #0090ff30); }
+.strategy-icon.s2 { background: linear-gradient(135deg, #a855f730, #7c3aed30); }
+.strategy-icon.s3 { background: linear-gradient(135deg, #fbbf2430, #f9731630); }
+.strategy-icon.s4 { background: linear-gradient(135deg, #00ff8830, #00cc6630); }
+.strategy-icon.s5 { background: linear-gradient(135deg, #ff336630, #ff174430); }
+
+.strategy-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.strategy-profit {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.strategy-stats {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+}
+
+.strategy-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.strategy-toggle.on {
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green-dim);
+}
+.strategy-toggle.off {
+  background: var(--text-dim);
+}
+.strategy-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.3s ease;
+}
+.strategy-toggle.on::after { left: 18px; }
+.strategy-toggle.off::after { left: 2px; }
+
+/* ─── TRADES TABLE ───────────────────────────────────── */
+.trades-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+.trades-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+.trades-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.trades-table tr:hover td {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+/* ─── LIVE FEED ──────────────────────────────────────── */
+.feed {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan-dim) transparent;
+}
+.feed::-webkit-scrollbar { width: 4px; }
+.feed::-webkit-scrollbar-track { background: transparent; }
+.feed::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 4px; }
+
+.feed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  animation: feedIn 0.3s ease;
+}
+@keyframes feedIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.feed-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  min-width: 60px;
+}
+
+.feed-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.feed-dot.opportunity { background: var(--yellow); }
+.feed-dot.trade { background: var(--green); }
+.feed-dot.error { background: var(--red); }
+
+.feed-text {
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.feed-text strong { color: var(--text-primary); }
+
+/* ─── OPPORTUNITY SCANNER ────────────────────────────── */
+.scanner-bar {
+  height: 4px;
+  background: var(--bg-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.scanner-bar-fill {
+  height: 100%;
+  background: var(--gradient-cyan);
+  border-radius: 2px;
+  animation: scanPulse 2s ease-in-out infinite;
+}
+@keyframes scanPulse {
+  0% { width: 0; opacity: 0.5; }
+  50% { width: 70%; opacity: 1; }
+  100% { width: 100%; opacity: 0.5; }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 1400px) {
+  .strategy-grid { grid-template-columns: repeat(3, 1fr); }
+  .kpi-row { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1000px) {
+  .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+  .strategy-grid { grid-template-columns: repeat(2, 1fr); }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ─── GLOW EFFECTS ───────────────────────────────────── */
+.glow-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* ─── DATA QUALITY BAR ─────────────────────────────── */
+.data-quality-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.dq-label {
+  color: var(--text-dim);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-width: 90px;
+}
+.dq-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.dq-bar-real {
+  height: 100%;
+  background: var(--gradient-green);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.dq-pct { color: var(--green); min-width: 50px; text-align: right; }
+.dq-info { color: var(--text-dim); }
+
+.badge-aggressive {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(249,115,22,0.2);
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  animation: aggPulse 2s ease-in-out infinite;
+}
+@keyframes aggPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(249,115,22,0.3); }
+  50% { box-shadow: 0 0 16px rgba(249,115,22,0.6); }
+}
+
+.badge-version {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background: rgba(0,240,255,0.1);
+  border: 1px solid var(--cyan-dim);
+  color: var(--cyan);
+}
+
+.source-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.source-tag.real { background: rgba(0,255,136,0.2); color: var(--green); }
+.source-tag.simulated { background: rgba(148,163,184,0.2); color: var(--text-dim); }
+
+.profit-flash {
+  animation: profitFlash 0.5s ease;
+}
+@keyframes profitFlash {
+  0% { background: rgba(0,255,136,0.2); }
+  100% { background: transparent; }
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <h1>ARBITRAGE NEXUS</h1>
+    <span class="badge-version" id="versionBadge">v3</span>
+  </div>
+  <div class="header-right">
+    <div id="wsStatus" class="ws-status">◉ CONNECTING...</div>
+    <div id="aggressiveBadge" class="badge-aggressive" style="display:none">⚡ AGGRESSIVE</div>
+    <div id="modeBadge" class="status-badge paper">
+      <span class="status-dot"></span>
+      <span id="modeText">PAPER</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- KPI ROW 1 -->
+  <div class="kpi-row">
+    <div class="kpi-card green">
+      <div class="kpi-label">Balance</div>
+      <div class="kpi-value" id="kpiBalance">$10,000.00</div>
+      <div class="kpi-sub" id="kpiBalanceSub">Initial: $10,000</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total P&L</div>
+      <div class="kpi-value" id="kpiPnl">$0.00</div>
+      <div class="kpi-sub" id="kpiRoi">ROI: 0.00%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Win Rate</div>
+      <div class="kpi-value" id="kpiWinRate">0%</div>
+      <div class="kpi-sub" id="kpiWL">W: 0 / L: 0</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Total Trades</div>
+      <div class="kpi-value" id="kpiTrades">0</div>
+      <div class="kpi-sub" id="kpiOpen">Open: 0</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Max Drawdown</div>
+      <div class="kpi-value" id="kpiDrawdown">0.00%</div>
+      <div class="kpi-sub">Risk limit: 5%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Runtime</div>
+      <div class="kpi-value" id="kpiRuntime">00:00:00</div>
+      <div class="kpi-sub" id="kpiExchanges">Exchanges: 0</div>
+    </div>
+  </div>
+
+  <!-- KPI ROW 2 — Execution Quality -->
+  <div class="kpi-row" style="margin-bottom:20px">
+    <div class="kpi-card red">
+      <div class="kpi-label">Total Fees Paid</div>
+      <div class="kpi-value" id="kpiFees">$0.00</div>
+      <div class="kpi-sub">Maker/Taker + Gas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Slippage Cost</div>
+      <div class="kpi-value" id="kpiSlippage">$0.00</div>
+      <div class="kpi-sub">Size-dependent model</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Latency</div>
+      <div class="kpi-value" id="kpiLatency">0ms</div>
+      <div class="kpi-sub">Per-exchange model</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Profit Factor</div>
+      <div class="kpi-value" id="kpiPF">0.00</div>
+      <div class="kpi-sub">Gross Win / Gross Loss</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Sharpe Ratio</div>
+      <div class="kpi-value" id="kpiSharpe">0.00</div>
+      <div class="kpi-sub">Annualized</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Price Source</div>
+      <div class="kpi-value" style="font-size:13px" id="kpiSource">simulator</div>
+      <div class="kpi-sub" id="kpiCcxt">ccxt: not installed</div>
+    </div>
+  </div>
+
+  <!-- DATA QUALITY BAR -->
+  <div class="data-quality-bar" id="dataQualityBar">
+    <span class="dq-label">Data Source</span>
+    <div class="dq-bar"><div class="dq-bar-real" id="dqBarReal" style="width:0%"></div></div>
+    <span class="dq-pct" id="dqRealPct">0% real</span>
+    <span class="dq-info" id="dqInfo">| 0 exchanges connected</span>
+  </div>
+
+  <!-- STRATEGY CARDS -->
+  <div class="strategy-grid">
+    <div class="strategy-card active" id="card-cross_exchange">
+      <button class="strategy-toggle on" onclick="toggleEngine('cross_exchange')"></button>
+      <div class="strategy-icon s1">🔄</div>
+      <div class="strategy-name">Cross-Exchange</div>
+      <div class="strategy-profit positive" id="profit-cross_exchange">$0.00</div>
+      <div class="strategy-stats">
+        <span>Trades: <strong id="trades-cross_exchange">0</strong></span>
+        <span>Opps: <strong id="opps-cross_exchange">0</strong></span>
+      </div>
+    </div>
+    <div class="strategy-card active" id="card-triangular">
+      <button class="strategy-toggle on" onclick="toggleEngine('triangular')"></button>
+      <div class="strategy-icon s2">🔺</div>
+      <div class="strategy-name">Triangular</div>
+      <div class="strategy-profit positive" id="profit-triangular">$0.00</div>
+      <div class="strategy-stats">
+        <span>Trades: <strong id="trades-triangular">0</strong></span>
+        <span>Opps: <strong id="opps-triangular">0</strong></span>
+      </div>
+    </div>
+    <div class="strategy-card active" id="card-statistical">
+      <button class="strategy-toggle on" onclick="toggleEngine('statistical')"></button>
+      <div class="strategy-icon s3">📊</div>
+      <div class="strategy-name">Statistical</div>
+      <div class="strategy-profit positive" id="profit-statistical">$0.00</div>
+      <div class="strategy-stats">
+        <span>Trades: <strong id="trades-statistical">0</strong></span>
+        <span>Opps: <strong id="opps-statistical">0</strong></span>
+      </div>
+    </div>
+    <div class="strategy-card active" id="card-funding_rate">
+      <button class="strategy-toggle on" onclick="toggleEngine('funding_rate')"></button>
+      <div class="strategy-icon s4">💰</div>
+      <div class="strategy-name">Funding Rate</div>
+      <div class="strategy-profit positive" id="profit-funding_rate">$0.00</div>
+      <div class="strategy-stats">
+        <span>Trades: <strong id="trades-funding_rate">0</strong></span>
+        <span>Opps: <strong id="opps-funding_rate">0</strong></span>
+      </div>
+    </div>
+    <div class="strategy-card active" id="card-dex_cex">
+      <button class="strategy-toggle on" onclick="toggleEngine('dex_cex')"></button>
+      <div class="strategy-icon s5">🌐</div>
+      <div class="strategy-name">DEX vs CEX</div>
+      <div class="strategy-profit positive" id="profit-dex_cex">$0.00</div>
+      <div class="strategy-stats">
+        <span>Trades: <strong id="trades-dex_cex">0</strong></span>
+        <span>Opps: <strong id="opps-dex_cex">0</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS + FEED -->
+  <div class="grid-2col">
+    <!-- Equity Chart -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📈 Equity Curve</span>
+        <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)" id="chartTimeRange">—</span>
+      </div>
+      <div class="panel-body">
+        <div class="chart-container">
+          <canvas id="equityChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Feed -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">⚡ Live Feed</span>
+        <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)" id="feedCount">0 events</span>
+      </div>
+      <div class="panel-body">
+        <div class="scanner-bar"><div class="scanner-bar-fill"></div></div>
+        <div class="feed" id="liveFeed">
+          <div class="feed-item">
+            <span class="feed-time">--:--</span>
+            <span class="feed-dot opportunity"></span>
+            <span class="feed-text">Waiting for connection...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGY BREAKDOWN + TRADES -->
+  <div class="grid-2col">
+    <!-- Strategy Breakdown -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">🏆 Strategy Breakdown</span>
+      </div>
+      <div class="panel-body">
+        <div class="chart-container" style="height:200px">
+          <canvas id="breakdownChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Trades -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📋 Recent Trades</span>
+        <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)" id="tradeCount">0 total</span>
+      </div>
+      <div class="panel-body" style="max-height:300px;overflow-y:auto">
+        <table class="trades-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Strategy</th>
+              <th>Pair</th>
+              <th>Side</th>
+              <th>Price</th>
+              <th>Slip%</th>
+              <th>Latency</th>
+              <th>Fees</th>
+              <th>P&L</th>
+              <th>Source</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tradesBody">
+            <tr><td colspan="7" style="text-align:center;color:var(--text-dim)">No trades yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════
+// ARBITRAGE NEXUS — DASHBOARD CONTROLLER
+// ═══════════════════════════════════════════════════════════
+
+const WS_URL = `ws://${location.host}/ws`;
+const API_URL = `http://${location.host}/api`;
+let ws = null;
+let reconnectTimer = null;
+let feedEvents = [];
+let equityData = [];
+
+// ─── CHART SETUP ──────────────────────────────────────
+const equityCtx = document.getElementById('equityChart').getContext('2d');
+const equityChart = new Chart(equityCtx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Equity',
+      data: [],
+      borderColor: '#00f0ff',
+      backgroundColor: 'rgba(0,240,255,0.08)',
+      borderWidth: 2,
+      fill: true,
+      tension: 0.4,
+      pointRadius: 0,
+      pointHoverRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#111827',
+        borderColor: '#00f0ff',
+        borderWidth: 1,
+        titleFont: { family: 'Orbitron', size: 10 },
+        bodyFont: { family: 'JetBrains Mono', size: 11 },
+        callbacks: {
+          label: ctx => `$${ctx.parsed.y.toFixed(2)}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+        grid: { color: 'rgba(30,41,59,0.5)' },
+        ticks: { color: '#475569', font: { family: 'JetBrains Mono', size: 9 }, maxTicksLimit: 8 }
+      },
+      y: {
+        display: true,
+        grid: { color: 'rgba(30,41,59,0.5)' },
+        ticks: {
+          color: '#475569',
+          font: { family: 'JetBrains Mono', size: 10 },
+          callback: v => '$' + v.toLocaleString()
+        }
+      }
+    },
+    interaction: { intersect: false, mode: 'index' },
+    animation: { duration: 300 }
+  }
+});
+
+const breakdownCtx = document.getElementById('breakdownChart').getContext('2d');
+const breakdownChart = new Chart(breakdownCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Cross-Exchange', 'Triangular', 'Statistical', 'Funding Rate', 'DEX/CEX'],
+    datasets: [{
+      label: 'P&L ($)',
+      data: [0, 0, 0, 0, 0],
+      backgroundColor: [
+        'rgba(0,240,255,0.6)',
+        'rgba(168,85,247,0.6)',
+        'rgba(251,191,36,0.6)',
+        'rgba(0,255,136,0.6)',
+        'rgba(255,51,102,0.6)',
+      ],
+      borderColor: ['#00f0ff', '#a855f7', '#fbbf24', '#00ff88', '#ff3366'],
+      borderWidth: 1,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#111827',
+        borderColor: '#1e293b',
+        borderWidth: 1,
+        bodyFont: { family: 'JetBrains Mono', size: 11 },
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { color: '#475569', font: { family: 'Rajdhani', size: 10 } }
+      },
+      y: {
+        grid: { color: 'rgba(30,41,59,0.5)' },
+        ticks: {
+          color: '#475569',
+          font: { family: 'JetBrains Mono', size: 10 },
+          callback: v => '$' + v.toFixed(2)
+        }
+      }
+    }
+  }
+});
+
+// ─── WEBSOCKET ────────────────────────────────────────
+function connectWS() {
+  ws = new WebSocket(WS_URL);
+
+  ws.onopen = () => {
+    document.getElementById('wsStatus').innerHTML = '◉ CONNECTED';
+    document.getElementById('wsStatus').style.color = '#00ff88';
+    addFeedItem('trade', 'WebSocket connected to server');
+  };
+
+  ws.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    if (msg.type === 'init' || msg.type === 'update') {
+      updateDashboard(msg.data);
+    }
+  };
+
+  ws.onclose = () => {
+    document.getElementById('wsStatus').innerHTML = '◉ DISCONNECTED';
+    document.getElementById('wsStatus').style.color = '#ff3366';
+    reconnectTimer = setTimeout(connectWS, 3000);
+  };
+
+  ws.onerror = () => {
+    document.getElementById('wsStatus').innerHTML = '◉ ERROR';
+    document.getElementById('wsStatus').style.color = '#ff3366';
+  };
+}
+
+// ─── DASHBOARD UPDATE ─────────────────────────────────
+function updateDashboard(data) {
+  if (!data) return;
+
+  const p = data.portfolio;
+  if (p) {
+    // KPIs
+    document.getElementById('kpiBalance').textContent = `$${p.current_balance.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+    document.getElementById('kpiBalanceSub').textContent = `Initial: $${p.initial_balance.toLocaleString()}`;
+
+    const pnlEl = document.getElementById('kpiPnl');
+    pnlEl.textContent = `${p.total_pnl >= 0 ? '+' : ''}$${p.total_pnl.toFixed(2)}`;
+    pnlEl.className = `kpi-value ${p.total_pnl >= 0 ? 'positive' : 'negative'}`;
+    document.getElementById('kpiRoi').textContent = `ROI: ${p.roi_pct >= 0 ? '+' : ''}${p.roi_pct.toFixed(4)}%`;
+
+    document.getElementById('kpiWinRate').textContent = `${p.win_rate}%`;
+    document.getElementById('kpiWL').textContent = `W: ${p.win_count} / L: ${p.loss_count}`;
+
+    document.getElementById('kpiTrades').textContent = p.total_trades;
+    document.getElementById('kpiOpen').textContent = `Open: ${p.open_positions}`;
+
+    const ddEl = document.getElementById('kpiDrawdown');
+    ddEl.textContent = `${p.max_drawdown_pct.toFixed(2)}%`;
+    ddEl.className = `kpi-value ${p.max_drawdown_pct > 3 ? 'negative' : ''}`;
+
+    // Runtime
+    const secs = Math.floor(p.runtime_sec);
+    const h = Math.floor(secs / 3600).toString().padStart(2, '0');
+    const m = Math.floor((secs % 3600) / 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
+    document.getElementById('kpiRuntime').textContent = `${h}:${m}:${s}`;
+
+    // Mode badge
+    const badge = document.getElementById('modeBadge');
+    const modeText = document.getElementById('modeText');
+    modeText.textContent = p.mode.toUpperCase();
+    badge.className = `status-badge ${p.mode}`;
+
+    // Equity chart
+    if (p.equity_curve && p.equity_curve.length > 0) {
+      const labels = p.equity_curve.map(e => {
+        const d = new Date(e.timestamp * 1000);
+        return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+      });
+      const values = p.equity_curve.map(e => e.equity);
+
+      equityChart.data.labels = labels;
+      equityChart.data.datasets[0].data = values;
+
+      // Color based on performance
+      const first = values[0] || 0;
+      const last = values[values.length - 1] || 0;
+      const color = last >= first ? '#00ff88' : '#ff3366';
+      equityChart.data.datasets[0].borderColor = color;
+      equityChart.data.datasets[0].backgroundColor = color.replace(')', ',0.08)').replace('rgb', 'rgba').replace('#', 'rgba(');
+
+      equityChart.update('none');
+    }
+
+    // v2 execution KPIs
+    document.getElementById('kpiFees').textContent = `$${(p.total_fees_usd || 0).toFixed(2)}`;
+    document.getElementById('kpiSlippage').textContent = `$${(p.total_slippage_cost_usd || 0).toFixed(2)}`;
+    document.getElementById('kpiLatency').textContent = `${(p.avg_latency_ms || 0).toFixed(0)}ms`;
+    document.getElementById('kpiPF').textContent = (p.profit_factor || 0).toFixed(2);
+    document.getElementById('kpiSharpe').textContent = (p.sharpe_ratio || 0).toFixed(2);
+
+    const pfEl = document.getElementById('kpiPF');
+    pfEl.className = `kpi-value ${(p.profit_factor || 0) >= 1.5 ? 'positive' : (p.profit_factor || 0) < 1 ? 'negative' : ''}`;
+    const shEl = document.getElementById('kpiSharpe');
+    shEl.className = `kpi-value ${(p.sharpe_ratio || 0) >= 1 ? 'positive' : (p.sharpe_ratio || 0) < 0 ? 'negative' : ''}`;
+
+    // Recent trades table
+    if (p.recent_trades) {
+      const tbody = document.getElementById('tradesBody');
+      if (p.recent_trades.length > 0) {
+        tbody.innerHTML = p.recent_trades.slice(-15).reverse().map(t => `
+          <tr>
+            <td style="color:var(--cyan)">${t.id}</td>
+            <td>${t.strategy}</td>
+            <td><strong>${t.pair}</strong></td>
+            <td style="color:${t.side === 'buy' ? 'var(--green)' : 'var(--red)'}">${t.side.toUpperCase()}</td>
+            <td>$${t.price.toFixed(2)}</td>
+            <td style="color:var(--orange)">${(t.slippage_pct || 0).toFixed(3)}%</td>
+            <td style="color:var(--text-dim)">${(t.latency_ms || 0).toFixed(0)}ms</td>
+            <td style="color:var(--red)">$${(t.fee + (t.exit_fee||0)).toFixed(2)}</td>
+            <td style="color:${t.pnl >= 0 ? 'var(--green)' : 'var(--red)'}">
+              ${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(4)}
+            </td>
+            <td style="color:${t.status === 'open' ? 'var(--yellow)' : 'var(--text-dim)'}">
+              ${t.status.toUpperCase()}
+            </td>
+          </tr>
+        `).join('');
+      }
+      document.getElementById('tradeCount').textContent = `${p.total_trades} total`;
+    }
+  }
+
+  // Strategy engines
+  const engines = data.engines;
+  if (engines) {
+    const strategyKeys = ['cross_exchange', 'triangular', 'statistical', 'funding_rate', 'dex_cex'];
+    strategyKeys.forEach(key => {
+      const eng = engines[key];
+      if (!eng) return;
+
+      const card = document.getElementById(`card-${key}`);
+      const toggle = card?.querySelector('.strategy-toggle');
+
+      if (card) {
+        card.className = `strategy-card ${eng.running ? 'active' : 'inactive'}`;
+      }
+      if (toggle) {
+        toggle.className = `strategy-toggle ${eng.running ? 'on' : 'off'}`;
+      }
+
+      const profitEl = document.getElementById(`profit-${key}`);
+      if (profitEl) {
+        profitEl.textContent = `${eng.total_profit >= 0 ? '+' : ''}$${eng.total_profit.toFixed(2)}`;
+        profitEl.className = `strategy-profit ${eng.total_profit >= 0 ? 'positive' : 'negative'}`;
+      }
+
+      const tradesEl = document.getElementById(`trades-${key}`);
+      if (tradesEl) tradesEl.textContent = eng.trades_executed;
+
+      const oppsEl = document.getElementById(`opps-${key}`);
+      if (oppsEl) oppsEl.textContent = eng.opportunities_found;
+
+      // Feed new events
+      if (eng.recent_events) {
+        eng.recent_events.forEach(evt => {
+          const evtKey = `${key}-${evt.timestamp}`;
+          if (!feedEvents.includes(evtKey)) {
+            feedEvents.push(evtKey);
+            if (feedEvents.length > 200) feedEvents = feedEvents.slice(-100);
+
+            if (evt.type === 'opportunity') {
+              const d = evt.data;
+              const spread = d.spread_pct || d.net_profit_pct || d.funding_rate_pct || 0;
+              addFeedItem('opportunity', `<strong>[${key}]</strong> ${d.pair || d.path?.join(' → ') || '—'} spread: ${spread.toFixed(4)}%`);
+            } else if (evt.type === 'trade') {
+              const d = evt.data;
+              addFeedItem('trade', `<strong>[${key}]</strong> Trade ${d.trade_id || ''} P&L: $${(d.pnl || 0).toFixed(4)}`);
+            } else if (evt.type === 'error') {
+              addFeedItem('error', `<strong>[${key}]</strong> ${evt.data?.error || 'Unknown error'}`);
+            }
+          }
+        });
+      }
+    });
+  }
+
+  // Strategy breakdown chart
+  const breakdown = data.strategy_breakdown;
+  if (breakdown) {
+    const keys = ['cross_exchange', 'triangular', 'statistical', 'funding_rate', 'dex_cex'];
+    const pnls = keys.map(k => breakdown[k]?.total_pnl || 0);
+    breakdownChart.data.datasets[0].data = pnls;
+    breakdownChart.update('none');
+  }
+
+  // Exchanges count + price source
+  if (data.exchanges) {
+    document.getElementById('kpiExchanges').textContent = `Exchanges: ${data.exchanges.length || 0}`;
+  }
+  if (data.price_source) {
+    document.getElementById('kpiSource').textContent = data.price_source;
+  }
+  if (data.ccxt_available !== undefined) {
+    document.getElementById('kpiCcxt').textContent = data.ccxt_available
+      ? 'ccxt: connected' : 'ccxt: not installed';
+    document.getElementById('kpiCcxt').style.color = data.ccxt_available
+      ? 'var(--green)' : 'var(--text-dim)';
+  }
+}
+
+// ─── FEED ─────────────────────────────────────────────
+function addFeedItem(type, text) {
+  const feed = document.getElementById('liveFeed');
+  const now = new Date();
+  const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+
+  const item = document.createElement('div');
+  item.className = 'feed-item';
+  item.innerHTML = `
+    <span class="feed-time">${time}</span>
+    <span class="feed-dot ${type}"></span>
+    <span class="feed-text">${text}</span>
+  `;
+
+  feed.insertBefore(item, feed.firstChild);
+
+  // Keep max 100 items
+  while (feed.children.length > 100) {
+    feed.removeChild(feed.lastChild);
+  }
+
+  document.getElementById('feedCount').textContent = `${feed.children.length} events`;
+}
+
+// ─── ENGINE TOGGLE ────────────────────────────────────
+function toggleEngine(name) {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ action: 'toggle_engine', engine: name }));
+    addFeedItem('trade', `Toggled engine: <strong>${name}</strong>`);
+  }
+}
+
+// ─── FALLBACK: POLL API ───────────────────────────────
+async function pollAPI() {
+  try {
+    const resp = await fetch(`${API_URL}/status`);
+    const data = await resp.json();
+    updateDashboard({
+      portfolio: data.portfolio,
+      engines: data.engines,
+      strategy_breakdown: data.strategy_breakdown,
+      exchanges: data.exchanges,
+    });
+  } catch (e) {
+    // Server not available
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────────
+connectWS();
+// Fallback polling every 3s in case WS is not available
+setInterval(pollAPI, 3000);
+</script>
+
+</body>
+</html>
