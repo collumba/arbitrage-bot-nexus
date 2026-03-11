@@ -9,3 +9,4 @@
 2026-03-11 19:58:27,720 [INFO] [v4] PAPER MODE — Simulated execution
 2026-03-11 19:58:27,738 [INFO] Server listening on port 8888
 2026-03-11 20:12:28,823 [INFO] [LOOP 30] trades=108 balance=$66.59 open=0
+2026-03-11 20:26:21,615 [INFO] [LOOP 60] trades=222 balance=$384.35 open=2
