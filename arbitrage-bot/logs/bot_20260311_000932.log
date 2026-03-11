@@ -1,0 +1,7 @@
+2026-03-11 00:09:32,217 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-11 00:09:33,019 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 00:09:33,071 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 00:09:33,122 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 00:09:34,631 [WARNING] Order execution failed on kucoin (BTC/USDT)
+2026-03-11 00:09:34,752 [WARNING] Order execution failed on gate (LINK/USDT)
+2026-03-11 00:09:37,039 [WARNING] Order execution failed on okx (DOGE/USDT)

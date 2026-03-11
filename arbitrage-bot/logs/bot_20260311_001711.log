@@ -1,0 +1,17 @@
+2026-03-11 00:17:11,915 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 00:17:15,173 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 00:17:19,454 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 00:17:21,895 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 00:17:24,151 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-11 00:17:35,983 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-11 00:17:38,796 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-11 00:17:38,796 [INFO] [REAL] 6/6 exchanges connected
+2026-03-11 00:17:38,810 [INFO] Server listening on port 8888
+2026-03-11 00:19:30,553 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 00:29:49,839 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 00:31:15,510 [INFO] [LOOP 30] trades=122 balance=$657.82 open=8
+2026-03-11 00:31:38,119 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 00:41:37,700 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 00:44:46,204 [INFO] [LOOP 60] trades=279 balance=$3,027.82 open=5
+2026-03-11 00:46:30,588 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 00:48:39,879 [INFO] Shutting down...

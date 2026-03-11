@@ -33,7 +33,14 @@ def _auto_install_ccxt():
         import ccxt
         return True
     except ImportError:
-        print("[*] ccxt not found — attempting install (30s timeout)...")
+        # Quick network check before attempting install
+        try:
+            s = socket.create_connection(("pypi.org", 443), timeout=3)
+            s.close()
+        except Exception:
+            print("[-] No internet — skipping ccxt install. Bot will use simulated prices.")
+            return False
+        print("[*] ccxt not found — attempting install (15s timeout)...")
         cmds = [
             [sys.executable, "-m", "pip", "install", "ccxt", "--quiet", "--break-system-packages"],
             [sys.executable, "-m", "pip", "install", "ccxt", "--quiet"],
@@ -41,7 +48,7 @@ def _auto_install_ccxt():
         for cmd in cmds:
             try:
                 proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-                _, stderr = proc.communicate(timeout=30)
+                _, stderr = proc.communicate(timeout=15)
                 if proc.returncode == 0:
                     print("[+] ccxt installed successfully!")
                     return True
@@ -78,6 +85,30 @@ logging.basicConfig(
     ]
 )
 log = logging.getLogger("nexus")
+
+# ═══════════════════════════════════════════════════════════
+# LOAD .env FILE
+# ═══════════════════════════════════════════════════════════
+def _load_dotenv():
+    """Load .env file from same directory as server.py"""
+    env_path = Path(__file__).parent / ".env"
+    if not env_path.exists():
+        return
+    with open(env_path, "r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            key = key.strip()
+            val = val.strip()
+            # Only set if not already defined (real env vars take priority)
+            if key not in os.environ:
+                os.environ[key] = val
+
+_load_dotenv()
 
 # ═══════════════════════════════════════════════════════════
 # CONFIGURATION v3
@@ -903,6 +934,11 @@ class BaseEngine:
         self._start = time.time()
         self._own_last_loss_time = 0  # Per-engine cooldown
 
+    @property
+    def max_trade(self):
+        """Max entry = 5% of current balance"""
+        return round(self.portfolio.balance * 0.05, 2)
+
     def _add_event(self, etype, data):
         self.events.append({"timestamp": time.time(), "type": etype, "data": data})
         if len(self.events) > 200:
@@ -1003,7 +1039,6 @@ class CrossExchangeEngine(BaseEngine):
     """Scans ALL pairs across ALL exchanges for price discrepancies"""
     PAIRS = ALL_PAIRS[:12]  # Top 12 pairs by volume
     MIN_SPREAD = 0.03 if AGGRESSIVE else 0.05
-    MAX_TRADE = 800 if AGGRESSIVE else 500
 
     def scan_and_execute(self):
         if not self.running:
@@ -1025,10 +1060,10 @@ class CrossExchangeEngine(BaseEngine):
             sell_price = tickers[sell_ex]["bid"]
             raw_spread = (sell_price - buy_price) / buy_price * 100
 
-            est_slip = self.execution.estimate_slippage(pair, self.MAX_TRADE) * 2
+            est_slip = self.execution.estimate_slippage(pair, self.max_trade) * 2
             est_fees = self.execution.get_fee_pct(buy_ex) + self.execution.get_fee_pct(sell_ex)
             withdrawal = self.execution.get_withdrawal_fee(buy_ex)
-            est_cost_pct = est_slip * 100 + est_fees + (withdrawal / self.MAX_TRADE * 100)
+            est_cost_pct = est_slip * 100 + est_fees + (withdrawal / self.max_trade * 100)
 
             net_spread = raw_spread - est_cost_pct
             data_source = self._get_data_source(tickers[buy_ex])
@@ -1041,7 +1076,7 @@ class CrossExchangeEngine(BaseEngine):
                     "raw_spread_pct": round(raw_spread, 4),
                     "est_costs_pct": round(est_cost_pct, 4),
                     "net_spread_pct": round(net_spread, 4),
-                    "potential_profit_usd": round(self.MAX_TRADE * net_spread / 100, 4),
+                    "potential_profit_usd": round(self.max_trade * net_spread / 100, 4),
                     "data_source": data_source,
                 }
 
@@ -1053,7 +1088,7 @@ class CrossExchangeEngine(BaseEngine):
             if self._risk_ok() and random.random() < 0.92:
                 self._execute_buy_sell(
                     best["pair"], best["buy_exchange"], best["sell_exchange"],
-                    best["buy_price"], best["sell_price"], self.MAX_TRADE,
+                    best["buy_price"], best["sell_price"], self.max_trade,
                     data_source=best["data_source"],
                 )
 
@@ -1068,7 +1103,6 @@ class TriangularEngine(BaseEngine):
         ("LINK/USDT", "LINK/ETH", "ETH/USDT"),
     ]
     MIN_PROFIT = 0.015 if AGGRESSIVE else 0.02
-    MAX_TRADE = 400 if AGGRESSIVE else 300
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1103,7 +1137,7 @@ class TriangularEngine(BaseEngine):
                 step3 = step2 * t3["bid"]
 
                 total_fee_pct = self.execution.get_fee_pct(exchange) * 3
-                total_slip = self.execution.estimate_slippage(tri[0], self.MAX_TRADE) * 3 * 100
+                total_slip = self.execution.estimate_slippage(tri[0], self.max_trade) * 3 * 100
                 profit_pct = (step3 - 1.0) * 100 - total_fee_pct - total_slip
                 data_source = self._get_data_source(t1)
 
@@ -1114,7 +1148,7 @@ class TriangularEngine(BaseEngine):
                         "fees_pct": round(total_fee_pct, 4),
                         "slippage_pct": round(total_slip, 4),
                         "net_profit_pct": round(profit_pct, 4),
-                        "potential_profit_usd": round(self.MAX_TRADE * profit_pct / 100, 4),
+                        "potential_profit_usd": round(self.max_trade * profit_pct / 100, 4),
                         "data_source": data_source,
                     }
                     self.opportunities_found += 1
@@ -1130,8 +1164,8 @@ class TriangularEngine(BaseEngine):
 
                         exec_price = drifted_price
                         exit_price = exec_price * (1 + actual_profit / 100)
-                        fee = self.MAX_TRADE * total_fee_pct / 100
-                        amount = self.MAX_TRADE / exec_price
+                        fee = self.max_trade * total_fee_pct / 100
+                        amount = self.max_trade / exec_price
 
                         trade = self.portfolio.open_trade(
                             self.name, tri[0], exchange, "buy", exec_price, amount,
@@ -1168,7 +1202,6 @@ class StatisticalEngine(BaseEngine):
     ]
     Z_ENTRY = 1.3 if AGGRESSIVE else 1.5
     Z_EXIT = 0.4 if AGGRESSIVE else 0.5
-    MAX_TRADE = 500 if AGGRESSIVE else 400
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1208,7 +1241,7 @@ class StatisticalEngine(BaseEngine):
             if key in self._active and abs(z) < self.Z_EXIT:
                 active = self._active[key]
                 sell_price, sell_fee, sell_slip, sell_lat, sell_ok = \
-                    self.execution.execute_order(pa, "binance", "sell", ta["last"], self.MAX_TRADE)
+                    self.execution.execute_order(pa, "binance", "sell", ta["last"], self.max_trade)
                 if sell_ok:
                     pnl = self.portfolio.close_trade(
                         active["trade_id"], sell_price,
@@ -1231,7 +1264,7 @@ class StatisticalEngine(BaseEngine):
                 opp = {
                     "pair_a": pa, "pair_b": pb, "z_score": round(z, 4),
                     "direction": "short_a_long_b" if z > 0 else "long_a_short_b",
-                    "potential_profit_usd": round(self.MAX_TRADE * abs(z) * 0.05, 4),
+                    "potential_profit_usd": round(self.max_trade * abs(z) * 0.05, 4),
                     "data_source": data_source,
                 }
                 self.opportunities_found += 1
@@ -1241,9 +1274,9 @@ class StatisticalEngine(BaseEngine):
                 if self._risk_ok():
                     side = "sell" if z > 0 else "buy"
                     exec_price, exec_fee, exec_slip, exec_lat, exec_ok = \
-                        self.execution.execute_order(pa, "binance", side, ta["last"], self.MAX_TRADE)
+                        self.execution.execute_order(pa, "binance", side, ta["last"], self.max_trade)
                     if exec_ok:
-                        amount = self.MAX_TRADE / exec_price
+                        amount = self.max_trade / exec_price
                         trade = self.portfolio.open_trade(
                             self.name, pa, "binance", side, exec_price, amount,
                             fee_usd=exec_fee, slippage_pct=exec_slip,
@@ -1261,7 +1294,6 @@ class FundingRateEngine(BaseEngine):
     """Captures funding rate premium between spot and perpetual futures"""
     PAIRS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "DOGE/USDT"]
     MIN_RATE = 0.008 if AGGRESSIVE else 0.01
-    MAX_TRADE = 1500 if AGGRESSIVE else 1000
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1279,13 +1311,13 @@ class FundingRateEngine(BaseEngine):
                     t = self.market.get_ticker(pair, "binance")
                     if t:
                         exec_price, fee, slip, lat, ok = \
-                            self.execution.execute_order(pair, "binance", "sell", t["last"], self.MAX_TRADE)
+                            self.execution.execute_order(pair, "binance", "sell", t["last"], self.max_trade)
                         if ok:
                             pnl = self.portfolio.close_trade(
                                 active["trade_id"], exec_price,
                                 fee_usd=fee, slippage_pct=slip, latency_ms=lat,
                             )
-                            funding_pnl = self.MAX_TRADE * abs(active["rate"]) / 100
+                            funding_pnl = self.max_trade * abs(active["rate"]) / 100
                             pnl_total = pnl + funding_pnl
                             self.trades_executed += 1
                             self.total_profit += pnl_total
@@ -1306,7 +1338,7 @@ class FundingRateEngine(BaseEngine):
                     "pair": pair, "funding_rate_pct": round(rate, 6),
                     "annual_yield_pct": round(annual_yield, 2),
                     "direction": "short_perp_long_spot" if rate > 0 else "long_perp_short_spot",
-                    "potential_profit_usd": round(self.MAX_TRADE * abs(rate) / 100, 4),
+                    "potential_profit_usd": round(self.max_trade * abs(rate) / 100, 4),
                 }
                 self.opportunities_found += 1
                 self.last_opportunity = opp
@@ -1316,9 +1348,9 @@ class FundingRateEngine(BaseEngine):
                     t = self.market.get_ticker(pair, "binance")
                     if t:
                         exec_price, fee, slip, lat, ok = \
-                            self.execution.execute_order(pair, "binance", "buy", t["last"], self.MAX_TRADE)
+                            self.execution.execute_order(pair, "binance", "buy", t["last"], self.max_trade)
                         if ok:
-                            amount = self.MAX_TRADE / exec_price
+                            amount = self.max_trade / exec_price
                             data_source = self._get_data_source(t)
                             trade = self.portfolio.open_trade(
                                 self.name, pair, "binance", "buy", exec_price, amount,
@@ -1337,7 +1369,6 @@ class DexCexEngine(BaseEngine):
     """DEX vs CEX price discrepancy arbitrage"""
     PAIRS = ["ETH/USDT", "SOL/USDT", "ARB/USDT", "OP/USDT", "UNI/USDT"]
     MIN_SPREAD = 0.08 if AGGRESSIVE else 0.10
-    MAX_TRADE = 400 if AGGRESSIVE else 300
     GAS_COST = 8.0  # Reduced for L2
 
     def __init__(self, *args, **kwargs):
@@ -1364,8 +1395,8 @@ class DexCexEngine(BaseEngine):
 
             dex_fee_pct = EXCHANGE_FEES["dex"]["taker"]
             cex_fee_pct = self.execution.get_fee_pct("binance")
-            est_slip = self.execution.estimate_slippage(pair, self.MAX_TRADE) * 100
-            gas_as_pct = self.GAS_COST / self.MAX_TRADE * 100
+            est_slip = self.execution.estimate_slippage(pair, self.max_trade) * 100
+            gas_as_pct = self.GAS_COST / self.max_trade * 100
 
             total_cost_pct = dex_fee_pct + cex_fee_pct + est_slip * 2 + gas_as_pct
             net_spread = best_spread - total_cost_pct
@@ -1380,7 +1411,7 @@ class DexCexEngine(BaseEngine):
                     "costs_pct": round(total_cost_pct, 4),
                     "net_spread_pct": round(net_spread, 4),
                     "gas_cost": self.GAS_COST,
-                    "net_profit_usd": round(self.MAX_TRADE * net_spread / 100, 4),
+                    "net_profit_usd": round(self.max_trade * net_spread / 100, 4),
                     "data_source": data_source,
                 }
                 self.opportunities_found += 1
@@ -1394,12 +1425,12 @@ class DexCexEngine(BaseEngine):
                     sell_p = t["bid"] if "sell_cex" in direction else dex_price
 
                     buy_exec, buy_fee, buy_slip, buy_lat, buy_ok = \
-                        self.execution.execute_order(pair, buy_ex, "buy", buy_p, self.MAX_TRADE)
+                        self.execution.execute_order(pair, buy_ex, "buy", buy_p, self.max_trade)
                     sell_exec, sell_fee, sell_slip, sell_lat, sell_ok = \
-                        self.execution.execute_order(pair, sell_ex, "sell", sell_p, self.MAX_TRADE)
+                        self.execution.execute_order(pair, sell_ex, "sell", sell_p, self.max_trade)
 
                     if buy_ok and sell_ok:
-                        amount = self.MAX_TRADE / buy_exec
+                        amount = self.max_trade / buy_exec
                         trade = self.portfolio.open_trade(
                             self.name, pair, "dex_cex", "buy", buy_exec, amount,
                             fee_usd=buy_fee, slippage_pct=buy_slip, latency_ms=buy_lat,
