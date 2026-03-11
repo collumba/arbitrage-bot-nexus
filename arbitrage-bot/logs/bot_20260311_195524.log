@@ -1,0 +1,6 @@
+2026-03-11 19:55:24,093 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-11 19:55:24,094 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 19:55:24,110 [INFO] Server listening on port 8888
+2026-03-11 19:55:39,176 [INFO] [LOOP 30] trades=28 balance=$10.10 open=0
+2026-03-11 19:55:54,567 [INFO] [LOOP 60] trades=43 balance=$8.38 open=5
+2026-03-11 19:56:10,677 [INFO] [LOOP 90] trades=105 balance=$9.66 open=3

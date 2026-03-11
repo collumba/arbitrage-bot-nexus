@@ -1551,13 +1551,19 @@ class StatisticalEngine(BaseEngine):
         ("LINK/USDT", "DOT/USDT"), ("ADA/USDT", "XRP/USDT"),
         ("UNI/USDT", "ATOM/USDT"), ("ARB/USDT", "OP/USDT"),
     ]
-    Z_ENTRY = 1.3 if AGGRESSIVE else 1.5
-    Z_EXIT = 0.4 if AGGRESSIVE else 0.5
+    Z_ENTRY = 1.8 if AGGRESSIVE else 2.0       # Higher entry = stronger signal
+    Z_EXIT = 0.3 if AGGRESSIVE else 0.4
+    MIN_HISTORY = 40                             # More data before first trade
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._history = {}
         self._active = {}
+
+    def _estimate_roundtrip_fee(self, trade_usd):
+        """Estimate total fees for open + close (2 trades)"""
+        fee_pct = EXCHANGE_FEES.get("binance", {}).get("taker", 0.10)
+        return trade_usd * fee_pct / 100 * 2
 
     def scan_and_execute(self):
         if not self.running:
@@ -1575,9 +1581,9 @@ class StatisticalEngine(BaseEngine):
 
             ratio = ta["last"] / tb["last"]
             self._history[key].append(ratio)
-            if len(self._history[key]) > 200:
-                self._history[key] = self._history[key][-100:]
-            if len(self._history[key]) < 25:
+            if len(self._history[key]) > 300:
+                self._history[key] = self._history[key][-200:]
+            if len(self._history[key]) < self.MIN_HISTORY:
                 continue
 
             data = self._history[key]
@@ -1591,12 +1597,13 @@ class StatisticalEngine(BaseEngine):
             # Close position if z reverts
             if key in self._active and abs(z) < self.Z_EXIT:
                 active = self._active[key]
-                sell_price, sell_fee, sell_slip, sell_lat, sell_ok = \
-                    self.execution.execute_order(pa, "binance", "sell", ta["last"], self.max_trade)
-                if sell_ok:
+                close_side = "sell" if active["side"] == "buy" else "buy"
+                close_price, close_fee, close_slip, close_lat, close_ok = \
+                    self.execution.execute_order(pa, "binance", close_side, ta["last"], self.max_trade)
+                if close_ok:
                     pnl = self.portfolio.close_trade(
-                        active["trade_id"], sell_price,
-                        fee_usd=sell_fee, slippage_pct=sell_slip, latency_ms=sell_lat,
+                        active["trade_id"], close_price,
+                        fee_usd=close_fee, slippage_pct=close_slip, latency_ms=close_lat,
                     )
                     self.trades_executed += 1
                     self.total_profit += pnl
@@ -1610,12 +1617,22 @@ class StatisticalEngine(BaseEngine):
                 del self._active[key]
                 continue
 
-            # Open new position
+            # Open new position — only with strong signal
             if key not in self._active and abs(z) > self.Z_ENTRY:
+                # Scale trade size with signal strength: stronger z = larger position
+                z_confidence = min(abs(z) / 3.0, 1.0)  # 0..1 scale
+                scaled_trade = self.max_trade * (0.3 + 0.7 * z_confidence)
+
+                # Profitability filter: expected profit must beat roundtrip fees
+                expected_profit = scaled_trade * abs(z) * 0.03
+                roundtrip_fees = self._estimate_roundtrip_fee(scaled_trade)
+                if expected_profit < roundtrip_fees * 2.5:
+                    continue  # Skip: expected profit doesn't justify fees
+
                 opp = {
                     "pair_a": pa, "pair_b": pb, "z_score": round(z, 4),
                     "direction": "short_a_long_b" if z > 0 else "long_a_short_b",
-                    "potential_profit_usd": round(self.max_trade * abs(z) * 0.05, 4),
+                    "potential_profit_usd": round(expected_profit, 4),
                     "data_source": data_source,
                 }
                 self.opportunities_found += 1
@@ -1625,16 +1642,16 @@ class StatisticalEngine(BaseEngine):
                 if self._risk_ok():
                     side = "sell" if z > 0 else "buy"
                     exec_price, exec_fee, exec_slip, exec_lat, exec_ok = \
-                        self.execution.execute_order(pa, "binance", side, ta["last"], self.max_trade)
+                        self.execution.execute_order(pa, "binance", side, ta["last"], scaled_trade)
                     if exec_ok:
-                        amount = self.max_trade / exec_price
+                        amount = scaled_trade / exec_price
                         trade = self.portfolio.open_trade(
                             self.name, pa, "binance", side, exec_price, amount,
                             fee_usd=exec_fee, slippage_pct=exec_slip,
                             latency_ms=exec_lat, data_source=data_source,
                         )
                         if trade:
-                            self._active[key] = {"trade_id": trade.id, "z": z}
+                            self._active[key] = {"trade_id": trade.id, "z": z, "side": side}
                             self._add_event("trade", {
                                 "trade_id": trade.id, "action": "open",
                                 "z_score": round(z, 4), "pnl": 0,
@@ -1644,11 +1661,18 @@ class StatisticalEngine(BaseEngine):
 class FundingRateEngine(BaseEngine):
     """Captures funding rate premium between spot and perpetual futures"""
     PAIRS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT", "DOGE/USDT"]
-    MIN_RATE = 0.008 if AGGRESSIVE else 0.01
+    MIN_RATE = 0.03 if AGGRESSIVE else 0.05    # Much higher threshold: only big funding rates
+    HOLD_TICKS = 12 if AGGRESSIVE else 18      # Hold longer to accumulate funding
+    MAX_CONCURRENT = 2                          # Max simultaneous positions
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._active = {}
+        self._rate_history = {}  # Track rate consistency
+
+    def _estimate_roundtrip_fee(self, trade_usd):
+        fee_pct = EXCHANGE_FEES.get("binance", {}).get("taker", 0.10)
+        return trade_usd * fee_pct / 100 * 2
 
     def scan_and_execute(self):
         if not self.running:
@@ -1657,18 +1681,19 @@ class FundingRateEngine(BaseEngine):
         for pair in self.PAIRS:
             if pair in self._active:
                 self._active[pair]["ticks"] += 1
-                if self._active[pair]["ticks"] > 6:
+                if self._active[pair]["ticks"] > self.HOLD_TICKS:
                     active = self._active[pair]
                     t = self.market.get_ticker(pair, "binance")
                     if t:
                         exec_price, fee, slip, lat, ok = \
-                            self.execution.execute_order(pair, "binance", "sell", t["last"], self.max_trade)
+                            self.execution.execute_order(pair, "binance", "sell", t["last"], active["size"])
                         if ok:
                             pnl = self.portfolio.close_trade(
                                 active["trade_id"], exec_price,
                                 fee_usd=fee, slippage_pct=slip, latency_ms=lat,
                             )
-                            funding_pnl = self.max_trade * abs(active["rate"]) / 100
+                            # Funding earned over holding period
+                            funding_pnl = active["size"] * abs(active["rate"]) / 100 * (active["ticks"] / 8)
                             pnl_total = pnl + funding_pnl
                             self.trades_executed += 1
                             self.total_profit += pnl_total
@@ -1682,26 +1707,53 @@ class FundingRateEngine(BaseEngine):
                     del self._active[pair]
                 continue
 
+            # Skip if max concurrent positions reached
+            if len(self._active) >= self.MAX_CONCURRENT:
+                continue
+
             rate = self.market.get_funding_rate(pair)
+
+            # Track rate history for consistency check
+            if pair not in self._rate_history:
+                self._rate_history[pair] = []
+            self._rate_history[pair].append(abs(rate))
+            if len(self._rate_history[pair]) > 10:
+                self._rate_history[pair] = self._rate_history[pair][-10:]
+
             if abs(rate) >= self.MIN_RATE:
+                # Consistency filter: avg of last 3 readings must also be above threshold
+                recent = self._rate_history[pair][-3:]
+                if len(recent) >= 3 and (sum(recent) / len(recent)) < self.MIN_RATE * 0.8:
+                    continue  # Rate spike is inconsistent, skip
+
+                # Scale size with rate strength
+                rate_strength = min(abs(rate) / 0.1, 1.0)
+                trade_size = self.max_trade * (0.4 + 0.6 * rate_strength)
+
+                # Profitability filter: funding earned must beat roundtrip fees
+                expected_funding = trade_size * abs(rate) / 100 * (self.HOLD_TICKS / 8)
+                roundtrip_fees = self._estimate_roundtrip_fee(trade_size)
+                if expected_funding < roundtrip_fees * 2.0:
+                    continue  # Not profitable enough after fees
+
                 annual_yield = abs(rate) * 3 * 365
                 opp = {
                     "pair": pair, "funding_rate_pct": round(rate, 6),
                     "annual_yield_pct": round(annual_yield, 2),
                     "direction": "short_perp_long_spot" if rate > 0 else "long_perp_short_spot",
-                    "potential_profit_usd": round(self.max_trade * abs(rate) / 100, 4),
+                    "potential_profit_usd": round(expected_funding, 4),
                 }
                 self.opportunities_found += 1
                 self.last_opportunity = opp
                 self._add_event("opportunity", opp)
 
-                if self._risk_ok() and random.random() < 0.75:
+                if self._risk_ok():
                     t = self.market.get_ticker(pair, "binance")
                     if t:
                         exec_price, fee, slip, lat, ok = \
-                            self.execution.execute_order(pair, "binance", "buy", t["last"], self.max_trade)
+                            self.execution.execute_order(pair, "binance", "buy", t["last"], trade_size)
                         if ok:
-                            amount = self.max_trade / exec_price
+                            amount = trade_size / exec_price
                             data_source = self._get_data_source(t)
                             trade = self.portfolio.open_trade(
                                 self.name, pair, "binance", "buy", exec_price, amount,
@@ -1709,7 +1761,10 @@ class FundingRateEngine(BaseEngine):
                                 data_source=data_source,
                             )
                             if trade:
-                                self._active[pair] = {"trade_id": trade.id, "rate": rate, "ticks": 0}
+                                self._active[pair] = {
+                                    "trade_id": trade.id, "rate": rate,
+                                    "ticks": 0, "size": trade_size,
+                                }
                                 self._add_event("trade", {
                                     "trade_id": trade.id, "action": "open",
                                     "funding_rate": round(rate, 6), "pnl": 0,

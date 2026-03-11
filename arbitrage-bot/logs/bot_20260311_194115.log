@@ -11,3 +11,7 @@
 2026-03-11 19:45:33,802 [INFO] [HTTP] Engine funding_rate -> OFF
 2026-03-11 19:45:37,582 [INFO] [HTTP] Close positions for funding_rate: 2/2 closed
 2026-03-11 19:45:43,744 [INFO] [HTTP] Engine funding_rate -> ON
+2026-03-11 19:55:08,320 [INFO] [LOOP 30] trades=126 balance=$33.33 open=9
+2026-03-11 19:55:31,585 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 19:56:24,723 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 19:57:55,220 [INFO] Shutting down...
