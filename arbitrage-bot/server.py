@@ -33,27 +33,27 @@ def _auto_install_ccxt():
         import ccxt
         return True
     except ImportError:
-        print("[*] ccxt not found — installing automatically...")
-        try:
-            subprocess.check_call(
-                [sys.executable, "-m", "pip", "install", "ccxt", "--quiet",
-                 "--break-system-packages"],
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
-            print("[+] ccxt installed successfully!")
-            return True
-        except Exception:
+        print("[*] ccxt not found — attempting install (30s timeout)...")
+        cmds = [
+            [sys.executable, "-m", "pip", "install", "ccxt", "--quiet", "--break-system-packages"],
+            [sys.executable, "-m", "pip", "install", "ccxt", "--quiet"],
+        ]
+        for cmd in cmds:
             try:
-                subprocess.check_call(
-                    [sys.executable, "-m", "pip", "install", "ccxt", "--quiet"],
-                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-                )
-                print("[+] ccxt installed successfully!")
-                return True
-            except Exception as e:
-                print(f"[-] Could not install ccxt: {e}")
-                print("    Run manually: pip install ccxt")
-                return False
+                proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+                _, stderr = proc.communicate(timeout=30)
+                if proc.returncode == 0:
+                    print("[+] ccxt installed successfully!")
+                    return True
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait()
+                print("[-] Install timed out")
+            except Exception:
+                pass
+        print("[-] Could not install ccxt. Run manually: pip install ccxt")
+        print("    Bot will start with simulated prices.")
+        return False
 
 CCXT_INSTALLED = _auto_install_ccxt()
 
@@ -86,7 +86,7 @@ log = logging.getLogger("nexus")
 TRADING_MODE = os.environ.get("TRADING_MODE", "paper")
 INITIAL_BALANCE = float(os.environ.get("INITIAL_BALANCE", "10000"))
 PORT = int(os.environ.get("PORT", "8888"))
-SCAN_INTERVAL = float(os.environ.get("SCAN_INTERVAL", "1.0"))  # seconds between scans
+SCAN_INTERVAL = float(os.environ.get("SCAN_INTERVAL", "0.5"))  # seconds between scans
 
 # AGGRESSIVE MODE: lower thresholds, more trades, higher risk
 AGGRESSIVE = os.environ.get("AGGRESSIVE", "true").lower() == "true"
@@ -139,11 +139,11 @@ RISK_NORMAL = {
 }
 
 RISK_AGGRESSIVE = {
-    "max_drawdown_pct": 10.0,
-    "max_daily_loss_usd": 500,
-    "max_open_positions": 20,
+    "max_drawdown_pct": 30.0,  # Higher because open positions temporarily reduce balance
+    "max_daily_loss_usd": 1000,
+    "max_open_positions": 30,
     "max_single_trade_usd": 2000,
-    "cooldown_after_loss_sec": 10,
+    "cooldown_after_loss_sec": 3,
 }
 
 RISK = RISK_AGGRESSIVE if AGGRESSIVE else RISK_NORMAL
@@ -427,16 +427,23 @@ class MarketSimulator:
         for pair in self.prices:
             vol = self.volatilities[pair]
             trend = self.trends[pair]
-            if random.random() < 0.01:
-                self.trends[pair] = random.gauss(0, 0.00005)
+            if random.random() < 0.02:
+                self.trends[pair] = random.gauss(0, 0.0001)
             base_move = random.gauss(trend, vol)
             for ex in EXCHANGES:
-                ex_noise = random.gauss(0, vol * 0.8)
+                # Higher inter-exchange noise for more arb opportunities
+                ex_noise = random.gauss(0, vol * 1.5)
                 self.prices[pair][ex] *= (1 + base_move + ex_noise)
             avg_price = sum(self.prices[pair].values()) / len(self.prices[pair])
             for ex in EXCHANGES:
                 diff = self.prices[pair][ex] - avg_price
-                self.prices[pair][ex] -= diff * 0.02
+                # Slower convergence = more persistent spreads
+                self.prices[pair][ex] -= diff * 0.008
+            # Occasional "shock" — exchange temporarily deviates
+            if random.random() < 0.05:
+                shock_ex = random.choice(EXCHANGES)
+                shock_pct = random.gauss(0, 0.003)
+                self.prices[pair][shock_ex] *= (1 + shock_pct)
             liq = self.orderbook_depth[pair]
             self.orderbook_depth[pair] = max(5000, liq * (1 + random.gauss(0, 0.05)))
 
@@ -894,6 +901,7 @@ class BaseEngine:
         self.last_opportunity = None
         self.events = []
         self._start = time.time()
+        self._own_last_loss_time = 0  # Per-engine cooldown
 
     def _add_event(self, etype, data):
         self.events.append({"timestamp": time.time(), "type": etype, "data": data})
@@ -914,16 +922,26 @@ class BaseEngine:
         }
 
     def _risk_ok(self):
-        if self.execution.in_cooldown():
+        # Per-engine cooldown instead of global
+        if (time.time() - self._own_last_loss_time) < RISK["cooldown_after_loss_sec"]:
             return False
-        stats = self.portfolio.get_stats()
-        if stats["open_positions"] >= RISK["max_open_positions"]:
+        if self.portfolio.open_positions >= RISK["max_open_positions"]:
             return False
-        if self.portfolio.max_drawdown >= RISK["max_drawdown_pct"] * 2:
-            return False
-        if abs(self.portfolio.daily_pnl) >= RISK["max_daily_loss_usd"] and self.portfolio.daily_pnl < 0:
+        # Check realized drawdown only (not temporary dips from open positions)
+        if not AGGRESSIVE:
+            current_dd = 0
+            if self.portfolio.max_balance > 0:
+                current_dd = (self.portfolio.max_balance - self.portfolio.balance) / self.portfolio.max_balance * 100
+            if current_dd > RISK["max_drawdown_pct"]:
+                return False
+        # Daily loss limit always applies
+        if self.portfolio.daily_pnl < 0 and abs(self.portfolio.daily_pnl) >= RISK["max_daily_loss_usd"]:
             return False
         return True
+
+    def _record_engine_loss(self):
+        """Record loss for this engine's cooldown only"""
+        self._own_last_loss_time = time.time()
 
     def _get_data_source(self, ticker):
         """Determine if this ticker is from real or simulated data"""
@@ -964,7 +982,7 @@ class BaseEngine:
         self.trades_executed += 1
         self.total_profit += pnl
         if pnl < 0:
-            self.execution.record_loss()
+            self._record_engine_loss()
 
         result = {
             "trade_id": trade.id, "pair": pair,
@@ -1129,7 +1147,7 @@ class TriangularEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl
                             if pnl < 0:
-                                self.execution.record_loss()
+                                self._record_engine_loss()
                             self._add_event("trade", {
                                 "trade_id": trade.id, "path": list(tri),
                                 "net_profit_pct": round(actual_profit, 4),
@@ -1199,7 +1217,7 @@ class StatisticalEngine(BaseEngine):
                     self.trades_executed += 1
                     self.total_profit += pnl
                     if pnl < 0:
-                        self.execution.record_loss()
+                        self._record_engine_loss()
                     self._add_event("trade", {
                         "trade_id": active["trade_id"], "action": "close",
                         "exit_z": round(z, 4), "pnl": round(pnl, 4),
@@ -1272,7 +1290,7 @@ class FundingRateEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl_total
                             if pnl_total < 0:
-                                self.execution.record_loss()
+                                self._record_engine_loss()
                             self._add_event("trade", {
                                 "trade_id": active["trade_id"], "action": "close",
                                 "funding_earned": round(funding_pnl, 4),
@@ -1396,7 +1414,7 @@ class DexCexEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl
                             if pnl < 0:
-                                self.execution.record_loss()
+                                self._record_engine_loss()
                             self._add_event("trade", {
                                 "trade_id": trade.id, "pair": pair,
                                 "direction": direction,
@@ -1605,9 +1623,11 @@ class BotServer:
                 pass
 
     def _engine_loop(self):
+        loop_count = 0
         while self.running:
             try:
-                for _ in range(3):
+                tick_count = 5 if AGGRESSIVE else 3
+                for _ in range(tick_count):
                     self.market.tick()
 
                 for engine in self.engines.values():
@@ -1616,6 +1636,11 @@ class BotServer:
                     except Exception as e:
                         engine._add_event("error", {"error": str(e)})
                         log.error(f"Engine {engine.name} error: {e}")
+
+                loop_count += 1
+                if loop_count % 30 == 0:
+                    total_trades = self.portfolio.get_stats()["total_trades"]
+                    log.info(f"[LOOP {loop_count}] trades={total_trades} balance=${self.portfolio.balance:,.2f} open={self.portfolio.open_positions}")
 
                 state = json.dumps({"type": "update", "data": self.get_state()})
                 dead = []
@@ -1652,7 +1677,7 @@ class BotServer:
 ║   + Aggressive mode (lower thresholds, more trades)          ║
 ║   + Real-time data quality tracking                          ║
 ║   + REAL vs SIMULATED trade tagging                          ║
-║   + Faster 1s scan interval                                  ║
+║   + Faster 0.5s scan interval                                ║
 ║   + 5 more triangular paths                                  ║
 ║   + 6 stat-arb pair combos                                   ║
 ║   + L2 DEX support (lower gas)                               ║

@@ -1,0 +1,6 @@
+2026-03-10 23:38:17,693 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-10 23:38:26,144 [WARNING] Order execution failed on kucoin (DOGE/USDT)
+2026-03-10 23:38:27,892 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-10 23:38:32,734 [WARNING] Order execution failed on kucoin (DOGE/USDT)
+2026-03-10 23:38:33,052 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-10 23:38:33,992 [WARNING] Order execution failed on kucoin (DOGE/USDT)

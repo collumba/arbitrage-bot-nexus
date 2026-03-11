@@ -1054,7 +1054,11 @@ function updateDashboard(data) {
     if (p.recent_trades) {
       const tbody = document.getElementById('tradesBody');
       if (p.recent_trades.length > 0) {
-        tbody.innerHTML = p.recent_trades.slice(-15).reverse().map(t => `
+        tbody.innerHTML = p.recent_trades.slice(-15).reverse().map(t => {
+          const src = t.data_source || 'unknown';
+          const srcClass = src === 'real' ? 'real' : 'simulated';
+          const srcLabel = src === 'real' ? 'REAL' : 'SIM';
+          return `
           <tr>
             <td style="color:var(--cyan)">${t.id}</td>
             <td>${t.strategy}</td>
@@ -1067,13 +1071,14 @@ function updateDashboard(data) {
             <td style="color:${t.pnl >= 0 ? 'var(--green)' : 'var(--red)'}">
               ${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(4)}
             </td>
+            <td><span class="source-tag ${srcClass}">${srcLabel}</span></td>
             <td style="color:${t.status === 'open' ? 'var(--yellow)' : 'var(--text-dim)'}">
               ${t.status.toUpperCase()}
             </td>
-          </tr>
-        `).join('');
+          </tr>`;
+        }).join('');
       }
-      document.getElementById('tradeCount').textContent = `${p.total_trades} total`;
+      document.getElementById('tradeCount').textContent = `${p.total_trades} total (${p.real_trades || 0} real)`;
     }
   }
 
@@ -1153,6 +1158,28 @@ function updateDashboard(data) {
     document.getElementById('kpiCcxt').style.color = data.ccxt_available
       ? 'var(--green)' : 'var(--text-dim)';
   }
+
+  // v3: Data quality bar
+  const dq = data.data_quality;
+  if (dq) {
+    const realPct = dq.real_pct || 0;
+    document.getElementById('dqBarReal').style.width = `${realPct}%`;
+    document.getElementById('dqRealPct').textContent = `${realPct}% real`;
+    document.getElementById('dqRealPct').style.color = realPct > 50 ? 'var(--green)' : realPct > 0 ? 'var(--yellow)' : 'var(--text-dim)';
+    const exCount = dq.fetcher_stats?.exchanges_connected?.length || 0;
+    const hitRate = dq.fetcher_stats?.hit_rate || 0;
+    document.getElementById('dqInfo').textContent = `| ${exCount} exchanges | ${hitRate}% hit rate | ${dq.total_ticks || 0} ticks`;
+  }
+
+  // v3: Aggressive mode badge
+  if (data.aggressive) {
+    document.getElementById('aggressiveBadge').style.display = 'inline-flex';
+  }
+
+  // v3: Version badge
+  if (data.version) {
+    document.getElementById('versionBadge').textContent = data.version;
+  }
 }
 
 // ─── FEED ─────────────────────────────────────────────
@@ -1192,12 +1219,7 @@ async function pollAPI() {
   try {
     const resp = await fetch(`${API_URL}/status`);
     const data = await resp.json();
-    updateDashboard({
-      portfolio: data.portfolio,
-      engines: data.engines,
-      strategy_breakdown: data.strategy_breakdown,
-      exchanges: data.exchanges,
-    });
+    updateDashboard(data);
   } catch (e) {
     // Server not available
   }

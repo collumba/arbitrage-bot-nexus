@@ -1,0 +1,4 @@
+2026-03-10 23:46:55,789 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-10 23:46:58,053 [WARNING] Order execution failed on bybit (DOT/USDT)
+2026-03-10 23:47:01,123 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-10 23:47:03,182 [WARNING] Order execution failed on bybit (DOT/USDT)

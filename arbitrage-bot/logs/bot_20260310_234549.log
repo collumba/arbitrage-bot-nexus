@@ -1,0 +1,6 @@
+2026-03-10 23:45:49,701 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-10 23:45:49,717 [INFO] Server listening on port 8888
+2026-03-10 23:45:59,972 [WARNING] Order execution failed on kucoin (LINK/USDT)
+2026-03-10 23:46:00,990 [WARNING] Order execution failed on binance (SHIB/USDT)
+2026-03-10 23:46:05,392 [INFO] [LOOP 30] trades=67 balance=$5,490.91 open=8
+2026-03-10 23:46:08,105 [WARNING] Order execution failed on kucoin (LINK/USDT)
