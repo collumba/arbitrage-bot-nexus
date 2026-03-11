@@ -1226,7 +1226,7 @@ class Portfolio:
             "real_trades": real_trades,
             "simulated_trades": sim_trades,
             "equity_curve": self.equity_curve[-200:],
-            "recent_trades": [t.to_dict() for t in self.trades[-50:]],
+            "recent_trades": [t.to_dict() for t in self.trades[-200:]],
         }
 
     def get_breakdown(self):

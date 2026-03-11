@@ -1,0 +1,6 @@
+2026-03-11 11:02:26,445 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-11 11:02:26,446 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 11:02:26,462 [INFO] Server listening on port 8888
+2026-03-11 11:02:35,881 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 11:02:41,875 [INFO] [LOOP 30] trades=49 balance=$8.68 open=4
+2026-03-11 11:02:42,879 [WARNING] Order execution failed on binance (BTC/USDT)

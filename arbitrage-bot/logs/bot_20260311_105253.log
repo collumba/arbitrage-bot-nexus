@@ -8,3 +8,9 @@
 2026-03-11 10:53:21,262 [INFO] [REAL] 6/6 exchanges connected
 2026-03-11 10:53:21,271 [INFO] [v4] PAPER MODE — Simulated execution
 2026-03-11 10:53:21,286 [INFO] Server listening on port 8888
+2026-03-11 11:03:35,563 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 11:06:43,797 [INFO] [LOOP 30] trades=122 balance=$34.20 open=10
+2026-03-11 11:15:15,491 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 11:20:15,774 [INFO] [LOOP 60] trades=252 balance=$155.24 open=8
+2026-03-11 11:23:49,823 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 11:28:52,568 [INFO] Shutting down...

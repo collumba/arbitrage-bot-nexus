@@ -898,48 +898,65 @@ body::before {
     </div>
   </div>
 
-  <!-- STRATEGY BREAKDOWN + TRADES -->
-  <div class="grid-2col">
-    <!-- Strategy Breakdown -->
-    <div class="panel">
-      <div class="panel-header">
-        <span class="panel-title">🏆 Strategy Breakdown</span>
-      </div>
-      <div class="panel-body">
-        <div class="chart-container" style="height:200px">
-          <canvas id="breakdownChart"></canvas>
-        </div>
+  <!-- STRATEGY BREAKDOWN -->
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-header">
+      <span class="panel-title">🏆 Strategy Breakdown</span>
+    </div>
+    <div class="panel-body">
+      <div class="chart-container" style="height:200px">
+        <canvas id="breakdownChart"></canvas>
       </div>
     </div>
+  </div>
 
-    <!-- Recent Trades -->
-    <div class="panel">
-      <div class="panel-header">
-        <span class="panel-title">📋 Recent Trades</span>
+  <!-- ALL TRADES — FULL WIDTH -->
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-header">
+      <span class="panel-title">📋 Trade History</span>
+      <div style="display:flex;align-items:center;gap:12px">
         <span style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)" id="tradeCount">0 total</span>
+        <select id="tradeFilter" onchange="filterTrades()" style="background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-family:'JetBrains Mono';font-size:11px;cursor:pointer">
+          <option value="all">All Strategies</option>
+          <option value="cross_exchange">Cross-Exchange</option>
+          <option value="triangular">Triangular</option>
+          <option value="statistical">Statistical</option>
+          <option value="funding_rate">Funding Rate</option>
+          <option value="dex_cex">DEX/CEX</option>
+        </select>
       </div>
-      <div class="panel-body" style="max-height:300px;overflow-y:auto">
-        <table class="trades-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Strategy</th>
-              <th>Pair</th>
-              <th>Side</th>
-              <th>Price</th>
-              <th>Slip%</th>
-              <th>Latency</th>
-              <th>Fees</th>
-              <th>P&L</th>
-              <th>Source</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="tradesBody">
-            <tr><td colspan="7" style="text-align:center;color:var(--text-dim)">No trades yet</td></tr>
-          </tbody>
-        </table>
-      </div>
+    </div>
+    <div class="panel-body" style="max-height:450px;overflow-y:auto">
+      <table class="trades-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>ID</th>
+            <th>Strategy</th>
+            <th>Exchange</th>
+            <th>Pair</th>
+            <th>Side</th>
+            <th>Size (USD)</th>
+            <th>Entry</th>
+            <th>Exit</th>
+            <th>Slip%</th>
+            <th>Latency</th>
+            <th>Fees</th>
+            <th>P&L</th>
+            <th>ROI%</th>
+            <th>Source</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tradesBody">
+          <tr><td colspan="16" style="text-align:center;color:var(--text-dim)">No trades yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="tradePagination" style="display:none;padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <button onclick="tradePage(-1)" id="btnPrev" style="background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:6px;padding:5px 14px;font-family:'JetBrains Mono';font-size:11px;cursor:pointer;transition:all .2s">◀ Prev</button>
+      <span id="pageInfo" style="font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)">Page 1 / 1</span>
+      <button onclick="tradePage(1)" id="btnNext" style="background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:6px;padding:5px 14px;font-family:'JetBrains Mono';font-size:11px;cursor:pointer;transition:all .2s">Next ▶</button>
     </div>
   </div>
 
@@ -1093,6 +1110,95 @@ function connectWS() {
 }
 
 // ─── DASHBOARD UPDATE ─────────────────────────────────
+window._allTrades = [];
+window._tradeCurrentPage = 1;
+const TRADES_PER_PAGE = 30;
+
+function renderTradeRow(t) {
+  const src = t.data_source || 'unknown';
+  const srcClass = src === 'real' ? 'real' : 'simulated';
+  const srcLabel = src === 'real' ? 'REAL' : 'SIM';
+  const sizeUsd = (t.price * (t.amount || 0));
+  const totalFees = (t.fee || 0) + (t.exit_fee || 0);
+  const roi = sizeUsd > 0 ? ((t.pnl || 0) / sizeUsd * 100) : 0;
+  const ts = t.closed_at || t.timestamp || '';
+  const timePart = ts ? new Date(ts * 1000).toLocaleTimeString('en-US', {hour12:false}) : '--:--:--';
+
+  return `<tr>
+    <td style="color:var(--text-dim);font-size:11px">${timePart}</td>
+    <td style="color:var(--cyan)">${t.id}</td>
+    <td style="font-size:11px">${(t.strategy||'').replace(/_/g,' ')}</td>
+    <td style="color:var(--purple)">${(t.exchange||'--').toUpperCase()}</td>
+    <td><strong>${t.pair}</strong></td>
+    <td style="color:${t.side==='buy'?'var(--green)':'var(--red)'}">${(t.side||'').toUpperCase()}</td>
+    <td>$${sizeUsd.toFixed(2)}</td>
+    <td>$${(t.price||0).toFixed(2)}</td>
+    <td>$${(t.exit_price||0).toFixed(2)}</td>
+    <td style="color:var(--orange)">${(t.slippage_pct||0).toFixed(3)}%</td>
+    <td style="color:var(--text-dim)">${(t.latency_ms||0).toFixed(0)}ms</td>
+    <td style="color:var(--red)">$${totalFees.toFixed(3)}</td>
+    <td style="color:${(t.pnl||0)>=0?'var(--green)':'var(--red)'}">
+      ${(t.pnl||0)>=0?'+':''}$${(t.pnl||0).toFixed(4)}
+    </td>
+    <td style="color:${roi>=0?'var(--green)':'var(--red)'}">${roi>=0?'+':''}${roi.toFixed(2)}%</td>
+    <td><span class="source-tag ${srcClass}">${srcLabel}</span></td>
+    <td style="color:${t.status==='open'?'var(--yellow)':'var(--text-dim)'}">
+      ${(t.status||'').toUpperCase()}
+    </td>
+  </tr>`;
+}
+
+function getFilteredTrades() {
+  const filter = document.getElementById('tradeFilter')?.value || 'all';
+  let trades = (window._allTrades || []).slice().reverse();
+  if (filter !== 'all') {
+    trades = trades.filter(t => t.strategy === filter);
+  }
+  return trades;
+}
+
+function filterTrades() {
+  window._tradeCurrentPage = 1;
+  renderTradesPage();
+}
+
+function tradePage(delta) {
+  const trades = getFilteredTrades();
+  const totalPages = Math.max(1, Math.ceil(trades.length / TRADES_PER_PAGE));
+  window._tradeCurrentPage = Math.max(1, Math.min(totalPages, window._tradeCurrentPage + delta));
+  renderTradesPage();
+}
+
+function renderTradesPage() {
+  const tbody = document.getElementById('tradesBody');
+  const pagination = document.getElementById('tradePagination');
+  if (!tbody) return;
+
+  const trades = getFilteredTrades();
+  const totalPages = Math.max(1, Math.ceil(trades.length / TRADES_PER_PAGE));
+  const page = Math.min(window._tradeCurrentPage, totalPages);
+  window._tradeCurrentPage = page;
+
+  if (trades.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="16" style="text-align:center;color:var(--text-dim)">No trades for this filter</td></tr>';
+    if (pagination) pagination.style.display = 'none';
+    return;
+  }
+
+  const start = (page - 1) * TRADES_PER_PAGE;
+  const pageItems = trades.slice(start, start + TRADES_PER_PAGE);
+  tbody.innerHTML = pageItems.map(renderTradeRow).join('');
+
+  if (pagination) {
+    pagination.style.display = 'flex';
+    document.getElementById('pageInfo').textContent = `Page ${page} / ${totalPages} (${trades.length} trades)`;
+    document.getElementById('btnPrev').disabled = page <= 1;
+    document.getElementById('btnNext').disabled = page >= totalPages;
+    document.getElementById('btnPrev').style.opacity = page <= 1 ? '0.4' : '1';
+    document.getElementById('btnNext').style.opacity = page >= totalPages ? '0.4' : '1';
+  }
+}
+
 function updateDashboard(data) {
   if (!data) return;
 
@@ -1165,32 +1271,8 @@ function updateDashboard(data) {
 
     // Recent trades table
     if (p.recent_trades) {
-      const tbody = document.getElementById('tradesBody');
-      if (p.recent_trades.length > 0) {
-        tbody.innerHTML = p.recent_trades.slice(-15).reverse().map(t => {
-          const src = t.data_source || 'unknown';
-          const srcClass = src === 'real' ? 'real' : 'simulated';
-          const srcLabel = src === 'real' ? 'REAL' : 'SIM';
-          return `
-          <tr>
-            <td style="color:var(--cyan)">${t.id}</td>
-            <td>${t.strategy}</td>
-            <td><strong>${t.pair}</strong></td>
-            <td style="color:${t.side === 'buy' ? 'var(--green)' : 'var(--red)'}">${t.side.toUpperCase()}</td>
-            <td>$${t.price.toFixed(2)}</td>
-            <td style="color:var(--orange)">${(t.slippage_pct || 0).toFixed(3)}%</td>
-            <td style="color:var(--text-dim)">${(t.latency_ms || 0).toFixed(0)}ms</td>
-            <td style="color:var(--red)">$${(t.fee + (t.exit_fee||0)).toFixed(2)}</td>
-            <td style="color:${t.pnl >= 0 ? 'var(--green)' : 'var(--red)'}">
-              ${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(4)}
-            </td>
-            <td><span class="source-tag ${srcClass}">${srcLabel}</span></td>
-            <td style="color:${t.status === 'open' ? 'var(--yellow)' : 'var(--text-dim)'}">
-              ${t.status.toUpperCase()}
-            </td>
-          </tr>`;
-        }).join('');
-      }
+      window._allTrades = p.recent_trades;
+      filterTrades();
       document.getElementById('tradeCount').textContent = `${p.total_trades} total (${p.real_trades || 0} real)`;
     }
   }
