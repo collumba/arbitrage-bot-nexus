@@ -1,7 +1,7 @@
 @echo off
-title ARBITRAGE NEXUS v3
+title ARBITRAGE NEXUS v4
 echo ========================================================
-echo        ARBITRAGE NEXUS v3 — REAL MARKET HUNTER
+echo        ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE
 echo ========================================================
 echo.
 
@@ -9,7 +9,7 @@ cd /d "%~dp0"
 
 echo  [*] Auto-installing ccxt if needed...
 echo  [*] Dashboard: http://localhost:8888
-echo  [*] Mode: AGGRESSIVE (more trades, lower thresholds)
+echo  [*] Kill Switch: http://localhost:8888/api/kill
 echo.
 
 python server.py

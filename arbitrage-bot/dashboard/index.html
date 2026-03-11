@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARBITRAGE NEXUS v3 — Real Market Hunter</title>
+<title>ARBITRAGE NEXUS v4 — Live Execution Engine</title>
 <style>
 /* ═══════════════════════════════════════════════════════════
    ARBITRAGE NEXUS — FUTURISTIC DARK THEME
@@ -592,6 +592,92 @@ body::before {
   100% { background: transparent; }
 }
 
+/* ─── v4: LIVE MODE ─────────────────────────────────── */
+.live-banner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.live-banner.active {
+  display: flex;
+  background: linear-gradient(135deg, rgba(255,51,102,0.15), rgba(255,51,102,0.05));
+  border: 1px solid var(--red);
+  animation: liveBannerPulse 2s ease-in-out infinite;
+}
+.live-banner.killed {
+  display: flex;
+  background: linear-gradient(135deg, rgba(255,51,102,0.3), rgba(255,51,102,0.15));
+  border: 2px solid var(--red);
+}
+@keyframes liveBannerPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,51,102,0.2); }
+  50% { box-shadow: 0 0 25px rgba(255,51,102,0.5); }
+}
+.live-banner-text {
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.live-banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.kill-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid var(--red);
+  transition: all 0.2s;
+}
+.kill-btn.kill {
+  background: var(--red);
+  color: white;
+}
+.kill-btn.kill:hover {
+  background: #ff1744;
+  box-shadow: 0 0 20px rgba(255,51,102,0.5);
+}
+.kill-btn.unkill {
+  background: transparent;
+  color: var(--green);
+  border-color: var(--green);
+}
+.kill-btn.unkill:hover {
+  background: rgba(0,255,136,0.1);
+}
+
+.live-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.live-stat-label {
+  font-size: 9px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.live-stat-value {
+  font-size: 13px;
+  font-weight: 600;
+}
+
 /* ─── SCROLLBAR ──────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -620,6 +706,33 @@ body::before {
 
 <!-- ═══ MAIN ═══ -->
 <div class="main">
+
+  <!-- v4: LIVE MODE BANNER -->
+  <div class="live-banner" id="liveBanner">
+    <div class="live-banner-text">
+      <span style="font-size:18px">⚠️</span>
+      <span id="liveBannerText">LIVE MODE — REAL MONEY</span>
+    </div>
+    <div class="live-banner-stats" id="liveBannerStats">
+      <div class="live-stat">
+        <span class="live-stat-label">Orders</span>
+        <span class="live-stat-value" id="liveOrders">0</span>
+      </div>
+      <div class="live-stat">
+        <span class="live-stat-label">Success</span>
+        <span class="live-stat-value" id="liveSuccessRate">—</span>
+      </div>
+      <div class="live-stat">
+        <span class="live-stat-label">Daily Loss</span>
+        <span class="live-stat-value" id="liveDailyLoss" style="color:var(--red)">$0</span>
+      </div>
+      <div class="live-stat">
+        <span class="live-stat-label">Balances</span>
+        <span class="live-stat-value" id="liveBalances">—</span>
+      </div>
+    </div>
+    <button class="kill-btn kill" id="killBtn" onclick="toggleKill()">⛔ KILL SWITCH</button>
+  </div>
 
   <!-- KPI ROW 1 -->
   <div class="kpi-row">
@@ -1176,9 +1289,49 @@ function updateDashboard(data) {
     document.getElementById('aggressiveBadge').style.display = 'inline-flex';
   }
 
-  // v3: Version badge
+  // v4: Version badge
   if (data.version) {
     document.getElementById('versionBadge').textContent = data.version;
+  }
+
+  // v4: Live mode banner and kill switch
+  const banner = document.getElementById('liveBanner');
+  if (data.is_live) {
+    const le = data.live_executor || {};
+    const killed = le.killed || false;
+
+    banner.className = `live-banner ${killed ? 'killed' : 'active'}`;
+    document.getElementById('liveBannerText').textContent =
+      killed ? '⛔ KILLED — TRADING HALTED' : 'LIVE MODE — REAL MONEY';
+
+    document.getElementById('liveOrders').textContent = le.total_orders || 0;
+    document.getElementById('liveSuccessRate').textContent = `${le.success_rate || 0}%`;
+    document.getElementById('liveDailyLoss').textContent =
+      `$${(le.daily_loss || 0).toFixed(2)} / $${(le.daily_loss_limit || 0).toFixed(0)}`;
+
+    // Show exchange balances
+    const bals = le.balances || {};
+    const balParts = Object.entries(bals).map(([ex, b]) => `${ex}: $${b.usdt_free}`);
+    document.getElementById('liveBalances').textContent = balParts.join(' | ') || '—';
+
+    const killBtn = document.getElementById('killBtn');
+    if (killed) {
+      killBtn.className = 'kill-btn unkill';
+      killBtn.textContent = '✅ RESUME TRADING';
+    } else {
+      killBtn.className = 'kill-btn kill';
+      killBtn.textContent = '⛔ KILL SWITCH';
+    }
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // v4: Mode badge update
+  if (data.trading_mode) {
+    const badge = document.getElementById('modeBadge');
+    const modeText = document.getElementById('modeText');
+    modeText.textContent = data.is_live ? 'LIVE' : data.trading_mode.toUpperCase();
+    badge.className = `status-badge ${data.is_live ? 'live' : 'paper'}`;
   }
 }
 
@@ -1204,6 +1357,22 @@ function addFeedItem(type, text) {
   }
 
   document.getElementById('feedCount').textContent = `${feed.children.length} events`;
+}
+
+// ─── v4: KILL SWITCH ──────────────────────────────────
+let isKilled = false;
+async function toggleKill() {
+  const endpoint = isKilled ? '/api/unkill' : '/api/kill';
+  try {
+    const resp = await fetch(`http://${location.host}${endpoint}`);
+    const result = await resp.json();
+    isKilled = result.killed;
+    addFeedItem(isKilled ? 'error' : 'trade',
+      isKilled ? '<strong>⛔ KILL SWITCH ACTIVATED</strong> — All live trading halted!'
+                : '<strong>✅ TRADING RESUMED</strong> — Kill switch deactivated');
+  } catch (e) {
+    addFeedItem('error', 'Failed to toggle kill switch');
+  }
 }
 
 // ─── ENGINE TOGGLE ────────────────────────────────────

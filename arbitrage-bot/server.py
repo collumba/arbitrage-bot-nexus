@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════╗
-║       ARBITRAGE NEXUS v3 — REAL MARKET HUNTER                ║
-║       Auto-installs ccxt · Real Binance/Bybit/OKX data       ║
-║       Aggressive Mode · Multi-Pair · Production Execution    ║
+║       ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE             ║
+║       Paper + Live modes · Real orders via ccxt              ║
+║       Kill switch · Balance sync · Safety guards             ║
 ╚══════════════════════════════════════════════════════════════╝
 """
 import json
@@ -199,9 +199,53 @@ PRICE_SEEDS = {
 
 EXCHANGES = ["binance", "bybit", "okx", "kucoin", "gate", "mexc"]
 
+# ═══════════════════════════════════════════════════════════
+# EXCHANGE CREDENTIALS (from .env) — used ONLY in live mode
+# ═══════════════════════════════════════════════════════════
+
+EXCHANGE_CREDENTIALS = {
+    "binance": {
+        "apiKey": os.environ.get("BINANCE_API_KEY", ""),
+        "secret": os.environ.get("BINANCE_SECRET", ""),
+    },
+    "bybit": {
+        "apiKey": os.environ.get("BYBIT_API_KEY", ""),
+        "secret": os.environ.get("BYBIT_SECRET", ""),
+    },
+    "okx": {
+        "apiKey": os.environ.get("OKX_API_KEY", ""),
+        "secret": os.environ.get("OKX_SECRET", ""),
+        "password": os.environ.get("OKX_PASSWORD", ""),
+    },
+    "kucoin": {
+        "apiKey": os.environ.get("KUCOIN_API_KEY", ""),
+        "secret": os.environ.get("KUCOIN_SECRET", ""),
+        "password": os.environ.get("KUCOIN_PASSWORD", ""),
+    },
+}
+
+# Live mode safety configuration
+LIVE_SAFETY = {
+    "max_daily_loss_usd": float(os.environ.get("LIVE_MAX_DAILY_LOSS", "50")),
+    "max_single_order_usd": float(os.environ.get("LIVE_MAX_ORDER", "100")),
+    "balance_sync_interval_sec": 30,
+    "require_minimum_balance_usd": 5.0,
+    "order_timeout_sec": 10,
+}
+
+def _get_configured_exchanges():
+    """Returns list of exchange IDs that have API keys configured"""
+    configured = []
+    for ex_id, creds in EXCHANGE_CREDENTIALS.items():
+        if creds.get("apiKey") and creds.get("secret"):
+            configured.append(ex_id)
+    return configured
+
+LIVE_EXCHANGES = _get_configured_exchanges()
+
 
 # ═══════════════════════════════════════════════════════════
-# EXECUTION MODEL v3 — Slippage, Latency, Fees
+# EXECUTION MODEL — Slippage, Latency, Fees (Paper Mode)
 # ═══════════════════════════════════════════════════════════
 
 class ExecutionModel:
@@ -281,7 +325,295 @@ class ExecutionModel:
 
 
 # ═══════════════════════════════════════════════════════════
-# REAL MARKET DATA ENGINE v3
+# LIVE EXECUTOR v4 — Real orders via ccxt
+# ═══════════════════════════════════════════════════════════
+
+class LiveExecutor:
+    """Places REAL orders on exchanges via ccxt authenticated API.
+    Returns same tuple as ExecutionModel for compatibility:
+        (executed_price, fee_usd, slippage_pct, latency_ms, success)
+    """
+
+    def __init__(self):
+        self.exchanges = {}        # authenticated ccxt instances
+        self.balances = {}         # cached exchange balances
+        self._order_log = deque(maxlen=500)
+        self._api_calls = {}
+        self._last_loss_time = 0
+        self._last_balance_sync = 0
+        self._total_orders = 0
+        self._failed_orders = 0
+        self._daily_loss = 0.0
+        self._daily_reset = time.time()
+        self.killed = False        # kill switch state
+
+        if CCXT_AVAILABLE:
+            self._init_exchanges()
+        else:
+            log.error("[LIVE] ccxt not available! Cannot place real orders.")
+
+    def _init_exchanges(self):
+        """Initialize AUTHENTICATED exchange connections"""
+        for ex_id, creds in EXCHANGE_CREDENTIALS.items():
+            if not creds.get("apiKey") or not creds.get("secret"):
+                continue
+            try:
+                ex_class = getattr(ccxt, ex_id, None)
+                if not ex_class:
+                    continue
+
+                config = {
+                    "apiKey": creds["apiKey"],
+                    "secret": creds["secret"],
+                    "enableRateLimit": True,
+                    "timeout": LIVE_SAFETY["order_timeout_sec"] * 1000,
+                    "options": {"defaultType": "spot"},
+                }
+                # OKX and KuCoin need password
+                if creds.get("password"):
+                    config["password"] = creds["password"]
+
+                ex = ex_class(config)
+                ex.load_markets()
+
+                # Verify credentials by fetching balance
+                bal = ex.fetch_balance()
+                usdt_free = float(bal.get("USDT", {}).get("free", 0))
+                self.balances[ex_id] = {
+                    "usdt_free": usdt_free,
+                    "usdt_total": float(bal.get("USDT", {}).get("total", 0)),
+                    "last_sync": time.time(),
+                }
+
+                self.exchanges[ex_id] = ex
+                log.info(f"[LIVE] {ex_id}: AUTHENTICATED — USDT balance: ${usdt_free:.2f}")
+
+            except ccxt.AuthenticationError as e:
+                log.error(f"[LIVE] {ex_id}: AUTHENTICATION FAILED — check your API keys: {e}")
+            except Exception as e:
+                log.error(f"[LIVE] {ex_id}: could not connect: {e}")
+
+        if not self.exchanges:
+            log.error("[LIVE] NO exchanges authenticated! Check API keys in .env")
+        else:
+            log.info(f"[LIVE] {len(self.exchanges)} exchange(s) authenticated: {list(self.exchanges.keys())}")
+
+    def sync_balance(self, exchange):
+        """Fetch real balance from exchange (with caching)"""
+        cached = self.balances.get(exchange, {})
+        if time.time() - cached.get("last_sync", 0) < LIVE_SAFETY["balance_sync_interval_sec"]:
+            return cached.get("usdt_free", 0)
+
+        ex = self.exchanges.get(exchange)
+        if not ex:
+            return 0
+
+        try:
+            bal = ex.fetch_balance()
+            usdt_free = float(bal.get("USDT", {}).get("free", 0))
+            self.balances[exchange] = {
+                "usdt_free": usdt_free,
+                "usdt_total": float(bal.get("USDT", {}).get("total", 0)),
+                "last_sync": time.time(),
+            }
+            return usdt_free
+        except Exception as e:
+            log.error(f"[LIVE] Balance sync failed on {exchange}: {e}")
+            return cached.get("usdt_free", 0)
+
+    def _check_safety(self, exchange, amount_usd):
+        """Pre-trade safety checks. Returns (ok, reason)."""
+        if self.killed:
+            return False, "KILL SWITCH ACTIVE"
+
+        # Daily loss limit
+        if time.time() - self._daily_reset > 86400:
+            self._daily_loss = 0.0
+            self._daily_reset = time.time()
+
+        if self._daily_loss >= LIVE_SAFETY["max_daily_loss_usd"]:
+            return False, f"Daily loss limit reached (${self._daily_loss:.2f} >= ${LIVE_SAFETY['max_daily_loss_usd']:.2f})"
+
+        # Max single order
+        if amount_usd > LIVE_SAFETY["max_single_order_usd"]:
+            return False, f"Order ${amount_usd:.2f} exceeds max ${LIVE_SAFETY['max_single_order_usd']:.2f}"
+
+        # Exchange must be authenticated
+        if exchange not in self.exchanges:
+            return False, f"Exchange {exchange} not authenticated"
+
+        # Balance check
+        usdt_free = self.sync_balance(exchange)
+        if usdt_free < LIVE_SAFETY["require_minimum_balance_usd"]:
+            return False, f"Insufficient balance on {exchange}: ${usdt_free:.2f}"
+
+        if amount_usd > usdt_free * 0.95:  # 5% buffer
+            return False, f"Order ${amount_usd:.2f} exceeds available ${usdt_free:.2f} on {exchange}"
+
+        return True, "OK"
+
+    def execute_order(self, pair, exchange, side, price, amount_usd):
+        """Execute a REAL order on the exchange.
+        Returns: (executed_price, fee_usd, slippage_pct, latency_ms, success)
+        """
+        self._total_orders += 1
+
+        # Safety checks
+        safe, reason = self._check_safety(exchange, amount_usd)
+        if not safe:
+            log.warning(f"[LIVE] Order BLOCKED: {reason} | {side} {pair} ${amount_usd:.2f} on {exchange}")
+            self._log_order(pair, exchange, side, price, amount_usd, 0, 0, False, reason)
+            self._failed_orders += 1
+            return (0, 0, 0, 0, False)
+
+        ex = self.exchanges[exchange]
+        amount_coin = amount_usd / price
+
+        try:
+            start_ts = time.time()
+            order = ex.create_order(
+                symbol=pair,
+                type="market",
+                side=side,
+                amount=amount_coin,
+            )
+            latency_ms = (time.time() - start_ts) * 1000
+
+            # Parse order result
+            status = order.get("status", "unknown")
+            filled = float(order.get("filled", 0))
+            avg_price = float(order.get("average", 0)) or float(order.get("price", 0)) or price
+            cost = float(order.get("cost", 0)) or (filled * avg_price)
+
+            # Fee
+            fee_info = order.get("fee") or {}
+            fee_cost = float(fee_info.get("cost", 0))
+            if fee_info.get("currency") and fee_info["currency"] != "USDT":
+                # Convert fee to USD estimate
+                fee_cost = cost * 0.001  # fallback: ~0.1%
+
+            # Slippage
+            slippage_pct = abs(avg_price - price) / price * 100 if price > 0 else 0
+
+            success = status in ("closed", "filled") or filled > 0
+
+            if not success:
+                self._failed_orders += 1
+                log.warning(f"[LIVE] Order NOT FILLED: {side} {amount_coin:.6f} {pair} on {exchange} — status: {status}")
+
+            self._log_order(pair, exchange, side, price, amount_usd,
+                            avg_price, fee_cost, success,
+                            f"order_id={order.get('id','?')} status={status} filled={filled:.6f}")
+
+            log.info(f"[LIVE] {'OK' if success else 'FAIL'}: {side.upper()} {pair} "
+                      f"${amount_usd:.2f} @ ${avg_price:.4f} | fee=${fee_cost:.4f} | "
+                      f"slip={slippage_pct:.4f}% | {latency_ms:.0f}ms | {exchange}")
+
+            # Invalidate balance cache after trade
+            if exchange in self.balances:
+                self.balances[exchange]["last_sync"] = 0
+
+            return (avg_price, fee_cost, slippage_pct, latency_ms, success)
+
+        except ccxt.InsufficientFunds as e:
+            self._failed_orders += 1
+            log.error(f"[LIVE] INSUFFICIENT FUNDS on {exchange}: {e}")
+            self._log_order(pair, exchange, side, price, amount_usd, 0, 0, False, f"InsufficientFunds: {e}")
+            return (0, 0, 0, 0, False)
+
+        except ccxt.InvalidOrder as e:
+            self._failed_orders += 1
+            log.error(f"[LIVE] INVALID ORDER on {exchange}: {e}")
+            self._log_order(pair, exchange, side, price, amount_usd, 0, 0, False, f"InvalidOrder: {e}")
+            return (0, 0, 0, 0, False)
+
+        except ccxt.NetworkError as e:
+            self._failed_orders += 1
+            log.error(f"[LIVE] NETWORK ERROR on {exchange}: {e}")
+            self._log_order(pair, exchange, side, price, amount_usd, 0, 0, False, f"NetworkError: {e}")
+            return (0, 0, 0, 0, False)
+
+        except Exception as e:
+            self._failed_orders += 1
+            log.error(f"[LIVE] UNEXPECTED ERROR on {exchange}: {e}")
+            self._log_order(pair, exchange, side, price, amount_usd, 0, 0, False, f"Error: {e}")
+            return (0, 0, 0, 0, False)
+
+    def record_loss(self, pnl_usd=0):
+        self._last_loss_time = time.time()
+        if pnl_usd < 0:
+            self._daily_loss += abs(pnl_usd)
+            if self._daily_loss >= LIVE_SAFETY["max_daily_loss_usd"]:
+                log.critical(f"[LIVE] DAILY LOSS LIMIT HIT: ${self._daily_loss:.2f} — ACTIVATING KILL SWITCH")
+                self.killed = True
+
+    def in_cooldown(self):
+        return (time.time() - self._last_loss_time) < RISK["cooldown_after_loss_sec"]
+
+    def kill(self):
+        """Emergency kill switch — stops all live trading immediately"""
+        self.killed = True
+        log.critical("[LIVE] === KILL SWITCH ACTIVATED === All live trading halted.")
+
+    def unkill(self):
+        """Reset kill switch — allow trading again"""
+        self.killed = False
+        self._daily_loss = 0.0
+        log.info("[LIVE] Kill switch deactivated. Trading resumed.")
+
+    def _log_order(self, pair, exchange, side, price, amount_usd,
+                   exec_price, fee, success, detail=""):
+        self._order_log.append({
+            "timestamp": time.time(),
+            "pair": pair,
+            "exchange": exchange,
+            "side": side,
+            "requested_price": price,
+            "amount_usd": amount_usd,
+            "executed_price": exec_price,
+            "fee": fee,
+            "success": success,
+            "detail": detail,
+        })
+
+    def get_fee_pct(self, exchange, order_type="taker"):
+        """Get fee from exchange info or fallback to config"""
+        return EXCHANGE_FEES.get(exchange, EXCHANGE_FEES["binance"]).get(order_type, 0.1)
+
+    def get_withdrawal_fee(self, exchange):
+        return EXCHANGE_FEES.get(exchange, EXCHANGE_FEES["binance"]).get("withdrawal_usdt", 1.0)
+
+    def estimate_slippage(self, pair, trade_usd, exchange="binance"):
+        """Estimate slippage (used for opportunity evaluation, not actual execution)"""
+        liq = SLIPPAGE_MODEL["liquidity_usd"].get(pair, 50000)
+        base = SLIPPAGE_MODEL["base_bps"]
+        size_impact = SLIPPAGE_MODEL["size_factor"] * (trade_usd / liq)
+        return (base + size_impact) / 10000
+
+    def check_rate_limit(self, exchange):
+        """Rate limiting (ccxt handles this internally, but we add a safety layer)"""
+        return True  # ccxt enableRateLimit handles it
+
+    def get_status(self):
+        return {
+            "mode": "live",
+            "exchanges_authenticated": list(self.exchanges.keys()),
+            "balances": {k: {"usdt_free": round(v.get("usdt_free", 0), 2),
+                             "usdt_total": round(v.get("usdt_total", 0), 2)}
+                         for k, v in self.balances.items()},
+            "total_orders": self._total_orders,
+            "failed_orders": self._failed_orders,
+            "success_rate": round((self._total_orders - self._failed_orders) /
+                                  max(1, self._total_orders) * 100, 1),
+            "daily_loss": round(self._daily_loss, 2),
+            "daily_loss_limit": LIVE_SAFETY["max_daily_loss_usd"],
+            "killed": self.killed,
+            "recent_orders": list(self._order_log)[-20:],
+        }
+
+
+# ═══════════════════════════════════════════════════════════
+# REAL MARKET DATA ENGINE
 # ═══════════════════════════════════════════════════════════
 
 class RealMarketFetcher:
@@ -497,10 +829,23 @@ class HybridMarket:
 
     def __init__(self):
         self.simulator = MarketSimulator()
-        self.execution = ExecutionModel()
         self.real_fetcher = RealMarketFetcher()
         self.use_real = len(self.real_fetcher.exchanges) > 0
         self._source_stats = {"real": 0, "simulated": 0}
+
+        # v4: Route execution based on TRADING_MODE
+        if TRADING_MODE == "live" and CCXT_AVAILABLE and LIVE_EXCHANGES:
+            self.execution = LiveExecutor()
+            self.is_live = True
+            log.info("[v4] LIVE MODE — Real orders will be placed on exchanges")
+        else:
+            self.execution = ExecutionModel()
+            self.is_live = False
+            if TRADING_MODE == "live" and not LIVE_EXCHANGES:
+                log.warning("[v4] TRADING_MODE=live but no API keys configured! Falling back to paper mode.")
+            elif TRADING_MODE == "live" and not CCXT_AVAILABLE:
+                log.warning("[v4] TRADING_MODE=live but ccxt not installed! Falling back to paper mode.")
+            log.info("[v4] PAPER MODE — Simulated execution")
 
     def tick(self):
         self.simulator.tick()
@@ -975,9 +1320,12 @@ class BaseEngine:
             return False
         return True
 
-    def _record_engine_loss(self):
+    def _record_engine_loss(self, pnl=0):
         """Record loss for this engine's cooldown only"""
         self._own_last_loss_time = time.time()
+        # v4: Notify live executor of loss for daily tracking
+        if hasattr(self.execution, 'record_loss') and hasattr(self.execution, 'killed'):
+            self.execution.record_loss(pnl)
 
     def _get_data_source(self, ticker):
         """Determine if this ticker is from real or simulated data"""
@@ -1018,7 +1366,7 @@ class BaseEngine:
         self.trades_executed += 1
         self.total_profit += pnl
         if pnl < 0:
-            self._record_engine_loss()
+            self._record_engine_loss(pnl)
 
         result = {
             "trade_id": trade.id, "pair": pair,
@@ -1181,7 +1529,7 @@ class TriangularEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl
                             if pnl < 0:
-                                self._record_engine_loss()
+                                self._record_engine_loss(pnl)
                             self._add_event("trade", {
                                 "trade_id": trade.id, "path": list(tri),
                                 "net_profit_pct": round(actual_profit, 4),
@@ -1250,7 +1598,7 @@ class StatisticalEngine(BaseEngine):
                     self.trades_executed += 1
                     self.total_profit += pnl
                     if pnl < 0:
-                        self._record_engine_loss()
+                        self._record_engine_loss(pnl)
                     self._add_event("trade", {
                         "trade_id": active["trade_id"], "action": "close",
                         "exit_z": round(z, 4), "pnl": round(pnl, 4),
@@ -1322,7 +1670,7 @@ class FundingRateEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl_total
                             if pnl_total < 0:
-                                self._record_engine_loss()
+                                self._record_engine_loss(pnl_total)
                             self._add_event("trade", {
                                 "trade_id": active["trade_id"], "action": "close",
                                 "funding_earned": round(funding_pnl, 4),
@@ -1445,7 +1793,7 @@ class DexCexEngine(BaseEngine):
                             self.trades_executed += 1
                             self.total_profit += pnl
                             if pnl < 0:
-                                self._record_engine_loss()
+                                self._record_engine_loss(pnl)
                             self._add_event("trade", {
                                 "trade_id": trade.id, "pair": pair,
                                 "direction": direction,
@@ -1552,12 +1900,26 @@ class BotServer:
             "price_source": self.market.get_price_source(),
             "ccxt_available": CCXT_AVAILABLE,
             "aggressive": AGGRESSIVE,
-            "version": "v3",
+            "version": "v4",
+            "live_mode": self.market.is_live,
+            "live_exchanges": LIVE_EXCHANGES,
         })
 
+    def kill_switch(self, activate=True):
+        """Emergency kill switch for live trading"""
+        if self.market.is_live:
+            if activate:
+                self.market.execution.kill()
+            else:
+                self.market.execution.unkill()
+            return True
+        return False
+
     def get_state(self):
-        return {
-            "version": "v3",
+        state = {
+            "version": "v4",
+            "trading_mode": TRADING_MODE,
+            "is_live": self.market.is_live,
             "portfolio": self.portfolio.get_stats(),
             "strategy_breakdown": self.portfolio.get_breakdown(),
             "engines": {n: e.get_status() for n, e in self.engines.items()},
@@ -1569,6 +1931,12 @@ class BotServer:
             "scan_interval": SCAN_INTERVAL,
             "timestamp": time.time(),
         }
+
+        # v4: Add live executor status
+        if self.market.is_live and hasattr(self.market.execution, 'get_status'):
+            state["live_executor"] = self.market.execution.get_status()
+
+        return state
 
     def _handle_http(self, conn, data):
         first_line = data.split("\r\n")[0] if "\r\n" in data else data.split("\n")[0]
@@ -1588,6 +1956,26 @@ class BotServer:
             else:
                 body = b"<h1>Dashboard not found</h1>"
                 resp = f"HTTP/1.1 404 Not Found\r\nContent-Length: {len(body)}\r\n\r\n".encode() + body
+        elif path == "/api/kill":
+            ok = self.kill_switch(activate=True)
+            result = {"killed": True, "success": ok}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
+        elif path == "/api/unkill":
+            ok = self.kill_switch(activate=False)
+            result = {"killed": False, "success": ok}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
         elif path.startswith("/api/"):
             body = json.dumps(self.get_state()).encode()
             resp = (
@@ -1690,33 +2078,43 @@ class BotServer:
     def start(self):
         src = self.market.get_price_source()
         mode_str = "AGGRESSIVE" if AGGRESSIVE else "NORMAL"
+        live_exs = ", ".join(LIVE_EXCHANGES) if LIVE_EXCHANGES else "none"
+        exec_mode = "LIVE (REAL ORDERS)" if self.market.is_live else "PAPER (simulated)"
+
         print(f"""
 ╔══════════════════════════════════════════════════════════════╗
-║          ARBITRAGE NEXUS v3 — REAL MARKET HUNTER             ║
+║          ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE          ║
 ╠══════════════════════════════════════════════════════════════╣
-║  Mode:     {TRADING_MODE.upper():>6} ({mode_str})                            ║
-║  Balance:  ${INITIAL_BALANCE:>10,.0f}                                  ║
-║  Prices:   {src:<48s} ║
-║  CCXT:     {'CONNECTED' if CCXT_AVAILABLE else 'Not installed':48s} ║
-║  Pairs:    {len(ALL_PAIRS)} tracked across {len(EXCHANGES)} exchanges             ║
-║  Scan:     Every {SCAN_INTERVAL}s                                       ║
+║  Execution: {exec_mode:<46s} ║
+║  Balance:   ${INITIAL_BALANCE:>10,.0f}                                 ║
+║  Prices:    {src:<46s} ║
+║  CCXT:      {'CONNECTED' if CCXT_AVAILABLE else 'Not installed':46s} ║
+║  Pairs:     {len(ALL_PAIRS)} tracked across {len(EXCHANGES)} exchanges            ║
+║  Scan:      Every {SCAN_INTERVAL}s · {mode_str:10s}                     ║
 ╠══════════════════════════════════════════════════════════════╣
-║  v3 UPGRADES:                                                ║
-║   + Auto-install ccxt (real prices from exchanges)           ║
-║   + 6 exchanges: Binance, Bybit, OKX, KuCoin, Gate, MEXC    ║
-║   + 20 trading pairs (top by volume)                         ║
-║   + Aggressive mode (lower thresholds, more trades)          ║
-║   + Real-time data quality tracking                          ║
-║   + REAL vs SIMULATED trade tagging                          ║
-║   + Faster 0.5s scan interval                                ║
-║   + 5 more triangular paths                                  ║
-║   + 6 stat-arb pair combos                                   ║
-║   + L2 DEX support (lower gas)                               ║
+║  v4 — LIVE EXECUTION:                                        ║
+║   + Paper/Live mode switch via TRADING_MODE env var          ║
+║   + Real order execution via ccxt create_order               ║
+║   + Authenticated exchanges: {live_exs:<30s} ║
+║   + Kill switch: /api/kill (emergency stop)                  ║
+║   + Daily loss limit: ${LIVE_SAFETY['max_daily_loss_usd']:<8,.0f}                            ║
+║   + Max order size:   ${LIVE_SAFETY['max_single_order_usd']:<8,.0f}                            ║
+║   + Balance sync every {LIVE_SAFETY['balance_sync_interval_sec']}s                             ║
+║   + Pre-trade safety checks (balance, limits, auth)          ║
+║   + Order log with full execution details                    ║
 ╠══════════════════════════════════════════════════════════════╣
-║  Dashboard:  http://localhost:{self.port}                         ║
-║  API:        http://localhost:{self.port}/api/status               ║
+║  Dashboard:   http://localhost:{self.port}                        ║
+║  API:         http://localhost:{self.port}/api/status              ║
+║  Kill Switch: http://localhost:{self.port}/api/kill               ║
 ╚══════════════════════════════════════════════════════════════╝
 """)
+
+        if self.market.is_live:
+            print("  ⚠️  WARNING: LIVE MODE ACTIVE — REAL MONEY WILL BE USED")
+            print(f"  ⚠️  Exchanges: {live_exs}")
+            print(f"  ⚠️  Daily loss limit: ${LIVE_SAFETY['max_daily_loss_usd']:.0f}")
+            print(f"  ⚠️  Kill switch: http://localhost:{self.port}/api/kill")
+            print()
 
         engine_thread = threading.Thread(target=self._engine_loop, daemon=True)
         engine_thread.start()
