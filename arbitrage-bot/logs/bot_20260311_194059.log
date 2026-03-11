@@ -1,0 +1,5 @@
+2026-03-11 19:40:59,341 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 19:41:02,464 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 19:41:07,185 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 19:41:09,694 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 19:41:11,558 [INFO] [REAL] kucoin: connected, 19 pairs available

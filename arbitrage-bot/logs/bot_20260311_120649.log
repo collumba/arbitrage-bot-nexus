@@ -1,0 +1,241 @@
+2026-03-11 12:06:49,403 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 12:06:53,391 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 12:07:01,851 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 12:07:04,416 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 12:07:06,220 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-11 12:07:17,470 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-11 12:07:20,525 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-11 12:07:20,525 [INFO] [REAL] 6/6 exchanges connected
+2026-03-11 12:07:20,525 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 12:07:20,540 [INFO] Server listening on port 8888
+2026-03-11 12:08:04,674 [INFO] [HTTP] Engine dex_cex -> OFF
+2026-03-11 12:08:06,382 [INFO] [HTTP] Engine dex_cex -> ON
+2026-03-11 12:21:01,080 [INFO] [LOOP 30] trades=118 balance=$34.75 open=6
+2026-03-11 12:34:57,740 [INFO] [LOOP 60] trades=255 balance=$152.06 open=7
+2026-03-11 12:41:04,205 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 12:48:53,326 [INFO] [LOOP 90] trades=387 balance=$757.81 open=6
+2026-03-11 12:54:07,186 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 13:03:00,110 [INFO] [LOOP 120] trades=529 balance=$2,789.15 open=7
+2026-03-11 13:08:35,557 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 13:09:23,976 [WARNING] Order execution failed on bybit (MATIC/USDT)
+2026-03-11 13:16:59,692 [INFO] [LOOP 150] trades=681 balance=$12,583.43 open=9
+2026-03-11 13:20:33,381 [WARNING] Order execution failed on binance (MATIC/USDT)
+2026-03-11 13:29:12,653 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 13:30:38,231 [INFO] [LOOP 180] trades=813 balance=$46,413.08 open=4
+2026-03-11 13:31:05,381 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 13:31:32,454 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 13:32:00,220 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 13:32:31,870 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 13:37:31,257 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 13:39:19,799 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 13:41:09,721 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 13:44:16,100 [INFO] [LOOP 210] trades=814 balance=$47,634.01 open=3
+2026-03-11 13:46:31,094 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 13:47:53,715 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 13:49:44,029 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 13:52:50,919 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 13:53:51,922 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 13:54:19,038 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 13:54:45,482 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 13:54:45,484 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 13:56:08,194 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 13:56:10,061 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 13:57:32,390 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 13:58:03,915 [INFO] [LOOP 240] trades=815 balance=$48,041.38 open=2
+2026-03-11 13:59:00,947 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 14:00:49,245 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 14:01:44,870 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 14:03:35,973 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 14:04:01,665 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 14:05:55,625 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 14:09:37,522 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 14:11:55,251 [INFO] [LOOP 270] trades=815 balance=$48,041.38 open=2
+2026-03-11 14:17:12,449 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 14:22:41,132 [WARNING] Order execution failed on binance (MATIC/USDT)
+2026-03-11 14:23:08,368 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 14:25:26,728 [INFO] [LOOP 300] trades=815 balance=$48,041.38 open=2
+2026-03-11 14:28:16,522 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 14:31:02,606 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 14:31:03,145 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 14:31:33,183 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 14:32:55,655 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 14:33:54,660 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 14:35:50,166 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 14:36:45,084 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 14:37:20,885 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 14:38:43,859 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 14:39:12,300 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 14:39:39,342 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 14:39:39,349 [INFO] [LOOP 330] trades=815 balance=$48,041.38 open=2
+2026-03-11 14:41:30,575 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 14:43:27,325 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 14:47:47,962 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 14:49:55,439 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 14:54:40,971 [INFO] [LOOP 360] trades=815 balance=$48,041.38 open=2
+2026-03-11 14:59:07,060 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:01:20,268 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 15:05:00,205 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 15:05:01,015 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:06:23,218 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:08:38,466 [INFO] [LOOP 390] trades=815 balance=$48,041.38 open=2
+2026-03-11 15:09:33,128 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 15:09:33,402 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:10:28,712 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 15:10:57,113 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:11:25,963 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:12:18,531 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 15:12:18,792 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 15:13:12,410 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 15:13:43,039 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:14:38,923 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 15:15:31,955 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 15:16:25,998 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:17:41,429 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 15:19:56,435 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 15:19:57,509 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 15:22:16,127 [INFO] [LOOP 420] trades=815 balance=$48,041.38 open=2
+2026-03-11 15:26:21,526 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 15:27:43,754 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:28:19,998 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:29:43,850 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:30:43,116 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:30:43,117 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 15:32:04,717 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:32:04,988 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:32:59,395 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:34:24,529 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 15:36:43,909 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:36:44,727 [INFO] [LOOP 450] trades=815 balance=$48,041.38 open=2
+2026-03-11 15:45:00,633 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:47:43,486 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 15:49:10,019 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 15:50:29,925 [INFO] [LOOP 480] trades=815 balance=$48,041.38 open=2
+2026-03-11 15:51:24,943 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:52:49,915 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 15:53:45,297 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 15:57:28,864 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 15:58:46,754 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 15:59:14,151 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 15:59:14,966 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 15:59:36,445 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 16:00:02,611 [WARNING] Order execution failed on bybit (MATIC/USDT)
+2026-03-11 16:01:34,040 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:04:13,431 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 16:04:15,809 [INFO] [LOOP 510] trades=815 balance=$48,041.38 open=2
+2026-03-11 16:05:36,264 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 16:06:06,179 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 16:11:39,535 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:16:13,029 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 16:16:14,083 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 16:17:08,578 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 16:17:08,853 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 16:18:02,031 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 16:18:02,301 [INFO] [LOOP 540] trades=815 balance=$48,041.38 open=2
+2026-03-11 16:20:20,865 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 16:23:09,711 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 16:25:33,223 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 16:25:58,725 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:26:25,730 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:26:52,535 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:32:04,727 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 16:32:07,132 [INFO] [LOOP 570] trades=815 balance=$48,041.38 open=2
+2026-03-11 16:32:59,799 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 16:34:54,189 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 16:36:21,134 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:39:12,702 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 16:39:42,899 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 16:40:35,888 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 16:42:01,188 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 16:45:19,815 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 16:45:50,250 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 16:46:18,954 [INFO] [LOOP 600] trades=815 balance=$48,041.38 open=2
+2026-03-11 16:53:23,686 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:57:30,550 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:58:25,995 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 16:58:49,326 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 17:00:18,939 [INFO] [LOOP 630] trades=815 balance=$48,041.38 open=2
+2026-03-11 17:05:15,499 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 17:05:51,027 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 17:10:38,800 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 17:14:26,026 [INFO] [LOOP 660] trades=815 balance=$48,041.38 open=2
+2026-03-11 17:19:41,840 [WARNING] Order execution failed on binance (ADA/USDT)
+2026-03-11 17:22:30,665 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 17:23:51,665 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 17:26:09,505 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 17:27:31,655 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 17:28:30,415 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 17:28:31,993 [INFO] [LOOP 690] trades=815 balance=$48,041.38 open=2
+2026-03-11 17:33:20,513 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 17:33:51,017 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 17:38:32,219 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 17:38:32,489 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 17:40:26,367 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 17:40:52,841 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 17:42:41,011 [INFO] [LOOP 720] trades=815 balance=$48,041.38 open=2
+2026-03-11 17:44:26,117 [WARNING] Order execution failed on bybit (MATIC/USDT)
+2026-03-11 17:46:18,683 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 17:46:52,427 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 17:56:30,209 [INFO] [LOOP 750] trades=815 balance=$48,041.38 open=2
+2026-03-11 17:58:13,671 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 18:03:03,386 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 18:10:27,354 [INFO] [LOOP 780] trades=815 balance=$48,041.38 open=2
+2026-03-11 18:15:34,761 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 18:15:58,713 [WARNING] Order execution failed on bybit (MATIC/USDT)
+2026-03-11 18:16:25,929 [WARNING] Order execution failed on bybit (MATIC/USDT)
+2026-03-11 18:21:08,816 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 18:21:35,042 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 18:23:28,754 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 18:24:29,951 [INFO] [LOOP 810] trades=815 balance=$48,041.38 open=2
+2026-03-11 18:26:54,568 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 18:28:45,363 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 18:29:43,451 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 18:30:34,411 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 18:31:08,336 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 18:32:06,724 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 18:33:04,748 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 18:34:26,173 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 18:37:16,730 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 18:38:48,184 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 18:38:48,992 [INFO] [LOOP 840] trades=815 balance=$48,041.38 open=2
+2026-03-11 18:41:37,756 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 18:41:40,428 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 18:41:40,429 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 18:42:08,916 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 18:48:58,615 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 18:51:56,843 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 18:53:21,921 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 18:53:22,462 [INFO] [LOOP 870] trades=815 balance=$48,041.38 open=2
+2026-03-11 18:53:49,082 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 18:54:45,434 [WARNING] Order execution failed on kucoin (MATIC/USDT)
+2026-03-11 18:55:43,514 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 18:56:47,155 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 18:56:48,490 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 18:58:43,439 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 19:01:40,071 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 19:01:41,675 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 19:02:42,684 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 19:03:06,980 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 19:03:10,414 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 19:05:07,737 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 19:05:08,271 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 19:07:06,015 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 19:07:32,632 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 19:08:06,244 [INFO] [LOOP 900] trades=815 balance=$48,041.38 open=2
+2026-03-11 19:09:26,617 [WARNING] Order execution failed on binance (UNI/USDT)
+2026-03-11 19:11:25,012 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 19:19:48,557 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 19:20:20,073 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 19:20:49,485 [WARNING] Order execution failed on binance (XRP/USDT)
+2026-03-11 19:22:52,001 [INFO] [LOOP 930] trades=815 balance=$48,041.38 open=2
+2026-03-11 19:23:22,103 [WARNING] Order execution failed on binance (ETH/USDT)
+2026-03-11 19:24:44,420 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 19:29:01,998 [WARNING] Order execution failed on binance (SOL/USDT)
+2026-03-11 19:29:57,440 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 19:31:49,167 [WARNING] Order execution failed on binance (DOGE/USDT)
+2026-03-11 19:31:49,167 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 19:35:30,942 [WARNING] Order execution failed on binance (LINK/USDT)
+2026-03-11 19:36:58,818 [INFO] [LOOP 960] trades=815 balance=$48,041.38 open=2
+2026-03-11 19:37:51,725 [WARNING] Order execution failed on binance (ARB/USDT)
+2026-03-11 19:40:15,204 [INFO] [HTTP] Engine dex_cex -> OFF
+2026-03-11 19:40:17,154 [INFO] [HTTP] Engine dex_cex -> ON
+2026-03-11 19:40:54,086 [INFO] Shutting down...

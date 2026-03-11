@@ -1,0 +1,9 @@
+2026-03-11 19:25:48,585 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-11 19:25:48,586 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 19:25:48,604 [INFO] Server listening on port 8888
+2026-03-11 19:26:03,452 [INFO] [HTTP] Close positions for cross_exchange: 0/0 closed
+2026-03-11 19:26:03,495 [INFO] [HTTP] Engine triangular -> OFF
+2026-03-11 19:26:03,521 [INFO] [HTTP] Engine triangular -> ON
+2026-03-11 19:26:03,550 [INFO] [LOOP 30] trades=18 balance=$8.61 open=3
+2026-03-11 19:26:08,643 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 19:26:10,329 [INFO] [HTTP] Close positions for statistical: 4/4 closed

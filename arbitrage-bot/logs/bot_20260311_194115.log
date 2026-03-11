@@ -1,0 +1,13 @@
+2026-03-11 19:41:15,318 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 19:41:18,314 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 19:41:23,327 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 19:41:25,731 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 19:41:27,677 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-11 19:41:39,003 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-11 19:41:41,428 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-11 19:41:41,429 [INFO] [REAL] 6/6 exchanges connected
+2026-03-11 19:41:41,438 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 19:41:41,454 [INFO] Server listening on port 8888
+2026-03-11 19:45:33,802 [INFO] [HTTP] Engine funding_rate -> OFF
+2026-03-11 19:45:37,582 [INFO] [HTTP] Close positions for funding_rate: 2/2 closed
+2026-03-11 19:45:43,744 [INFO] [HTTP] Engine funding_rate -> ON

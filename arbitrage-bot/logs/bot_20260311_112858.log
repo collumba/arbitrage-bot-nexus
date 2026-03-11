@@ -9,3 +9,6 @@
 2026-03-11 11:29:27,791 [INFO] [v4] PAPER MODE — Simulated execution
 2026-03-11 11:29:27,807 [INFO] Server listening on port 8888
 2026-03-11 11:42:47,594 [INFO] [LOOP 30] trades=115 balance=$31.84 open=6
+2026-03-11 11:57:13,729 [INFO] [LOOP 60] trades=252 balance=$123.30 open=8
+2026-03-11 11:58:08,248 [WARNING] Order execution failed on binance (BTC/USDT)
+2026-03-11 12:06:45,197 [INFO] Shutting down...

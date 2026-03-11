@@ -1290,12 +1290,15 @@ class BaseEngine:
             self.events = self.events[-100:]
 
     def get_status(self):
+        open_pos = sum(1 for t in self.portfolio.trades
+                       if t.status == "open" and t.strategy == self.name)
         return {
             "name": self.name, "running": self.running,
             "opportunities_found": self.opportunities_found,
             "trades_executed": self.trades_executed,
             "trades_failed": self.trades_failed,
             "total_profit": round(self.total_profit, 4),
+            "open_positions": open_pos,
             "last_scan": time.time(),
             "last_opportunity": self.last_opportunity,
             "runtime_sec": round(time.time() - self._start),
@@ -1969,6 +1972,44 @@ class BotServer:
         elif path == "/api/unkill":
             ok = self.kill_switch(activate=False)
             result = {"killed": False, "success": ok}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
+        elif path.startswith("/api/toggle/"):
+            engine_name = path.split("/api/toggle/")[1]
+            eng = self.engines.get(engine_name)
+            if eng:
+                eng.running = not eng.running
+                log.info(f"[HTTP] Engine {engine_name} -> {'ON' if eng.running else 'OFF'}")
+                result = {"engine": engine_name, "running": eng.running}
+            else:
+                result = {"error": f"Engine '{engine_name}' not found"}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
+        elif path.startswith("/api/close/"):
+            engine_name = path.split("/api/close/")[1]
+            closed = 0
+            open_trades = [t for t in self.portfolio.trades
+                           if t.status == "open" and t.strategy == engine_name]
+            for t in open_trades:
+                ticker = self.market.get_ticker(t.pair, t.exchange)
+                if ticker:
+                    exit_price = ticker["bid"] if t.side == "buy" else ticker["ask"]
+                    fee_pct = 0.001
+                    fee_usd = exit_price * t.amount * fee_pct
+                    self.portfolio.close_trade(t.id, exit_price, fee_usd=fee_usd)
+                    closed += 1
+            log.info(f"[HTTP] Close positions for {engine_name}: {closed}/{len(open_trades)} closed")
+            result = {"engine": engine_name, "closed": closed, "total_open": len(open_trades)}
             body = json.dumps(result).encode()
             resp = (
                 f"HTTP/1.1 200 OK\r\n"

@@ -357,6 +357,28 @@ body::before {
   color: var(--text-dim);
 }
 
+.close-engine-btn {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px 0;
+  border-radius: 6px;
+  border: 1px solid var(--orange);
+  background: rgba(255,152,0,0.1);
+  color: var(--orange);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.close-engine-btn:hover {
+  background: rgba(255,152,0,0.25);
+  box-shadow: 0 0 10px rgba(255,152,0,0.3);
+}
+.close-engine-btn.has-open {
+  display: block;
+}
+
 .strategy-toggle {
   position: absolute;
   top: 12px;
@@ -820,7 +842,9 @@ body::before {
       <div class="strategy-stats">
         <span>Trades: <strong id="trades-cross_exchange">0</strong></span>
         <span>Opps: <strong id="opps-cross_exchange">0</strong></span>
+        <span>Open: <strong id="open-cross_exchange">0</strong></span>
       </div>
+      <button class="close-engine-btn" id="close-btn-cross_exchange" onclick="event.stopPropagation();closeEnginePositions('cross_exchange')">✖ Close Positions</button>
     </div>
     <div class="strategy-card active" id="card-triangular">
       <button class="strategy-toggle on" onclick="toggleEngine('triangular')"></button>
@@ -830,7 +854,9 @@ body::before {
       <div class="strategy-stats">
         <span>Trades: <strong id="trades-triangular">0</strong></span>
         <span>Opps: <strong id="opps-triangular">0</strong></span>
+        <span>Open: <strong id="open-triangular">0</strong></span>
       </div>
+      <button class="close-engine-btn" id="close-btn-triangular" onclick="event.stopPropagation();closeEnginePositions('triangular')">✖ Close Positions</button>
     </div>
     <div class="strategy-card active" id="card-statistical">
       <button class="strategy-toggle on" onclick="toggleEngine('statistical')"></button>
@@ -840,7 +866,9 @@ body::before {
       <div class="strategy-stats">
         <span>Trades: <strong id="trades-statistical">0</strong></span>
         <span>Opps: <strong id="opps-statistical">0</strong></span>
+        <span>Open: <strong id="open-statistical">0</strong></span>
       </div>
+      <button class="close-engine-btn" id="close-btn-statistical" onclick="event.stopPropagation();closeEnginePositions('statistical')">✖ Close Positions</button>
     </div>
     <div class="strategy-card active" id="card-funding_rate">
       <button class="strategy-toggle on" onclick="toggleEngine('funding_rate')"></button>
@@ -850,7 +878,9 @@ body::before {
       <div class="strategy-stats">
         <span>Trades: <strong id="trades-funding_rate">0</strong></span>
         <span>Opps: <strong id="opps-funding_rate">0</strong></span>
+        <span>Open: <strong id="open-funding_rate">0</strong></span>
       </div>
+      <button class="close-engine-btn" id="close-btn-funding_rate" onclick="event.stopPropagation();closeEnginePositions('funding_rate')">✖ Close Positions</button>
     </div>
     <div class="strategy-card active" id="card-dex_cex">
       <button class="strategy-toggle on" onclick="toggleEngine('dex_cex')"></button>
@@ -860,7 +890,9 @@ body::before {
       <div class="strategy-stats">
         <span>Trades: <strong id="trades-dex_cex">0</strong></span>
         <span>Opps: <strong id="opps-dex_cex">0</strong></span>
+        <span>Open: <strong id="open-dex_cex">0</strong></span>
       </div>
+      <button class="close-engine-btn" id="close-btn-dex_cex" onclick="event.stopPropagation();closeEnginePositions('dex_cex')">✖ Close Positions</button>
     </div>
   </div>
 
@@ -1219,6 +1251,7 @@ function updateDashboard(data) {
     document.getElementById('kpiTrades').textContent = p.total_trades;
     document.getElementById('kpiOpen').textContent = `Open: ${p.open_positions}`;
 
+
     const ddEl = document.getElementById('kpiDrawdown');
     ddEl.textContent = `${p.max_drawdown_pct.toFixed(2)}%`;
     ddEl.className = `kpi-value ${p.max_drawdown_pct > 3 ? 'negative' : ''}`;
@@ -1306,6 +1339,19 @@ function updateDashboard(data) {
 
       const oppsEl = document.getElementById(`opps-${key}`);
       if (oppsEl) oppsEl.textContent = eng.opportunities_found;
+
+      // Open positions per engine
+      const openCount = eng.open_positions || 0;
+      const openEl = document.getElementById(`open-${key}`);
+      if (openEl) {
+        openEl.textContent = openCount;
+        openEl.style.color = openCount > 0 ? 'var(--orange)' : '';
+      }
+      const closeBtn = document.getElementById(`close-btn-${key}`);
+      if (closeBtn) {
+        closeBtn.className = `close-engine-btn ${openCount > 0 ? 'has-open' : ''}`;
+        closeBtn.textContent = `✖ Close ${openCount} Position${openCount !== 1 ? 's' : ''}`;
+      }
 
       // Feed new events
       if (eng.recent_events) {
@@ -1458,10 +1504,41 @@ async function toggleKill() {
 }
 
 // ─── ENGINE TOGGLE ────────────────────────────────────
-function toggleEngine(name) {
+async function toggleEngine(name) {
+  // Try WebSocket first, fallback to HTTP
   if (ws && ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify({ action: 'toggle_engine', engine: name }));
     addFeedItem('trade', `Toggled engine: <strong>${name}</strong>`);
+  } else {
+    try {
+      const resp = await fetch(`${API_URL}/toggle/${name}`);
+      const data = await resp.json();
+      if (data.running !== undefined) {
+        addFeedItem('trade', `Engine <strong>${name}</strong> → ${data.running ? 'ON' : 'OFF'}`);
+        // Immediately update the UI
+        const card = document.getElementById(`card-${name}`);
+        const toggle = card?.querySelector('.strategy-toggle');
+        if (card) card.className = `strategy-card ${data.running ? 'active' : 'inactive'}`;
+        if (toggle) toggle.className = `strategy-toggle ${data.running ? 'on' : 'off'}`;
+      } else {
+        addFeedItem('error', `Toggle failed: ${data.error || 'unknown'}`);
+      }
+    } catch (e) {
+      addFeedItem('error', 'Failed to toggle engine (no connection)');
+    }
+  }
+}
+
+// ─── CLOSE ENGINE POSITIONS ──────────────────────────
+async function closeEnginePositions(engineName) {
+  const label = engineName.replace(/_/g, ' ');
+  if (!confirm(`Close all open positions for ${label}?`)) return;
+  try {
+    const resp = await fetch(`${API_URL}/close/${engineName}`);
+    const data = await resp.json();
+    addFeedItem('trade', `Closed <strong>${data.closed}</strong> positions for ${label}`);
+  } catch (e) {
+    addFeedItem('error', `Failed to close ${label} positions`);
   }
 }
 
