@@ -30,3 +30,24 @@
 2026-03-11 22:13:45,969 [WARNING] Order execution failed on okx (MATIC/USDT)
 2026-03-11 22:13:55,363 [INFO] [HTTP] Engine statistical -> OFF
 2026-03-11 22:13:59,066 [INFO] [HTTP] Close positions for statistical: 3/3 closed
+2026-03-11 22:18:42,346 [INFO] [LOOP 210] trades=641 balance=$45,036.87 open=0
+2026-03-11 22:20:19,578 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 22:26:18,721 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:30:44,136 [INFO] [LOOP 240] trades=641 balance=$45,036.87 open=0
+2026-03-11 22:33:31,059 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 22:37:34,343 [WARNING] Order execution failed on kucoin (MATIC/USDT)
+2026-03-11 22:39:11,604 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:42:28,254 [WARNING] Order execution failed on dex (UNI/USDT)
+2026-03-11 22:42:52,971 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:42:53,779 [INFO] [LOOP 270] trades=641 balance=$45,036.87 open=0
+2026-03-11 22:43:34,256 [INFO] [v5] DB backed up to nexus_backup_20260311_224334.db
+2026-03-11 22:44:56,053 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 22:45:40,766 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 22:48:35,503 [WARNING] Order execution failed on mexc (MATIC/USDT)
+2026-03-11 22:48:37,639 [WARNING] Order execution failed on dex (OP/USDT)
+2026-03-11 22:49:26,448 [WARNING] Order execution failed on dex (SOL/USDT)
+2026-03-11 22:52:40,138 [WARNING] Order execution failed on dex (ARB/USDT)
+2026-03-11 22:53:14,224 [INFO] Signal received, initiating graceful shutdown...
+2026-03-11 22:53:14,225 [INFO] Initiating v5 graceful shutdown...
+2026-03-11 22:53:14,225 [INFO] [v5] No open positions to close on shutdown
+2026-03-11 22:53:14,228 [INFO] Server stopped.
