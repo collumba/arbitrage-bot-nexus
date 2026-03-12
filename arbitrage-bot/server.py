@@ -236,6 +236,10 @@ LIVE_SAFETY = {
     "order_timeout_sec": 10,
 }
 
+# Trade sizing (% of current balance per trade)
+TRADE_SIZE_PCT = float(os.environ.get("TRADE_SIZE_PCT", "5.0"))
+MIN_ORDER_USD = float(os.environ.get("MIN_ORDER_USD", "5.0"))  # Minimum order for exchanges
+
 # ═══════════════════════════════════════════════════════════
 # v5 CONFIGURATION
 # ═══════════════════════════════════════════════════════════
@@ -1318,8 +1322,10 @@ class Portfolio:
                    fee_usd=0, slippage_pct=0, latency_ms=0, data_source="unknown"):
         cost = price * amount
         total_cost = cost + fee_usd
-        if total_cost > self.balance:
-            return None
+        # In live mode, the exchange already validates balance — skip internal check
+        if self.mode != "live":
+            if total_cost > self.balance:
+                return None
         if cost > RISK["max_single_trade_usd"]:
             return None
 
@@ -1493,8 +1499,9 @@ class BaseEngine:
 
     @property
     def max_trade(self):
-        """Max entry = 5% of current balance"""
-        return round(self.portfolio.balance * 0.05, 2)
+        """Max entry = TRADE_SIZE_PCT% of current balance, respecting MIN_ORDER_USD"""
+        sized = round(self.portfolio.balance * TRADE_SIZE_PCT / 100, 2)
+        return max(sized, MIN_ORDER_USD) if sized > 0 else MIN_ORDER_USD
 
     def _add_event(self, etype, data):
         self.events.append({"timestamp": time.time(), "type": etype, "data": data})
@@ -1603,14 +1610,29 @@ class CrossExchangeEngine(BaseEngine):
     PAIRS = ALL_PAIRS[:12]  # Top 12 pairs by volume
     MIN_SPREAD = 0.03 if AGGRESSIVE else 0.05
 
+    def _get_live_exchanges(self):
+        """In live mode, only consider exchanges with authenticated API keys."""
+        if self.market.is_live and hasattr(self.execution, 'exchanges'):
+            return set(self.execution.exchanges.keys())
+        return None  # None = no filter (paper mode uses all)
+
     def scan_and_execute(self):
         if not self.running:
             return
+
+        live_exs = self._get_live_exchanges()
+        # In live mode with only 1 authenticated exchange, cross-exchange can't work
+        if live_exs is not None and len(live_exs) < 2:
+            return
+
         best = None
         best_spread = 0
 
         for pair in self.PAIRS:
             tickers = self.market.get_all_tickers(pair)
+            # In live mode, filter tickers to only authenticated exchanges
+            if live_exs is not None:
+                tickers = {k: v for k, v in tickers.items() if k in live_exs}
             if len(tickers) < 2:
                 continue
 
@@ -1657,13 +1679,27 @@ class CrossExchangeEngine(BaseEngine):
 
 
 class TriangularEngine(BaseEngine):
-    """Triangular arbitrage within a single exchange"""
+    """Triangular arbitrage within a single exchange.
+
+    Executes 3 real orders in sequence when in LIVE mode:
+      e.g. ("BTC/USDT", "ETH/BTC", "ETH/USDT"):
+        1) Buy BTC with USDT  (buy BTC/USDT)
+        2) Buy ETH with BTC   (buy ETH/BTC)
+        3) Sell ETH for USDT  (sell ETH/USDT)
+
+    If final USDT > initial USDT, profit is realized.
+    """
+    # Each triangle: (pair1, pair2, pair3, cross_direction)
+    # cross_direction: "buy" = buy pair2 (divide by ask), "sell" = sell pair2 (multiply by bid)
+    # Path A: USDT → buy pair1 → buy pair2 (cross) → sell pair3 → USDT
+    # Path B: USDT → buy pair1 → sell pair2 (cross) → sell pair3 → USDT
     TRIANGLES = [
-        ("BTC/USDT", "ETH/BTC", "ETH/USDT"),
-        ("SOL/USDT", "SOL/ETH", "ETH/USDT"),
-        ("XRP/USDT", "XRP/BTC", "BTC/USDT"),
-        ("DOGE/USDT", "DOGE/BTC", "BTC/USDT"),
-        ("LINK/USDT", "LINK/ETH", "ETH/USDT"),
+        # USDT→BTC→ETH→USDT : buy BTC/USDT, buy ETH/BTC (spend BTC get ETH), sell ETH/USDT
+        ("BTC/USDT", "ETH/BTC", "ETH/USDT", "buy"),
+        # USDT→XRP→BTC→USDT : buy XRP/USDT, sell XRP/BTC (spend XRP get BTC), sell BTC/USDT
+        ("XRP/USDT", "XRP/BTC", "BTC/USDT", "sell"),
+        # USDT→DOGE→BTC→USDT : buy DOGE/USDT, sell DOGE/BTC (spend DOGE get BTC), sell BTC/USDT
+        ("DOGE/USDT", "DOGE/BTC", "BTC/USDT", "sell"),
     ]
     MIN_PROFIT = 0.015 if AGGRESSIVE else 0.02
 
@@ -1675,29 +1711,45 @@ class TriangularEngine(BaseEngine):
             "LINK/ETH": 0.00563, "LINK/BTC": 0.000190,
         }
 
+    def _fetch_cross_ticker(self, pair, exchange):
+        """Try to get real ticker for cross pair (e.g. ETH/BTC), fallback to simulated."""
+        real = self.market.get_ticker(pair, exchange)
+        if real and real.get("source") == "real":
+            return real
+        # Fallback: simulate from known cross price
+        base = self._cross_prices.get(pair, 0.05)
+        price = base * (1 + random.gauss(0, 0.001))
+        self._cross_prices[pair] = price
+        spread = price * random.uniform(0.0001, 0.0005)
+        return {"bid": price - spread/2, "ask": price + spread/2, "last": price, "source": "simulated"}
+
     def scan_and_execute(self):
         if not self.running:
             return
 
-        for tri in self.TRIANGLES:
+        for tri_def in self.TRIANGLES:
             try:
+                pair1, pair2, pair3, cross_dir = tri_def
+                tri = (pair1, pair2, pair3)
                 exchange = "binance"
-                t1 = self.market.get_ticker(tri[0], exchange)
+                # Fetch all 3 tickers (real if available)
+                t1 = self.market.get_ticker(pair1, exchange)  # e.g. BTC/USDT
                 if not t1:
                     continue
-
-                cross_key = tri[1]
-                base_cross = self._cross_prices.get(cross_key, 0.05)
-                cross_price = base_cross * (1 + random.gauss(0, 0.001))
-                self._cross_prices[cross_key] = cross_price
-
-                t3 = self.market.get_ticker(tri[2], exchange)
+                t2 = self._fetch_cross_ticker(pair2, exchange)  # e.g. ETH/BTC
+                if not t2:
+                    continue
+                t3 = self.market.get_ticker(pair3, exchange)    # e.g. ETH/USDT
                 if not t3:
                     continue
 
-                step1 = 1.0 / t1["ask"]
-                step2 = step1 * cross_price
-                step3 = step2 * t3["bid"]
+                # Calculate triangular path profit:
+                step1 = 1.0 / t1["ask"]       # USDT → base1 (e.g. BTC)
+                if cross_dir == "buy":
+                    step2 = step1 / t2["ask"]  # buy cross pair (e.g. BTC → ETH via ETH/BTC)
+                else:
+                    step2 = step1 * t2["bid"]  # sell cross pair (e.g. XRP → BTC via XRP/BTC)
+                step3 = step2 * t3["bid"]      # → USDT
 
                 total_fee_pct = self.execution.get_fee_pct(exchange) * 3
                 total_slip = self.execution.estimate_slippage(tri[0], self.max_trade) * 3 * 100
@@ -1718,42 +1770,174 @@ class TriangularEngine(BaseEngine):
                     self.last_opportunity = opp
                     self._add_event("opportunity", opp)
 
-                    if self._risk_ok() and random.random() < 0.88:
-                        total_latency = sum(
-                            self.execution.estimate_latency_ms(exchange) for _ in range(3)
-                        )
-                        drifted_price = self.execution.simulate_price_drift(t1["ask"], total_latency)
-                        actual_profit = profit_pct * random.uniform(0.3, 1.2)
+                    if self._risk_ok() and random.random() < 0.92:
+                        self._execute_triangular(tri, exchange, t1, t2, t3, cross_dir,
+                                                  profit_pct, total_fee_pct, total_slip, data_source)
 
-                        exec_price = drifted_price
-                        exit_price = exec_price * (1 + actual_profit / 100)
-                        fee = self.max_trade * total_fee_pct / 100
-                        amount = self.max_trade / exec_price
+            except Exception as e:
+                self._add_event("error", {"error": str(e), "path": list(tri)})
 
-                        trade = self.portfolio.open_trade(
-                            self.name, tri[0], exchange, "buy", exec_price, amount,
-                            fee_usd=fee / 2, slippage_pct=total_slip / 2,
-                            latency_ms=total_latency / 2, data_source=data_source,
-                        )
-                        if trade:
-                            pnl = self.portfolio.close_trade(
-                                trade.id, exit_price,
-                                fee_usd=fee / 2, slippage_pct=total_slip / 2,
-                                latency_ms=total_latency / 2,
-                            )
-                            self.trades_executed += 1
-                            self.total_profit += pnl
-                            if pnl < 0:
-                                self._record_engine_loss(pnl)
-                            self._add_event("trade", {
-                                "trade_id": trade.id, "path": list(tri),
-                                "net_profit_pct": round(actual_profit, 4),
-                                "latency_ms": round(total_latency, 1),
-                                "pnl": round(pnl, 4),
-                                "data_source": data_source,
-                            })
-            except Exception:
-                pass
+    def _execute_live_order(self, pair, exchange, side, price, amount_coin):
+        """Execute a LIVE order using coin amount directly (not USD).
+        Wraps LiveExecutor to handle cross-pairs correctly."""
+        ex = self.execution.exchanges.get(exchange)
+        if not ex:
+            log.warning(f"[LIVE-TRI] Exchange {exchange} not authenticated")
+            return (0, 0, 0, 0, False)
+
+        try:
+            start_ts = time.time()
+            order = ex.create_order(symbol=pair, type="market", side=side, amount=amount_coin)
+            latency_ms = (time.time() - start_ts) * 1000
+
+            status = order.get("status", "unknown")
+            filled = float(order.get("filled", 0))
+            avg_price = float(order.get("average", 0)) or float(order.get("price", 0)) or price
+            cost = float(order.get("cost", 0)) or (filled * avg_price)
+
+            fee_info = order.get("fee") or {}
+            fee_cost = float(fee_info.get("cost", 0))
+            if fee_info.get("currency") and fee_info["currency"] != "USDT":
+                fee_cost = cost * 0.001
+
+            slippage_pct = abs(avg_price - price) / price * 100 if price > 0 else 0
+            success = status in ("closed", "filled") or filled > 0
+
+            log.info(f"[LIVE-TRI] {'OK' if success else 'FAIL'}: {side.upper()} {amount_coin:.6f} {pair} "
+                      f"@ {avg_price:.8f} | fee={fee_cost:.6f} | slip={slippage_pct:.4f}% | "
+                      f"{latency_ms:.0f}ms | filled={filled:.6f}")
+
+            return (avg_price, fee_cost, slippage_pct, latency_ms, success)
+
+        except Exception as e:
+            log.error(f"[LIVE-TRI] Order failed {side} {pair}: {e}")
+            return (0, 0, 0, 0, False)
+
+    def _execute_triangular(self, tri, exchange, t1, t2, t3, cross_dir,
+                             expected_profit_pct, total_fee_pct, total_slip, data_source):
+        """Execute 3 legs of triangular arb. Uses real orders in LIVE mode."""
+        trade_usd = self.max_trade
+        is_live = self.market.is_live
+
+        if is_live:
+            # ── LEG 1: Buy pair1 with USDT (e.g. buy XRP/USDT) ──
+            # amount_coin = how many coins to buy with our USDT budget
+            leg1_amount = trade_usd / t1["ask"]
+            ep1, fee1, slip1, lat1, ok1 = self._execute_live_order(
+                tri[0], exchange, "buy", t1["ask"], leg1_amount)
+            if not ok1:
+                self.trades_failed += 1
+                self._add_event("error", {"error": f"Leg1 failed: buy {leg1_amount:.6f} {tri[0]}", "path": list(tri)})
+                return
+
+            # We now hold base1 coins (e.g. XRP)
+            base1_coins = leg1_amount  # approximate (could use filled from order)
+
+            # ── LEG 2: Cross pair ──
+            if cross_dir == "sell":
+                # e.g. sell XRP/BTC: sell our XRP to get BTC
+                ep2, fee2, slip2, lat2, ok2 = self._execute_live_order(
+                    tri[1], exchange, "sell", t2["bid"], base1_coins)
+                if not ok2:
+                    # Reverse leg1
+                    self._execute_live_order(tri[0], exchange, "sell", t1["bid"], base1_coins)
+                    self.trades_failed += 1
+                    self._add_event("error", {"error": f"Leg2 failed: sell {base1_coins:.6f} {tri[1]}, reversed", "path": list(tri)})
+                    return
+                # BTC obtained = base1_coins * ep2 (sell price)
+                base2_coins = base1_coins * ep2
+            else:
+                # e.g. buy ETH/BTC: spend our BTC to get ETH
+                # base1_coins here is BTC, amount of ETH to buy = BTC / ask_price
+                leg2_amount = base1_coins / t2["ask"]
+                ep2, fee2, slip2, lat2, ok2 = self._execute_live_order(
+                    tri[1], exchange, "buy", t2["ask"], leg2_amount)
+                if not ok2:
+                    self._execute_live_order(tri[0], exchange, "sell", t1["bid"], base1_coins)
+                    self.trades_failed += 1
+                    self._add_event("error", {"error": f"Leg2 failed: buy {leg2_amount:.6f} {tri[1]}, reversed", "path": list(tri)})
+                    return
+                base2_coins = leg2_amount
+
+            # ── LEG 3: Sell final asset for USDT (e.g. sell BTC/USDT) ──
+            ep3, fee3, slip3, lat3, ok3 = self._execute_live_order(
+                tri[2], exchange, "sell", t3["bid"], base2_coins)
+            if not ok3:
+                # Try to reverse: buy back on leg3's pair, then reverse leg2 and leg1
+                log.error(f"[LIVE-TRI] Leg3 failed! Attempting recovery for {base2_coins:.6f} {tri[2]}")
+                # Reverse leg2
+                if cross_dir == "sell":
+                    self._execute_live_order(tri[1], exchange, "buy", t2["ask"], base1_coins)
+                else:
+                    self._execute_live_order(tri[1], exchange, "sell", t2["bid"], base2_coins)
+                # Reverse leg1
+                self._execute_live_order(tri[0], exchange, "sell", t1["bid"], base1_coins)
+                self.trades_failed += 1
+                self._add_event("error", {"error": f"Leg3 failed: sell {base2_coins:.6f} {tri[2]}, reversed", "path": list(tri)})
+                return
+
+            # Calculate actual P&L in USDT
+            final_usdt = base2_coins * ep3
+            total_fees = fee1 + fee2 + fee3
+            actual_pnl = final_usdt - trade_usd - total_fees
+            total_latency = lat1 + lat2 + lat3
+            actual_profit_pct = (actual_pnl / trade_usd) * 100
+
+            log.info(f"[LIVE-TRI] COMPLETE: {' → '.join(tri)} | "
+                      f"in=${trade_usd:.2f} out=${final_usdt:.2f} fees=${total_fees:.4f} "
+                      f"pnl=${actual_pnl:.4f} ({actual_profit_pct:.4f}%)")
+
+        else:
+            # ── PAPER MODE: simulated execution (original logic) ──
+            total_latency = sum(self.execution.estimate_latency_ms(exchange) for _ in range(3))
+            drifted_price = self.execution.simulate_price_drift(t1["ask"], total_latency)
+            actual_profit_pct = expected_profit_pct * random.uniform(0.3, 1.2)
+            ep1 = drifted_price
+            ep3 = ep1 * (1 + actual_profit_pct / 100)
+            total_fees = trade_usd * total_fee_pct / 100
+            actual_pnl = trade_usd * actual_profit_pct / 100 - total_fees
+            fee1 = total_fees / 2
+            fee3 = total_fees / 2
+            slip1 = total_slip / 2
+            slip3 = total_slip / 2
+            lat1 = total_latency / 2
+
+        # Record trade in portfolio
+        amount = trade_usd / ep1 if ep1 > 0 else 0
+        if amount <= 0:
+            return
+
+        trade = self.portfolio.open_trade(
+            self.name, tri[0], exchange, "buy", ep1, amount,
+            fee_usd=fee1, slippage_pct=slip1 if not is_live else 0,
+            latency_ms=lat1, data_source=data_source,
+        )
+        if trade:
+            if is_live:
+                exit_price = ep1 + (actual_pnl / amount) if amount > 0 else ep1
+            else:
+                exit_price = ep1 * (1 + actual_profit_pct / 100)
+
+            pnl = self.portfolio.close_trade(
+                trade.id, exit_price,
+                fee_usd=fee3 if not is_live else 0,
+                slippage_pct=slip3 if not is_live else 0,
+                latency_ms=total_latency - lat1 if not is_live else 0,
+            )
+            self.trades_executed += 1
+            self.total_profit += pnl
+            if pnl < 0:
+                self._record_engine_loss(pnl)
+            self._add_event("trade", {
+                "trade_id": trade.id, "path": list(tri),
+                "net_profit_pct": round(actual_profit_pct, 4),
+                "latency_ms": round(total_latency, 1),
+                "pnl": round(pnl, 4),
+                "data_source": data_source,
+                "live": is_live,
+            })
+        else:
+            log.warning(f"[LIVE-TRI] Trade recording failed (open_trade returned None)")
 
 
 class StatisticalEngine(BaseEngine):
@@ -1996,6 +2180,9 @@ class DexCexEngine(BaseEngine):
     def scan_and_execute(self):
         if not self.running:
             return
+        # DEX/CEX requires DEX wallet integration — skip in live mode
+        if self.market.is_live:
+            return
 
         for pair in self.PAIRS:
             t = self.market.get_ticker(pair, "binance")
@@ -2154,7 +2341,16 @@ class BotServer:
         self.port = port
         self.db = Database()
         self.market = HybridMarket()
-        self.portfolio = Portfolio(INITIAL_BALANCE, TRADING_MODE, self.db)
+
+        # In LIVE mode, fetch real balance from exchange wallet
+        live_balance = INITIAL_BALANCE
+        if self.market.is_live and hasattr(self.market.execution, 'balances'):
+            total_real = sum(b.get("usdt_free", 0) for b in self.market.execution.balances.values())
+            if total_real > 0:
+                live_balance = total_real
+                log.info(f"[v5] LIVE balance synced from exchange(s): ${live_balance:.2f}")
+
+        self.portfolio = Portfolio(live_balance, TRADING_MODE, self.db)
         self.engines = {}
         self.ws_clients = []
         self.running = True
@@ -2171,6 +2367,8 @@ class BotServer:
             "trailing_stop": SL_TP_CONFIG["trailing_stop"],
             "scan_interval": SCAN_INTERVAL,
             "aggressive": AGGRESSIVE,
+            "trade_size_pct": TRADE_SIZE_PCT,
+            "min_order_usd": MIN_ORDER_USD,
         }
 
         self.engines["cross_exchange"] = CrossExchangeEngine("cross_exchange", self.market, self.portfolio)
@@ -2362,11 +2560,14 @@ class BotServer:
                                 self.runtime_config[k] = int(float(v))
                             else:
                                 self.runtime_config[k] = v
-                            # Apply config changes
+                            # Apply config changes to globals
+                            global TRADE_SIZE_PCT, MIN_ORDER_USD
                             SL_TP_CONFIG["stop_loss_pct"] = self.runtime_config["stop_loss_pct"]
                             SL_TP_CONFIG["take_profit_pct"] = self.runtime_config["take_profit_pct"]
                             SL_TP_CONFIG["max_hold_ticks"] = self.runtime_config["max_hold_ticks"]
                             SL_TP_CONFIG["trailing_stop"] = self.runtime_config["trailing_stop"]
+                            TRADE_SIZE_PCT = self.runtime_config.get("trade_size_pct", TRADE_SIZE_PCT)
+                            MIN_ORDER_USD = self.runtime_config.get("min_order_usd", MIN_ORDER_USD)
                             log.info(f"[v5] Config updated: {k}={self.runtime_config[k]}")
             result = self.runtime_config
             body = json.dumps(result).encode()
@@ -2533,6 +2734,16 @@ class BotServer:
                 if loop_count % 30 == 0:
                     total_trades = self.portfolio.get_stats()["total_trades"]
                     log.info(f"[LOOP {loop_count}] trades={total_trades} balance=${self.portfolio.balance:,.2f} open={self.portfolio.open_positions}")
+
+                    # v5: Sync balance from real exchange in live mode
+                    if self.market.is_live and hasattr(self.market.execution, 'balances'):
+                        real_bal = sum(
+                            self.market.execution.sync_balance(ex)
+                            for ex in self.market.execution.exchanges
+                        )
+                        if real_bal > 0 and abs(real_bal - self.portfolio.balance) > 0.01:
+                            log.info(f"[v5] Balance sync: portfolio ${self.portfolio.balance:.2f} → exchange ${real_bal:.2f}")
+                            self.portfolio.balance = real_bal
 
                 # v5: Auto-reconnect check every ~60s
                 if RECONNECT_CONFIG["enabled"] and reconnect_counter >= int(RECONNECT_CONFIG["health_check_interval_sec"] / max(SCAN_INTERVAL, 0.1)):

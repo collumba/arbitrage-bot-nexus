@@ -1,0 +1,53 @@
+2026-03-12 00:25:11,372 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-12 00:25:15,184 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-12 00:25:19,895 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-12 00:25:22,325 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-12 00:25:24,208 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-12 00:25:35,605 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-12 00:25:38,504 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-12 00:25:38,504 [INFO] [REAL] 6/6 exchanges connected
+2026-03-12 00:25:43,299 [INFO] [LIVE] binance: AUTHENTICATED — USDT balance: $19.88
+2026-03-12 00:25:43,299 [INFO] [LIVE] 1 exchange(s) authenticated: ['binance']
+2026-03-12 00:25:43,299 [INFO] [v4] LIVE MODE — Real orders will be placed on exchanges
+2026-03-12 00:25:43,306 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-12 00:25:43,313 [INFO] Server listening on port 8888
+2026-03-12 00:26:05,359 [INFO] [LIVE] OK: BUY XRP/USDT $9.94 @ $1.3739 | fee=$0.0099 | slip=0.0073% | 265ms | binance
+2026-03-12 00:26:05,630 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | sell XRP/BTC $9.94 on binance
+2026-03-12 00:26:05,630 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | sell XRP/USDT $9.94 on binance
+2026-03-12 00:26:05,900 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:26:13,308 [INFO] [v5] DB backed up to nexus_backup_20260312_002613.db
+2026-03-12 00:26:13,309 [INFO] [v5] Removed old backup: nexus_backup_20260311_211334.db
+2026-03-12 00:26:35,487 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:26:36,025 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:27:00,981 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:27:01,250 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:27:26,055 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:27:51,824 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:27:52,091 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:28:17,489 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:28:18,524 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:28:44,200 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:28:44,464 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.99 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:29:11,533 [INFO] [LIVE] OK: BUY XRP/USDT $9.94 @ $1.3736 | fee=$0.0099 | slip=0.0000% | 268ms | binance
+2026-03-12 00:29:11,803 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | sell XRP/BTC $9.94 on binance
+2026-03-12 00:29:11,804 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | sell XRP/USDT $9.94 on binance
+2026-03-12 00:29:12,337 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:29:38,208 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:30:03,733 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:30:03,994 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:30:29,162 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:30:29,437 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.84 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:30:55,314 [INFO] [LIVE] OK: BUY XRP/USDT $9.94 @ $1.3741 | fee=$0.0099 | slip=0.0000% | 263ms | binance
+2026-03-12 00:30:55,584 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | sell XRP/BTC $9.94 on binance
+2026-03-12 00:30:55,584 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | sell XRP/USDT $9.94 on binance
+2026-03-12 00:30:56,110 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:31:22,775 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:31:23,544 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:31:48,658 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:32:14,339 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy XRP/USDT $9.94 on binance
+2026-03-12 00:32:14,609 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:32:39,297 [WARNING] [LIVE] Order BLOCKED: Order $9.94 exceeds available $9.82 on binance | buy DOGE/USDT $9.94 on binance
+2026-03-12 00:32:50,099 [INFO] Signal received, initiating graceful shutdown...
+2026-03-12 00:32:50,100 [INFO] Initiating v5 graceful shutdown...
+2026-03-12 00:32:50,100 [INFO] [v5] No open positions to close on shutdown
+2026-03-12 00:32:50,100 [INFO] Server stopped.

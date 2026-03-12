@@ -1,0 +1,1433 @@
+2026-03-12 00:53:02,147 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-12 00:53:05,389 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-12 00:53:11,423 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-12 00:53:13,953 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-12 00:53:16,224 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-12 00:53:27,770 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-12 00:53:31,571 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-12 00:53:31,571 [INFO] [REAL] 6/6 exchanges connected
+2026-03-12 00:53:36,361 [INFO] [LIVE] binance: AUTHENTICATED — USDT balance: $9.82
+2026-03-12 00:53:36,361 [INFO] [LIVE] 1 exchange(s) authenticated: ['binance']
+2026-03-12 00:53:36,362 [INFO] [v4] LIVE MODE — Real orders will be placed on exchanges
+2026-03-12 00:53:36,362 [INFO] [v5] LIVE balance synced from exchange(s): $9.82
+2026-03-12 00:53:36,377 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-12 00:53:36,385 [INFO] Server listening on port 8888
+2026-03-12 00:53:37,448 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 00:53:37,978 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0921 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 00:53:38,252 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | sell DOGE/BTC $5.00 on binance
+2026-03-12 00:53:38,252 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | sell DOGE/USDT $5.00 on binance
+2026-03-12 00:53:47,128 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:53:51,338 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:53:51,379 [INFO] [HTTP] Engine dex_cex -> OFF
+2026-03-12 00:53:51,599 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:53:53,044 [INFO] [HTTP] Engine funding_rate -> OFF
+2026-03-12 00:53:54,026 [INFO] [HTTP] Engine cross_exchange -> OFF
+2026-03-12 00:53:55,539 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:53:55,808 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:53:56,618 [INFO] [HTTP] Engine statistical -> OFF
+2026-03-12 00:53:59,766 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:00,030 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:00,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:00,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:01,835 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:02,104 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:02,605 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:02,606 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:03,907 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:04,172 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:04,674 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:04,674 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:05,974 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:06,237 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:06,379 [INFO] [v5] DB backed up to nexus_backup_20260312_005406.db
+2026-03-12 00:54:06,380 [INFO] [v5] Removed old backup: nexus_backup_20260311_221334.db
+2026-03-12 00:54:06,738 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:06,739 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:08,036 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:08,583 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:09,873 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:10,142 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:10,644 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:10,645 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:11,943 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:12,206 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:12,708 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:12,708 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:13,992 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:14,261 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:14,763 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:14,764 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:16,055 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:16,321 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:16,822 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:16,823 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:18,129 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:18,397 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:18,899 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:18,899 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:20,192 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:20,458 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:20,961 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:20,961 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:22,257 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:22,526 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:23,027 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:23,027 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:24,323 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:24,592 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:25,094 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:25,094 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:26,401 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:26,669 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:26,670 [INFO] [LOOP 30] trades=0 balance=$9.82 open=0
+2026-03-12 00:54:27,190 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:27,191 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:28,491 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:28,752 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:29,254 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:29,255 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:30,545 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:31,313 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:31,313 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:32,610 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:32,872 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:33,374 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:33,375 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:34,667 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:34,928 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:35,430 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:35,430 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:36,994 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:37,496 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:37,496 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:39,063 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:39,327 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:40,623 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:40,623 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:41,125 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:41,390 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:43,203 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:43,472 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:43,973 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:43,974 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:45,264 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:45,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:46,036 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:47,341 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:47,607 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:48,110 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:48,110 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:49,416 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:49,681 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:50,182 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:50,183 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:51,473 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:51,738 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:52,240 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:52,240 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:53,546 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:53,815 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:54,317 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:54,317 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:55,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:55,879 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:56,381 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:56,381 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:57,676 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:57,943 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:58,445 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:54:58,446 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:54:58,446 [INFO] [LOOP 60] trades=0 balance=$4.85 open=0
+2026-03-12 00:54:59,748 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:00,515 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:01,821 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:02,088 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:02,590 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:02,591 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:03,885 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:04,154 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:04,656 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:04,656 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:05,955 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:06,220 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:06,721 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:06,722 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:08,026 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:08,290 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:08,792 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:10,361 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:10,626 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:11,930 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:11,930 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:12,433 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:12,700 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:13,995 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:14,497 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:14,762 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:16,059 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:16,060 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:16,823 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:18,122 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:18,123 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:18,624 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:18,894 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:20,187 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:20,688 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:20,951 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:22,251 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:22,251 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:22,753 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:23,018 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:24,317 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:24,818 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:25,086 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:26,384 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:26,385 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:27,155 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:28,459 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:28,459 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:28,961 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:29,226 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:30,517 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:30,517 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:30,518 [INFO] [LOOP 90] trades=0 balance=$4.85 open=0
+2026-03-12 00:55:31,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:31,287 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:32,588 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:32,589 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:33,091 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:33,356 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:34,647 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:34,648 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:35,150 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:35,415 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:36,701 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:36,702 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:37,203 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:37,470 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:38,769 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:38,769 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:39,271 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:39,535 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:41,106 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:41,372 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:43,184 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:44,227 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:45,262 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:45,262 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:46,031 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:46,296 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:47,326 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:47,327 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:48,093 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:48,357 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:49,386 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:49,386 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:50,151 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:50,416 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:51,446 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:51,447 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:52,476 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:53,504 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:53,505 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:54,270 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:54,534 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:55,566 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:55,567 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:56,333 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:56,603 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:57,631 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:57,632 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:58,398 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:58,659 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:55:59,693 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:55:59,693 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:00,462 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:00,725 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:01,758 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:01,759 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:02,522 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:02,791 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:03,827 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:03,827 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:03,827 [INFO] [LOOP 120] trades=0 balance=$4.85 open=0
+2026-03-12 00:56:04,594 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:04,861 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:05,894 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:05,894 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:06,661 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:06,927 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:07,966 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:07,966 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:08,735 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:08,997 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:10,032 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:10,033 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:10,804 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:11,069 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:12,377 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:12,644 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:13,145 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:13,411 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:14,711 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:15,213 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:15,475 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:16,772 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:16,772 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:17,539 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:18,839 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:18,840 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:19,342 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:19,607 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:20,902 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:20,902 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:21,404 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:21,669 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:22,964 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:22,964 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:23,466 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:23,735 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:25,038 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:25,038 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:25,806 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:27,103 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:27,104 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:27,605 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:27,870 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:29,164 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:29,165 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:29,666 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:29,927 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:31,222 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:31,222 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:31,725 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:31,989 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:33,282 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:33,283 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:33,784 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:35,345 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:35,345 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:35,345 [INFO] [LOOP 150] trades=0 balance=$4.85 open=0
+2026-03-12 00:56:35,847 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:36,109 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:37,409 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:37,409 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:37,911 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:39,477 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:39,477 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:39,980 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:40,245 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:41,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:41,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:42,035 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:42,303 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:43,875 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:44,141 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:45,437 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:45,438 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:45,939 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:46,205 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:47,503 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:47,504 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:48,005 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:49,558 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:49,558 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:50,060 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:50,326 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:51,627 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:51,627 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:52,129 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:52,398 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:53,694 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:53,695 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:54,196 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:54,461 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:55,762 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:55,762 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:56,264 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:56,529 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:57,825 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:57,825 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:58,327 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:58,595 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:56:59,888 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:56:59,889 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:00,391 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:00,657 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:01,957 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:01,957 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:02,459 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:02,722 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:04,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:04,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:04,520 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:06,078 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:06,078 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:06,580 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:06,842 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:06,842 [INFO] [LOOP 180] trades=0 balance=$4.85 open=0
+2026-03-12 00:57:08,137 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:08,137 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:08,639 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:08,901 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:10,184 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:10,686 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:10,951 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:12,252 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:12,252 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:12,754 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:13,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:14,587 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:14,852 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:16,150 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:16,150 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:16,652 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:16,921 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:18,217 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:18,217 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:18,720 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:18,981 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:20,270 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:20,271 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:20,772 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:21,034 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:22,331 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:22,332 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:22,834 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:23,099 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:24,398 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:24,398 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:24,900 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:25,166 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:26,458 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:26,458 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:26,960 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:27,223 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:28,517 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:28,517 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:29,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:29,284 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:30,581 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:30,581 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:31,083 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:31,352 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:32,643 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:32,644 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:33,145 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:33,411 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:34,697 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:34,698 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:35,199 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:35,463 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:36,755 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:36,755 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:37,257 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:38,809 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:38,809 [INFO] [LOOP 210] trades=0 balance=$4.85 open=0
+2026-03-12 00:57:39,311 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:39,580 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:40,879 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:40,880 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:41,382 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:41,645 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:42,939 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:42,940 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:43,442 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:43,709 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:45,278 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:45,547 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:46,836 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:47,338 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:47,603 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:49,680 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:50,445 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:50,445 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:51,480 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:51,743 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:52,513 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:52,513 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:53,545 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:54,584 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:54,584 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:55,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:55,877 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:56,647 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:57,680 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:57:57,942 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:58,710 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:57:59,740 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:00,000 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:00,765 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:00,766 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:01,800 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:02,066 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:02,830 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:02,830 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:03,864 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:04,132 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:04,898 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:05,929 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:06,191 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:06,965 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:06,965 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:08,001 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:08,264 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:09,028 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:09,029 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:10,059 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:10,323 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:11,090 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:11,091 [INFO] [LOOP 240] trades=0 balance=$4.85 open=0
+2026-03-12 00:58:12,127 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:12,393 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:13,159 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:13,160 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:14,196 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:14,460 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:15,227 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:15,227 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:16,531 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:16,798 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:17,834 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:18,601 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:18,869 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:19,903 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:19,904 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:20,673 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:20,936 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:21,972 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:21,972 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:22,738 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:23,003 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:24,032 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:24,032 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:24,803 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:25,068 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:26,099 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:26,100 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:26,868 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:27,129 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:28,164 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:28,165 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:28,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:29,193 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:30,223 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:30,224 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:30,999 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:31,264 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:32,294 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:32,294 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:33,066 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:33,335 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:34,363 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:34,363 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:35,130 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:35,398 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:36,440 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:36,441 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:37,236 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:37,521 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:38,548 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:38,549 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:39,315 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:39,580 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:40,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:40,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:41,374 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:41,644 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:42,676 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:42,676 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:42,677 [INFO] [LOOP 270] trades=0 balance=$4.85 open=0
+2026-03-12 00:58:43,447 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:43,711 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:44,742 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:44,742 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:45,506 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:45,768 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:47,067 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:47,830 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:49,127 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:50,164 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:50,426 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:51,191 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:51,192 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:52,225 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:52,487 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:53,256 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:53,256 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:54,282 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:54,543 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:55,307 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:55,307 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:56,341 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:56,611 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:57,373 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:58,401 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:58:58,669 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:58:59,434 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:00,462 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:00,731 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:01,498 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:01,499 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:02,533 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:02,800 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:03,568 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:03,568 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:04,600 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:04,867 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:05,633 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:05,633 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:06,661 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:06,927 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:07,691 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:08,723 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:09,758 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:09,758 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:10,790 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:11,052 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:11,816 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:12,853 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:13,116 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:13,885 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:13,885 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:13,886 [INFO] [LOOP 300] trades=0 balance=$4.85 open=0
+2026-03-12 00:59:15,185 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:15,947 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:15,947 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:16,977 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:17,519 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:18,552 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:18,553 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:19,315 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:19,584 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:20,622 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:20,622 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:21,392 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:21,653 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:22,685 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:23,448 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:23,713 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:24,741 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:24,742 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:25,513 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:25,778 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:26,812 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:26,813 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:27,579 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:27,845 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:28,870 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:28,871 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:29,641 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:29,904 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:30,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:30,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:31,698 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:31,966 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:32,995 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:32,995 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:33,759 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:34,020 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:35,050 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:35,050 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:35,821 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:36,091 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:37,119 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:37,119 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:37,885 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:38,147 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:39,175 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:39,176 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:39,943 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:41,234 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:41,234 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:42,001 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:42,266 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:43,296 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:43,297 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:44,061 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:44,330 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:45,359 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:45,359 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:45,360 [INFO] [LOOP 330] trades=0 balance=$4.85 open=0
+2026-03-12 00:59:46,391 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:47,426 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:47,427 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:48,472 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:49,001 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:50,044 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:50,044 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:50,811 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:51,078 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:52,115 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:52,116 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:52,884 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:53,144 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:54,175 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:54,175 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:54,938 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:55,201 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:56,230 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:56,998 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:57,266 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:58,297 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:58,297 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 00:59:59,067 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 00:59:59,335 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:00,371 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:00,372 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:01,138 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:01,403 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:02,438 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:02,438 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:03,469 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:04,502 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:04,502 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:05,269 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:06,567 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:06,568 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:07,335 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:07,600 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:08,626 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:08,627 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:10,429 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:10,693 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:11,195 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:11,195 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:12,492 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:13,257 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:13,257 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:14,556 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:14,816 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:15,318 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:15,318 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:16,611 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:16,877 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:17,379 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:17,380 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:17,380 [INFO] [LOOP 360] trades=0 balance=$4.85 open=0
+2026-03-12 01:00:19,211 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:20,507 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:20,776 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:21,278 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:21,278 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:22,578 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:22,844 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:23,346 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:23,347 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:24,641 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:24,902 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:25,404 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:26,701 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:26,969 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:27,471 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:27,471 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:28,762 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:29,026 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:29,528 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:29,528 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:30,824 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:31,092 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:31,594 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:32,893 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:33,158 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:33,660 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:33,660 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:35,221 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:35,723 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:37,027 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:37,296 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:37,799 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:37,800 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:39,095 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:39,357 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:39,860 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:39,861 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:41,160 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:41,429 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:41,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:41,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:43,234 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:43,500 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:44,001 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:45,298 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:45,565 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:46,067 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:46,067 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:47,363 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:47,628 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:48,130 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:48,130 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:49,704 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:49,968 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:49,969 [INFO] [LOOP 390] trades=0 balance=$4.85 open=0
+2026-03-12 01:00:51,263 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:51,264 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:51,766 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:52,029 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:53,332 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:53,332 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:53,833 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:54,100 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:55,399 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:55,400 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:55,901 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:56,172 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:57,472 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:57,974 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:58,239 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:00:59,541 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:00:59,542 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:00,043 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:00,312 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:01,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:01,609 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:02,111 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:02,380 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:03,681 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:03,682 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:04,184 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:04,450 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:05,744 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:06,245 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:06,513 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:07,809 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:08,311 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:08,573 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:09,867 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:09,867 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:10,369 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:10,638 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:11,929 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:11,929 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:12,431 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:12,697 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:14,002 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:14,503 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:14,771 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:16,064 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:16,065 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:16,566 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:16,836 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:18,134 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:18,134 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:18,635 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:18,898 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:21,251 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:22,577 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:22,840 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:22,841 [INFO] [LOOP 420] trades=0 balance=$4.85 open=0
+2026-03-12 01:01:23,343 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:23,343 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:24,635 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:24,901 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:25,403 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:26,702 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:26,969 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:27,470 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:27,471 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:29,026 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:29,529 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:29,530 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:30,828 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:31,090 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:31,593 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:31,593 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:32,885 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:33,151 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:33,653 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:33,653 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:34,960 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:35,224 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:35,727 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:35,727 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:37,028 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:37,293 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:37,795 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:37,795 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:39,086 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:39,351 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:39,852 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:39,853 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:41,152 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:41,418 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:41,920 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:41,921 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:43,212 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:43,477 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:43,978 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:45,271 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:45,538 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:46,040 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:46,040 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:47,326 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:47,589 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:48,091 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:48,091 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:50,418 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:50,685 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:51,725 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:51,726 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:52,764 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:53,294 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:53,795 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:53,797 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:55,088 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:55,354 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:55,354 [INFO] [LOOP 450] trades=0 balance=$4.85 open=0
+2026-03-12 01:01:55,856 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:55,857 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:57,160 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:57,426 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:57,927 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:57,928 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:59,224 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:59,490 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:01:59,993 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:01:59,993 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:01,291 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:01,557 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:02,059 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:02,059 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:03,356 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:03,618 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:04,120 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:04,120 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:05,421 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:05,689 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:06,191 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:06,191 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:07,502 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:07,770 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:08,271 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:09,567 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:09,828 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:10,330 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:10,331 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:11,895 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:12,397 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:12,397 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:13,692 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:13,966 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:14,468 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:15,770 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:16,039 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:16,543 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:16,543 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:17,835 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:18,097 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:18,598 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:18,598 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:19,897 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:20,163 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:20,665 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:20,665 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:22,232 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:23,805 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:23,805 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:24,307 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:24,577 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:25,870 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:25,870 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:26,372 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:26,633 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:26,633 [INFO] [LOOP 480] trades=0 balance=$4.85 open=0
+2026-03-12 01:02:27,931 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:27,932 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:28,433 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:28,701 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:29,998 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:30,500 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:30,764 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:32,060 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:32,061 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:32,565 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:32,831 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:34,125 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:34,125 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:34,627 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:34,896 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:36,197 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:36,197 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:36,967 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:38,267 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:38,267 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:38,769 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:39,038 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:40,327 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:40,328 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:40,829 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:41,094 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:42,393 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:42,393 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:42,895 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:43,160 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:44,457 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:44,458 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:44,961 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:45,228 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:46,530 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:46,530 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:47,031 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:47,300 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:48,595 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:48,596 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:49,363 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:51,167 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:51,435 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:51,937 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:51,937 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:54,013 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:55,583 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:55,584 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:56,085 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:56,353 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:57,657 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:57,658 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:58,159 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:58,426 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:59,730 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:02:59,730 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:02:59,730 [INFO] [LOOP 510] trades=0 balance=$4.85 open=0
+2026-03-12 01:03:00,232 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:00,494 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:01,801 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:01,801 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:02,302 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:02,572 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:03,869 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:03,870 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:04,371 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:04,640 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:05,945 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:05,946 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:06,447 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:06,708 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:08,001 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:08,002 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:08,503 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:08,774 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:10,080 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:10,581 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:10,846 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:12,144 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:12,145 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:12,646 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:12,911 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:14,211 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:14,211 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:14,713 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:14,981 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:16,287 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:16,287 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:16,789 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:17,579 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:18,883 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:18,883 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:19,385 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:19,654 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:20,955 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:21,458 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:21,724 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:23,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:23,019 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:23,521 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:23,786 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:25,362 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:25,624 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:26,919 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:26,920 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:27,421 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:27,690 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:28,993 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:28,994 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:29,495 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:29,760 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:31,054 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:31,054 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:31,555 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:31,824 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:31,824 [INFO] [LOOP 540] trades=0 balance=$4.85 open=0
+2026-03-12 01:03:33,119 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:33,120 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:33,622 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:33,889 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:35,182 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:35,182 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:35,684 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:37,243 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:37,745 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:38,014 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:39,315 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:39,315 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:39,817 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:40,082 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:41,377 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:41,378 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:41,879 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:42,148 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:43,454 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:43,455 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:43,957 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:44,218 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:45,514 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:45,515 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:46,016 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:46,279 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:47,575 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:47,576 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:48,078 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:48,346 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:49,646 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:49,646 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:50,148 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:50,409 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:52,225 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:52,496 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:54,313 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:55,082 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:55,082 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:56,648 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:56,914 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:58,728 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:03:58,999 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:03:59,500 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:00,803 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:01,075 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:01,577 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:01,577 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:02,875 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:03,641 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:03,641 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:04,938 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:05,213 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:05,715 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:05,715 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:05,715 [INFO] [LOOP 570] trades=0 balance=$4.85 open=0
+2026-03-12 01:04:07,016 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:07,280 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:07,782 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:07,784 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:09,081 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:09,351 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:09,853 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:11,142 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:11,410 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:11,912 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:11,912 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:13,222 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:13,486 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:13,988 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:13,989 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:15,296 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:15,563 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:16,064 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:16,065 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:17,632 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:18,133 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:18,134 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:19,427 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:19,692 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:20,193 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:20,194 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:21,490 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:21,756 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:22,258 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:22,258 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:23,565 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:23,832 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:24,334 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:24,334 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:25,894 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:26,396 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:27,963 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:28,226 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:29,527 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:29,527 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:30,031 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:30,300 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:31,598 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:31,598 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:32,100 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:32,366 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:33,659 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:33,659 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:34,161 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:34,429 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:35,728 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:36,230 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:36,491 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:37,794 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:37,795 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:37,795 [INFO] [LOOP 600] trades=0 balance=$4.85 open=0
+2026-03-12 01:04:38,296 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:39,850 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:39,851 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:40,352 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:40,620 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:41,920 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:42,422 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:42,688 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:43,979 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:43,980 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:44,481 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:44,747 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:46,053 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:46,053 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:46,555 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:46,820 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:48,112 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:48,112 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:48,614 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:48,883 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:50,190 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:50,692 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:50,957 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:52,254 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:52,756 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:53,025 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:54,312 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:54,312 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:54,814 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:55,075 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:56,373 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy DOGE/USDT $5.00 on binance
+2026-03-12 01:04:56,875 [WARNING] [LIVE] Order BLOCKED: Insufficient balance on binance: $4.85 | buy XRP/USDT $5.00 on binance
+2026-03-12 01:04:58,976 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:04:59,520 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 275ms | binance
+2026-03-12 01:05:00,062 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:00,330 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 268ms | binance
+2026-03-12 01:05:02,173 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:04,005 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:05,840 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:06,373 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:05:06,908 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:07,171 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:05:09,019 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:09,549 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:10,092 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:10,378 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 287ms | binance
+2026-03-12 01:05:12,214 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:12,746 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:05:13,290 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:13,558 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:05:15,674 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 267ms | binance
+2026-03-12 01:05:16,208 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:16,477 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0217% | 269ms | binance
+2026-03-12 01:05:18,316 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:18,851 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 266ms | binance
+2026-03-12 01:05:19,386 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:19,653 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 267ms | binance
+2026-03-12 01:05:21,481 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:22,009 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:05:22,553 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:22,816 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:05:24,654 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:25,184 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:05:25,727 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:25,995 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:05:27,832 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:28,363 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:28,902 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:29,169 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:05:29,170 [INFO] [LOOP 630] trades=0 balance=$4.85 open=0
+2026-03-12 01:05:31,015 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:31,541 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:05:32,084 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:32,354 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:05:34,184 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:34,711 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:05:35,247 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:35,512 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 265ms | binance
+2026-03-12 01:05:37,351 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:37,880 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 265ms | binance
+2026-03-12 01:05:38,425 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:38,689 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:05:40,524 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:41,057 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:41,605 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:41,871 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:43,974 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:05:44,510 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:44,780 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:05:46,617 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:47,145 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:05:47,681 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:47,948 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:49,785 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:50,314 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:05:50,847 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:51,117 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:05:52,949 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:53,492 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:05:54,030 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:54,296 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:56,136 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:56,674 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:05:57,211 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:05:57,482 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:05:59,316 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:05:59,851 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:06:00,397 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:00,661 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:06:02,502 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:03,031 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:06:03,581 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:03,849 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 267ms | binance
+2026-03-12 01:06:05,687 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:06,220 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:06,762 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:07,033 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:06:08,878 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:10,708 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:11,243 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:06:11,778 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:12,042 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:06:13,872 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:14,406 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 267ms | binance
+2026-03-12 01:06:14,941 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:15,209 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 268ms | binance
+2026-03-12 01:06:17,317 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:06:17,856 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:18,120 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:06:19,949 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:20,483 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:21,022 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:21,293 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 271ms | binance
+2026-03-12 01:06:23,128 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:23,667 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 271ms | binance
+2026-03-12 01:06:24,208 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:24,480 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 271ms | binance
+2026-03-12 01:06:26,316 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:26,842 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 265ms | binance
+2026-03-12 01:06:27,378 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:27,641 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:06:29,751 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:06:30,289 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:30,560 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 271ms | binance
+2026-03-12 01:06:32,405 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:32,936 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:33,483 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:33,756 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 273ms | binance
+2026-03-12 01:06:35,596 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:36,124 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:06:36,665 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:36,931 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:39,034 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 265ms | binance
+2026-03-12 01:06:39,569 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:39,837 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:06:41,694 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:43,531 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:44,066 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:06:44,600 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:44,871 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:06:46,703 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:48,535 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:49,070 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:06:49,606 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:49,875 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:06:51,705 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:52,235 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:52,773 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:53,043 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:06:55,905 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:56,704 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:06:57,247 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:06:57,513 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:06:59,361 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:06:59,892 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:07:00,427 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:00,694 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:00,695 [INFO] [LOOP 660] trades=0 balance=$14.69 open=0
+2026-03-12 01:07:03,051 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:03,578 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:07:04,124 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:04,391 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:06,227 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:06,764 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:07:07,312 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:07,575 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 263ms | binance
+2026-03-12 01:07:09,405 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:09,940 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:07:10,998 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:11,265 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:13,107 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:13,640 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:07:14,171 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:14,433 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:07:16,268 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:16,808 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:07:17,348 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:17,616 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:07:19,457 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:19,996 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:07:20,544 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:20,812 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:22,906 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0217% | 264ms | binance
+2026-03-12 01:07:23,443 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:23,712 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0217% | 269ms | binance
+2026-03-12 01:07:25,551 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:26,094 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:07:26,630 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:26,900 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 270ms | binance
+2026-03-12 01:07:28,726 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:30,558 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:31,100 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 272ms | binance
+2026-03-12 01:07:31,635 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:31,903 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0108% | 268ms | binance
+2026-03-12 01:07:33,740 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:34,276 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:07:34,813 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:35,084 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:07:36,929 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:37,462 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 269ms | binance
+2026-03-12 01:07:38,004 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:38,271 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:40,099 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:41,927 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:42,467 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:07:43,009 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:43,276 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0922 | fee=$0.0050 | slip=0.0000% | 267ms | binance
+2026-03-12 01:07:45,114 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:45,650 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0434% | 270ms | binance
+2026-03-12 01:07:46,191 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:46,457 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0434% | 265ms | binance
+2026-03-12 01:07:48,290 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:48,821 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:07:49,364 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:49,629 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 265ms | binance
+2026-03-12 01:07:51,735 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 270ms | binance
+2026-03-12 01:07:52,278 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:52,544 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:07:54,384 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:54,917 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 268ms | binance
+2026-03-12 01:07:55,457 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:55,730 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 272ms | binance
+2026-03-12 01:07:57,571 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:07:58,099 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:07:58,639 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:07:58,902 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 262ms | binance
+2026-03-12 01:08:00,735 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:01,264 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 264ms | binance
+2026-03-12 01:08:01,803 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:08:02,069 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:08:03,916 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:04,449 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:08:04,985 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:08:05,257 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 271ms | binance
+2026-03-12 01:08:07,087 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:07,626 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0924 | fee=$0.0050 | slip=0.0108% | 269ms | binance
+2026-03-12 01:08:08,162 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:08:08,429 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0924 | fee=$0.0050 | slip=0.0108% | 266ms | binance
+2026-03-12 01:08:10,268 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:10,797 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 263ms | binance
+2026-03-12 01:08:11,338 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:08:11,604 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 266ms | binance
+2026-03-12 01:08:13,446 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:13,974 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0000% | 266ms | binance
+2026-03-12 01:08:15,030 [ERROR] [LIVE] INSUFFICIENT FUNDS on binance: binance Account has insufficient balance for requested action.
+2026-03-12 01:08:15,820 [INFO] [LIVE] OK: SELL DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0325% | 789ms | binance
+2026-03-12 01:08:17,650 [ERROR] [LIVE] UNEXPECTED ERROR on binance: binance {"code":-1013,"msg":"Filter failure: NOTIONAL"}
+2026-03-12 01:08:18,176 [INFO] [LIVE] OK: BUY DOGE/USDT $5.00 @ $0.0923 | fee=$0.0050 | slip=0.0108% | 260ms | binance
+2026-03-12 01:08:18,856 [INFO] Signal received, initiating graceful shutdown...
+2026-03-12 01:08:18,856 [INFO] Initiating v5 graceful shutdown...
+2026-03-12 01:08:18,857 [INFO] [v5] No open positions to close on shutdown
+2026-03-12 01:08:18,857 [INFO] Server stopped.

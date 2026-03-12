@@ -1,0 +1,9 @@
+2026-03-12 00:47:42,185 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-12 00:47:42,187 [WARNING] [v4] TRADING_MODE=live but ccxt not installed! Falling back to paper mode.
+2026-03-12 00:47:42,188 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-12 00:47:42,198 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-12 00:47:42,210 [INFO] Server listening on port 8888
+2026-03-12 00:47:48,064 [INFO] Signal received, initiating graceful shutdown...
+2026-03-12 00:47:48,217 [INFO] Initiating v5 graceful shutdown...
+2026-03-12 00:47:48,219 [INFO] [v5] No open positions to close on shutdown
+2026-03-12 00:47:48,222 [INFO] Server stopped.

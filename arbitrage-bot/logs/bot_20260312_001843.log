@@ -1,0 +1,4 @@
+2026-03-12 00:18:43,515 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-12 00:18:43,517 [WARNING] [v4] TRADING_MODE=live but ccxt not installed! Falling back to paper mode.
+2026-03-12 00:18:43,518 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-12 00:18:43,530 [INFO] [v5] DB backup enabled: every 30min, max 10 files
