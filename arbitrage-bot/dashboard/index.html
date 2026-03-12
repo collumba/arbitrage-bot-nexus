@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARBITRAGE NEXUS v4 — Live Execution Engine</title>
+<title>ARBITRAGE NEXUS v5 — Live Execution Engine</title>
 <style>
 /* ═══════════════════════════════════════════════════════════
    ARBITRAGE NEXUS — FUTURISTIC DARK THEME
@@ -705,6 +705,147 @@ body::before {
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+
+/* ─── v5: SETTINGS PANEL ──────────────────────────────── */
+.v5-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.v5-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.v5-toolbar-btn:hover {
+  border-color: var(--cyan-dim);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+.v5-toolbar-btn.active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 0 10px var(--border-glow);
+}
+.v5-notify-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.v5-notify-dot.on { background: var(--green); box-shadow: 0 0 6px var(--green-dim); }
+.v5-notify-dot.off { background: var(--text-dim); }
+
+.settings-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+  animation: feedIn 0.3s ease;
+}
+.settings-panel.open { display: block; }
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.settings-group {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+.settings-group-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.setting-row:last-child { margin-bottom: 0; }
+.setting-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+.setting-input {
+  width: 80px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-align: right;
+}
+.setting-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 8px var(--border-glow);
+}
+.setting-toggle {
+  width: 32px; height: 18px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+.setting-toggle.on { background: var(--green); }
+.setting-toggle.off { background: var(--text-dim); }
+.setting-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.3s;
+}
+.setting-toggle.on::after { left: 16px; }
+.setting-toggle.off::after { left: 2px; }
+.settings-save-btn {
+  margin-top: 12px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--cyan);
+  background: rgba(0,240,255,0.1);
+  color: var(--cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.settings-save-btn:hover {
+  background: rgba(0,240,255,0.2);
+  box-shadow: 0 0 15px var(--border-glow);
+}
+
+@media (max-width: 1000px) {
+  .settings-grid { grid-template-columns: repeat(2, 1fr); }
+  .v5-toolbar { gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -830,6 +971,108 @@ body::before {
     <div class="dq-bar"><div class="dq-bar-real" id="dqBarReal" style="width:0%"></div></div>
     <span class="dq-pct" id="dqRealPct">0% real</span>
     <span class="dq-info" id="dqInfo">| 0 exchanges connected</span>
+  </div>
+
+  <!-- v5: TOOLBAR -->
+  <div class="v5-toolbar">
+    <button class="v5-toolbar-btn" onclick="toggleSettings()">
+      ⚙️ Settings
+    </button>
+    <button class="v5-toolbar-btn" onclick="triggerBackup()">
+      💾 Backup Now
+    </button>
+    <div class="v5-toolbar-btn" style="cursor:default">
+      🔔 Notifications: <span class="v5-notify-dot off" id="notifyDot"></span>
+      <span id="notifyStatus" style="color:var(--text-dim)">off</span>
+    </div>
+    <div class="v5-toolbar-btn" style="cursor:default">
+      🛡️ SL/TP: <span id="slTpStatus" style="color:var(--text-dim)">—</span>
+    </div>
+    <div class="v5-toolbar-btn" style="cursor:default">
+      💾 Backup: <span id="backupStatus" style="color:var(--text-dim)">—</span>
+    </div>
+  </div>
+
+  <!-- v5: SETTINGS PANEL -->
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-grid">
+      <div class="settings-group">
+        <div class="settings-group-title">🛡️ Stop Loss / Take Profit</div>
+        <div class="setting-row">
+          <span class="setting-label">Stop Loss %</span>
+          <input type="number" step="0.1" class="setting-input" id="cfg-stop_loss_pct" value="2.0">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Take Profit %</span>
+          <input type="number" step="0.1" class="setting-input" id="cfg-take_profit_pct" value="5.0">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Max Hold Ticks</span>
+          <input type="number" step="1" class="setting-input" id="cfg-max_hold_ticks" value="120">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Trailing Stop</span>
+          <button class="setting-toggle off" id="cfg-trailing_stop" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-title">⏱️ Engine Config</div>
+        <div class="setting-row">
+          <span class="setting-label">Scan Interval (s)</span>
+          <input type="number" step="1" class="setting-input" id="cfg-scan_interval" value="10">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Trade Size %</span>
+          <input type="number" step="0.5" class="setting-input" id="cfg-trade_size_pct" value="5.0">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Min Spread %</span>
+          <input type="number" step="0.01" class="setting-input" id="cfg-min_spread" value="0.15">
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-title">🔔 Notifications</div>
+        <div class="setting-row">
+          <span class="setting-label">On Trade</span>
+          <button class="setting-toggle on" id="cfg-notify_on_trade" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Min P&L ($)</span>
+          <input type="number" step="0.5" class="setting-input" id="cfg-min_pnl_notify" value="1.0">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Telegram</span>
+          <span id="cfgTelegramStatus" style="font-size:11px;color:var(--text-dim)">not set</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Discord</span>
+          <span id="cfgDiscordStatus" style="font-size:11px;color:var(--text-dim)">not set</span>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group-title">💾 Backup & Safety</div>
+        <div class="setting-row">
+          <span class="setting-label">Auto Backup</span>
+          <button class="setting-toggle on" id="cfg-backup_enabled" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Interval (min)</span>
+          <input type="number" step="5" class="setting-input" id="cfg-backup_interval" value="30">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Max Files</span>
+          <input type="number" step="1" class="setting-input" id="cfg-backup_max" value="10">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Auto Reconnect</span>
+          <button class="setting-toggle on" id="cfg-auto_reconnect" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+      </div>
+    </div>
+    <button class="settings-save-btn" onclick="saveSettings()">💾 SAVE SETTINGS</button>
   </div>
 
   <!-- STRATEGY CARDS -->
@@ -1461,6 +1704,9 @@ function updateDashboard(data) {
     modeText.textContent = data.is_live ? 'LIVE' : data.trading_mode.toUpperCase();
     badge.className = `status-badge ${data.is_live ? 'live' : 'paper'}`;
   }
+
+  // v5: Update settings, notifications, backup status
+  updateV5Status(data);
 }
 
 // ─── FEED ─────────────────────────────────────────────
@@ -1550,6 +1796,122 @@ async function pollAPI() {
     updateDashboard(data);
   } catch (e) {
     // Server not available
+  }
+}
+
+// ─── v5: SETTINGS PANEL ──────────────────────────────
+function toggleSettings() {
+  const panel = document.getElementById('settingsPanel');
+  panel.classList.toggle('open');
+}
+
+async function saveSettings() {
+  const configs = {
+    stop_loss_pct: parseFloat(document.getElementById('cfg-stop_loss_pct').value),
+    take_profit_pct: parseFloat(document.getElementById('cfg-take_profit_pct').value),
+    max_hold_ticks: parseInt(document.getElementById('cfg-max_hold_ticks').value),
+    trailing_stop: document.getElementById('cfg-trailing_stop').classList.contains('on'),
+    scan_interval: parseInt(document.getElementById('cfg-scan_interval').value),
+    trade_size_pct: parseFloat(document.getElementById('cfg-trade_size_pct').value),
+    min_spread: parseFloat(document.getElementById('cfg-min_spread').value),
+    notify_on_trade: document.getElementById('cfg-notify_on_trade').classList.contains('on'),
+    min_pnl_notify: parseFloat(document.getElementById('cfg-min_pnl_notify').value),
+  };
+
+  const params = Object.entries(configs).map(([k,v]) => `${k}=${v}`).join('&');
+  try {
+    const resp = await fetch(`${API_URL}/config?${params}`);
+    const result = await resp.json();
+    addFeedItem('trade', '<strong>[v5]</strong> Settings saved successfully');
+  } catch(e) {
+    addFeedItem('error', '<strong>[v5]</strong> Failed to save settings');
+  }
+}
+
+async function triggerBackup() {
+  try {
+    const resp = await fetch(`${API_URL}/backup`);
+    const result = await resp.json();
+    addFeedItem('trade', `<strong>[v5]</strong> ${result.status || 'Backup triggered'}`);
+  } catch(e) {
+    addFeedItem('error', '<strong>[v5]</strong> Backup failed');
+  }
+}
+
+function updateV5Status(data) {
+  // v5: Runtime config sync
+  const rc = data.runtime_config;
+  if (rc) {
+    // SL/TP status display
+    const slTp = document.getElementById('slTpStatus');
+    if (slTp) {
+      slTp.textContent = `SL:${rc.stop_loss_pct || '—'}% / TP:${rc.take_profit_pct || '—'}%`;
+      slTp.style.color = 'var(--text-secondary)';
+    }
+
+    // Sync settings panel values
+    const fields = {
+      'cfg-stop_loss_pct': rc.stop_loss_pct,
+      'cfg-take_profit_pct': rc.take_profit_pct,
+      'cfg-max_hold_ticks': rc.max_hold_ticks,
+      'cfg-scan_interval': rc.scan_interval,
+      'cfg-trade_size_pct': rc.trade_size_pct,
+      'cfg-min_spread': rc.min_spread,
+      'cfg-min_pnl_notify': rc.min_pnl_notify,
+    };
+    for (const [id, val] of Object.entries(fields)) {
+      const el = document.getElementById(id);
+      if (el && val !== undefined) el.value = val;
+    }
+
+    // Toggles
+    const toggles = {
+      'cfg-trailing_stop': rc.trailing_stop,
+      'cfg-notify_on_trade': rc.notify_on_trade,
+      'cfg-backup_enabled': rc.backup_enabled,
+      'cfg-auto_reconnect': rc.auto_reconnect,
+    };
+    for (const [id, val] of Object.entries(toggles)) {
+      const el = document.getElementById(id);
+      if (el && val !== undefined) {
+        el.className = `setting-toggle ${val ? 'on' : 'off'}`;
+      }
+    }
+  }
+
+  // v5: Notification status
+  const notify = data.notifications;
+  if (notify) {
+    const dot = document.getElementById('notifyDot');
+    const status = document.getElementById('notifyStatus');
+    const hasNotify = notify.telegram || notify.discord;
+    if (dot) dot.className = `v5-notify-dot ${hasNotify ? 'on' : 'off'}`;
+    if (status) {
+      const parts = [];
+      if (notify.telegram) parts.push('TG');
+      if (notify.discord) parts.push('DC');
+      status.textContent = parts.length > 0 ? parts.join('+') : 'off';
+      status.style.color = hasNotify ? 'var(--green)' : 'var(--text-dim)';
+    }
+    const tgStatus = document.getElementById('cfgTelegramStatus');
+    if (tgStatus) {
+      tgStatus.textContent = notify.telegram ? 'connected' : 'not set';
+      tgStatus.style.color = notify.telegram ? 'var(--green)' : 'var(--text-dim)';
+    }
+    const dcStatus = document.getElementById('cfgDiscordStatus');
+    if (dcStatus) {
+      dcStatus.textContent = notify.discord ? 'connected' : 'not set';
+      dcStatus.style.color = notify.discord ? 'var(--green)' : 'var(--text-dim)';
+    }
+  }
+
+  // v5: Backup status
+  if (data.backup) {
+    const bkStatus = document.getElementById('backupStatus');
+    if (bkStatus) {
+      bkStatus.textContent = data.backup.last || 'never';
+      bkStatus.style.color = data.backup.enabled ? 'var(--green)' : 'var(--text-dim)';
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 @echo off
-title ARBITRAGE NEXUS v4
+title ARBITRAGE NEXUS v5
 echo ========================================================
-echo        ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE
+echo        ARBITRAGE NEXUS v5 — LIVE EXECUTION ENGINE
 echo ========================================================
 echo.
 
@@ -10,6 +10,10 @@ cd /d "%~dp0"
 echo  [*] Auto-installing ccxt if needed...
 echo  [*] Dashboard: http://localhost:8888
 echo  [*] Kill Switch: http://localhost:8888/api/kill
+echo  [*] Settings API: http://localhost:8888/api/config
+echo  [*] Manual Backup: http://localhost:8888/api/backup
+echo.
+echo  [v5] SL/TP, Notifications, Auto-Backup, Graceful Shutdown
 echo.
 
 python server.py

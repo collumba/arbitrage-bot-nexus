@@ -1,0 +1,32 @@
+2026-03-11 20:42:34,830 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 20:42:38,721 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 20:42:43,569 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 20:42:47,167 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 20:42:49,829 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-11 20:43:01,286 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-11 20:43:04,214 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-11 20:43:04,215 [INFO] [REAL] 6/6 exchanges connected
+2026-03-11 20:43:04,215 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 20:43:04,223 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-11 20:43:04,233 [INFO] Server listening on port 8888
+2026-03-11 20:43:34,226 [INFO] [v5] DB backed up to nexus_backup_20260311_204334.db
+2026-03-11 20:57:00,784 [INFO] [LOOP 30] trades=99 balance=$47.82 open=0
+2026-03-11 21:10:56,737 [INFO] [LOOP 60] trades=205 balance=$232.50 open=0
+2026-03-11 21:13:34,238 [INFO] [v5] DB backed up to nexus_backup_20260311_211334.db
+2026-03-11 21:19:34,397 [WARNING] Order execution failed on kucoin (MATIC/USDT)
+2026-03-11 21:24:46,252 [INFO] [LOOP 90] trades=335 balance=$1,084.01 open=3
+2026-03-11 21:38:51,252 [INFO] [LOOP 120] trades=474 balance=$6,064.29 open=4
+2026-03-11 21:43:34,240 [INFO] [v5] DB backed up to nexus_backup_20260311_214334.db
+2026-03-11 21:52:27,851 [INFO] [LOOP 150] trades=612 balance=$36,656.46 open=2
+2026-03-11 21:54:37,043 [WARNING] Order execution failed on kucoin (MATIC/USDT)
+2026-03-11 22:03:37,154 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:04:26,039 [WARNING] Order execution failed on kucoin (MATIC/USDT)
+2026-03-11 22:05:54,521 [INFO] [LOOP 180] trades=636 balance=$40,230.01 open=3
+2026-03-11 22:08:35,606 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:09:54,428 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:11:39,855 [WARNING] Order execution failed on dex (ETH/USDT)
+2026-03-11 22:12:28,402 [WARNING] Order execution failed on gate (MATIC/USDT)
+2026-03-11 22:13:34,252 [INFO] [v5] DB backed up to nexus_backup_20260311_221334.db
+2026-03-11 22:13:45,969 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 22:13:55,363 [INFO] [HTTP] Engine statistical -> OFF
+2026-03-11 22:13:59,066 [INFO] [HTTP] Close positions for statistical: 3/3 closed

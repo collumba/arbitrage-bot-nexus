@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════╗
-║       ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE             ║
-║       Paper + Live modes · Real orders via ccxt              ║
-║       Kill switch · Balance sync · Safety guards             ║
+║       ARBITRAGE NEXUS v5 — SMART EXECUTION ENGINE            ║
+║       SL/TP · Runtime Config · Notifications · DB Backup     ║
+║       Graceful Shutdown · Auto-Reconnect · Live/Paper        ║
 ╚══════════════════════════════════════════════════════════════╝
 """
 import json
@@ -18,6 +18,9 @@ import sqlite3
 import logging
 import traceback
 import subprocess
+import signal
+import shutil
+import urllib.request
 from pathlib import Path
 import threading
 import socket
@@ -232,6 +235,157 @@ LIVE_SAFETY = {
     "require_minimum_balance_usd": 5.0,
     "order_timeout_sec": 10,
 }
+
+# ═══════════════════════════════════════════════════════════
+# v5 CONFIGURATION
+# ═══════════════════════════════════════════════════════════
+
+# Stop Loss / Take Profit defaults (% from entry)
+SL_TP_CONFIG = {
+    "stop_loss_pct": float(os.environ.get("STOP_LOSS_PCT", "2.0")),    # Close if -2% from entry
+    "take_profit_pct": float(os.environ.get("TAKE_PROFIT_PCT", "5.0")),  # Close if +5% from entry
+    "max_hold_ticks": int(os.environ.get("MAX_HOLD_TICKS", "120")),      # Force close after N ticks
+    "trailing_stop": os.environ.get("TRAILING_STOP", "false").lower() == "true",
+}
+
+# Notification config
+NOTIFY_CONFIG = {
+    "telegram_token": os.environ.get("TELEGRAM_BOT_TOKEN", ""),
+    "telegram_chat_id": os.environ.get("TELEGRAM_CHAT_ID", ""),
+    "discord_webhook": os.environ.get("DISCORD_WEBHOOK_URL", ""),
+    "notify_on_trade": os.environ.get("NOTIFY_ON_TRADE", "true").lower() == "true",
+    "notify_on_kill": True,
+    "notify_on_error": True,
+    "notify_on_daily_summary": True,
+    "min_pnl_notify": float(os.environ.get("MIN_PNL_NOTIFY", "1.0")),  # Only notify trades > $1
+}
+
+# DB Backup config
+BACKUP_CONFIG = {
+    "enabled": os.environ.get("DB_BACKUP_ENABLED", "true").lower() == "true",
+    "interval_min": int(os.environ.get("DB_BACKUP_INTERVAL_MIN", "30")),
+    "max_backups": int(os.environ.get("DB_BACKUP_MAX_FILES", "10")),
+    "backup_dir": str(Path(__file__).parent / "backups"),
+}
+
+# Auto-reconnect config
+RECONNECT_CONFIG = {
+    "enabled": True,
+    "max_retries": 5,
+    "retry_delay_sec": 10,
+    "health_check_interval_sec": 60,
+}
+
+
+# ═══════════════════════════════════════════════════════════
+# NOTIFICATION SYSTEM (Telegram + Discord)
+# ═══════════════════════════════════════════════════════════
+
+class Notifier:
+    """Sends notifications via Telegram and/or Discord"""
+
+    def __init__(self):
+        self.telegram_token = NOTIFY_CONFIG["telegram_token"]
+        self.telegram_chat = NOTIFY_CONFIG["telegram_chat_id"]
+        self.discord_webhook = NOTIFY_CONFIG["discord_webhook"]
+        self._queue = deque(maxlen=100)
+        self._lock = threading.Lock()
+        self._enabled = bool(self.telegram_token and self.telegram_chat) or bool(self.discord_webhook)
+        if self._enabled:
+            self._thread = threading.Thread(target=self._sender_loop, daemon=True)
+            self._thread.start()
+            log.info(f"[v5] Notifications enabled: telegram={'yes' if self.telegram_token else 'no'}, discord={'yes' if self.discord_webhook else 'no'}")
+
+    def send(self, message, level="info"):
+        if not self._enabled:
+            return
+        with self._lock:
+            self._queue.append({"msg": message, "level": level, "ts": time.time()})
+
+    def _sender_loop(self):
+        while True:
+            try:
+                item = None
+                with self._lock:
+                    if self._queue:
+                        item = self._queue.popleft()
+                if item:
+                    text = f"[{item['level'].upper()}] {item['msg']}"
+                    self._send_telegram(text)
+                    self._send_discord(text)
+                else:
+                    time.sleep(0.5)
+            except Exception as e:
+                log.debug(f"Notifier error: {e}")
+                time.sleep(2)
+
+    def _send_telegram(self, text):
+        if not self.telegram_token or not self.telegram_chat:
+            return
+        try:
+            url = f"https://api.telegram.org/bot{self.telegram_token}/sendMessage"
+            payload = json.dumps({"chat_id": self.telegram_chat, "text": text, "parse_mode": "HTML"}).encode()
+            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+            urllib.request.urlopen(req, timeout=5)
+        except Exception as e:
+            log.debug(f"Telegram send failed: {e}")
+
+    def _send_discord(self, text):
+        if not self.discord_webhook:
+            return
+        try:
+            payload = json.dumps({"content": text}).encode()
+            req = urllib.request.Request(self.discord_webhook, data=payload, headers={"Content-Type": "application/json"})
+            urllib.request.urlopen(req, timeout=5)
+        except Exception as e:
+            log.debug(f"Discord send failed: {e}")
+
+
+# ═══════════════════════════════════════════════════════════
+# DB BACKUP SYSTEM
+# ═══════════════════════════════════════════════════════════
+
+class DBBackupManager:
+    """Automatic periodic backup of the SQLite database"""
+
+    def __init__(self, db_path):
+        self.db_path = Path(db_path)
+        self.backup_dir = Path(BACKUP_CONFIG["backup_dir"])
+        self.backup_dir.mkdir(exist_ok=True)
+        self.interval = BACKUP_CONFIG["interval_min"] * 60
+        self.max_backups = BACKUP_CONFIG["max_backups"]
+        self._running = BACKUP_CONFIG["enabled"]
+        if self._running:
+            self._thread = threading.Thread(target=self._backup_loop, daemon=True)
+            self._thread.start()
+            log.info(f"[v5] DB backup enabled: every {BACKUP_CONFIG['interval_min']}min, max {self.max_backups} files")
+
+    def _backup_loop(self):
+        time.sleep(30)  # Wait for initial startup
+        while self._running:
+            try:
+                self.do_backup()
+            except Exception as e:
+                log.error(f"DB backup failed: {e}")
+            time.sleep(self.interval)
+
+    def do_backup(self):
+        if not self.db_path.exists():
+            return
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        dest = self.backup_dir / f"nexus_backup_{ts}.db"
+        shutil.copy2(str(self.db_path), str(dest))
+        self._last_backup_time = datetime.now().strftime("%H:%M:%S")
+        log.info(f"[v5] DB backed up to {dest.name}")
+        self._cleanup()
+
+    def _cleanup(self):
+        backups = sorted(self.backup_dir.glob("nexus_backup_*.db"), key=lambda p: p.stat().st_mtime)
+        while len(backups) > self.max_backups:
+            old = backups.pop(0)
+            old.unlink()
+            log.info(f"[v5] Removed old backup: {old.name}")
+
 
 def _get_configured_exchanges():
     """Returns list of exchange IDs that have API keys configured"""
@@ -1036,6 +1190,60 @@ class Trade:
         self.exit_latency = 0.0
         self.status = "open"
         self.closed_at = 0.0
+        # v5: SL/TP
+        self.stop_loss_price = 0.0
+        self.take_profit_price = 0.0
+        self.ticks_held = 0
+        self.max_favorable = 0.0  # For trailing stop: best price seen
+
+    def set_sl_tp(self, sl_pct=None, tp_pct=None):
+        """Set stop loss / take profit based on % from entry"""
+        sl = sl_pct if sl_pct is not None else SL_TP_CONFIG["stop_loss_pct"]
+        tp = tp_pct if tp_pct is not None else SL_TP_CONFIG["take_profit_pct"]
+        if self.side == "buy":
+            self.stop_loss_price = self.price * (1 - sl / 100)
+            self.take_profit_price = self.price * (1 + tp / 100)
+        else:
+            self.stop_loss_price = self.price * (1 + sl / 100)
+            self.take_profit_price = self.price * (1 - tp / 100)
+        self.max_favorable = self.price
+
+    def check_sl_tp(self, current_price):
+        """Returns 'sl', 'tp', 'timeout' or None"""
+        self.ticks_held += 1
+        # Track max favorable for trailing stop
+        if self.side == "buy":
+            self.max_favorable = max(self.max_favorable, current_price)
+        else:
+            self.max_favorable = min(self.max_favorable, current_price) if self.max_favorable > 0 else current_price
+
+        # Trailing stop: adjust SL based on best price
+        if SL_TP_CONFIG["trailing_stop"] and self.max_favorable > 0:
+            sl_pct = SL_TP_CONFIG["stop_loss_pct"]
+            if self.side == "buy":
+                self.stop_loss_price = max(self.stop_loss_price, self.max_favorable * (1 - sl_pct / 100))
+            else:
+                self.stop_loss_price = min(self.stop_loss_price, self.max_favorable * (1 + sl_pct / 100))
+
+        # Check stop loss
+        if self.stop_loss_price > 0:
+            if self.side == "buy" and current_price <= self.stop_loss_price:
+                return "sl"
+            if self.side == "sell" and current_price >= self.stop_loss_price:
+                return "sl"
+
+        # Check take profit
+        if self.take_profit_price > 0:
+            if self.side == "buy" and current_price >= self.take_profit_price:
+                return "tp"
+            if self.side == "sell" and current_price <= self.take_profit_price:
+                return "tp"
+
+        # Max hold timeout
+        if SL_TP_CONFIG["max_hold_ticks"] > 0 and self.ticks_held >= SL_TP_CONFIG["max_hold_ticks"]:
+            return "timeout"
+
+        return None
 
     def to_dict(self):
         return {
@@ -1049,6 +1257,9 @@ class Trade:
             "timestamp": self.timestamp, "closed_at": self.closed_at,
             "pnl": round(self.pnl, 4), "status": self.status,
             "data_source": self.data_source,
+            "stop_loss": round(self.stop_loss_price, 6),
+            "take_profit": round(self.take_profit_price, 6),
+            "ticks_held": self.ticks_held,
         }
 
     def to_db_dict(self):
@@ -1125,6 +1336,7 @@ class Portfolio:
 
         t = Trade(strategy, pair, exchange, side, price, amount,
                   fee_usd, slippage_pct, latency_ms, data_source)
+        t.set_sl_tp()  # v5: auto-set SL/TP on every trade
         self.trades.append(t)
         self.open_positions += 1
         self._record()
@@ -1947,6 +2159,20 @@ class BotServer:
         self.ws_clients = []
         self.running = True
 
+        # v5: Notifier + Backup
+        self.notifier = Notifier()
+        self.backup_mgr = DBBackupManager(self.db.db_path if hasattr(self.db, 'db_path') else "")
+
+        # v5: Runtime config (mutable from dashboard)
+        self.runtime_config = {
+            "stop_loss_pct": SL_TP_CONFIG["stop_loss_pct"],
+            "take_profit_pct": SL_TP_CONFIG["take_profit_pct"],
+            "max_hold_ticks": SL_TP_CONFIG["max_hold_ticks"],
+            "trailing_stop": SL_TP_CONFIG["trailing_stop"],
+            "scan_interval": SCAN_INTERVAL,
+            "aggressive": AGGRESSIVE,
+        }
+
         self.engines["cross_exchange"] = CrossExchangeEngine("cross_exchange", self.market, self.portfolio)
         self.engines["triangular"] = TriangularEngine("triangular", self.market, self.portfolio)
         self.engines["statistical"] = StatisticalEngine("statistical", self.market, self.portfolio)
@@ -1958,10 +2184,12 @@ class BotServer:
             "price_source": self.market.get_price_source(),
             "ccxt_available": CCXT_AVAILABLE,
             "aggressive": AGGRESSIVE,
-            "version": "v4",
+            "version": "v5",
             "live_mode": self.market.is_live,
             "live_exchanges": LIVE_EXCHANGES,
         })
+
+        self.notifier.send(f"Arbitrage Nexus v5 started | Mode: {TRADING_MODE} | Balance: ${INITIAL_BALANCE:,.0f}")
 
     def kill_switch(self, activate=True):
         """Emergency kill switch for live trading"""
@@ -1975,7 +2203,7 @@ class BotServer:
 
     def get_state(self):
         state = {
-            "version": "v4",
+            "version": "v5",
             "trading_mode": TRADING_MODE,
             "is_live": self.market.is_live,
             "portfolio": self.portfolio.get_stats(),
@@ -1986,8 +2214,18 @@ class BotServer:
             "data_quality": self.market.get_data_quality(),
             "ccxt_available": CCXT_AVAILABLE,
             "aggressive": AGGRESSIVE,
-            "scan_interval": SCAN_INTERVAL,
+            "scan_interval": self.runtime_config.get("scan_interval", SCAN_INTERVAL),
             "timestamp": time.time(),
+            "runtime_config": self.runtime_config,
+            "notifications": {
+                "telegram": bool(NOTIFY_CONFIG.get("telegram_token")),
+                "discord": bool(NOTIFY_CONFIG.get("discord_webhook")),
+                "enabled": NOTIFY_CONFIG.get("notify_on_trade", False),
+            },
+            "backup": {
+                "enabled": BACKUP_CONFIG.get("enabled", False),
+                "last": getattr(self.backup_mgr, '_last_backup_time', 'never') if hasattr(self, 'backup_mgr') else 'never',
+            },
         }
 
         # v4: Add live executor status
@@ -2072,6 +2310,72 @@ class BotServer:
                 f"Content-Length: {len(body)}\r\n"
                 f"Access-Control-Allow-Origin: *\r\n\r\n"
             ).encode() + body
+        elif path == "/api/close-all":
+            closed = 0
+            open_trades = [t for t in self.portfolio.trades if t.status == "open"]
+            for t in open_trades:
+                ticker = self.market.get_ticker(t.pair, t.exchange)
+                if ticker:
+                    exit_price = ticker["bid"] if t.side == "buy" else ticker["ask"]
+                    fee_usd = exit_price * t.amount * 0.001
+                    self.portfolio.close_trade(t.id, exit_price, fee_usd=fee_usd)
+                    closed += 1
+            self.notifier.send(f"Close all: {closed}/{len(open_trades)} positions closed")
+            result = {"closed": closed, "total_open": len(open_trades)}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
+        elif path == "/api/backup":
+            try:
+                self.backup_mgr.do_backup()
+                result = {"success": True}
+            except Exception as e:
+                result = {"success": False, "error": str(e)}
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
+        elif path.startswith("/api/config"):
+            # v5: Runtime config — GET returns config, POST-style via query params updates
+            if "?" in path:
+                # Parse params: /api/config?stop_loss_pct=3.0&take_profit_pct=8.0
+                params_str = path.split("?")[1]
+                for param in params_str.split("&"):
+                    if "=" in param:
+                        k, v = param.split("=", 1)
+                        k = urllib.request.unquote(k)
+                        v = urllib.request.unquote(v)
+                        if k in self.runtime_config:
+                            old_val = self.runtime_config[k]
+                            if isinstance(old_val, bool):
+                                self.runtime_config[k] = v.lower() in ("true", "1", "yes")
+                            elif isinstance(old_val, float):
+                                self.runtime_config[k] = float(v)
+                            elif isinstance(old_val, int):
+                                self.runtime_config[k] = int(float(v))
+                            else:
+                                self.runtime_config[k] = v
+                            # Apply config changes
+                            SL_TP_CONFIG["stop_loss_pct"] = self.runtime_config["stop_loss_pct"]
+                            SL_TP_CONFIG["take_profit_pct"] = self.runtime_config["take_profit_pct"]
+                            SL_TP_CONFIG["max_hold_ticks"] = self.runtime_config["max_hold_ticks"]
+                            SL_TP_CONFIG["trailing_stop"] = self.runtime_config["trailing_stop"]
+                            log.info(f"[v5] Config updated: {k}={self.runtime_config[k]}")
+            result = self.runtime_config
+            body = json.dumps(result).encode()
+            resp = (
+                f"HTTP/1.1 200 OK\r\n"
+                f"Content-Type: application/json\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                f"Access-Control-Allow-Origin: *\r\n\r\n"
+            ).encode() + body
         elif path.startswith("/api/"):
             body = json.dumps(self.get_state()).encode()
             resp = (
@@ -2137,8 +2441,76 @@ class BotServer:
             except Exception:
                 pass
 
+    def _check_sl_tp(self):
+        """v5: Check stop loss / take profit on all open positions"""
+        open_trades = [t for t in self.portfolio.trades if t.status == "open"]
+        for t in open_trades:
+            ticker = self.market.get_ticker(t.pair, t.exchange)
+            if not ticker:
+                continue
+            current_price = ticker["last"]
+            result = t.check_sl_tp(current_price)
+            if result:
+                exit_price = ticker["bid"] if t.side == "buy" else ticker["ask"]
+                fee_usd = exit_price * t.amount * 0.001
+                pnl = self.portfolio.close_trade(t.id, exit_price, fee_usd=fee_usd)
+                reason = {"sl": "STOP LOSS", "tp": "TAKE PROFIT", "timeout": "MAX HOLD TIME"}.get(result, result)
+                log.info(f"[v5] {reason} triggered: {t.id} {t.pair} pnl=${pnl:.4f}")
+                # Notify on SL/TP
+                if abs(pnl) >= NOTIFY_CONFIG["min_pnl_notify"]:
+                    emoji = "🔴" if pnl < 0 else "🟢"
+                    self.notifier.send(f"{emoji} {reason}: {t.pair} | PnL: ${pnl:.2f} | {t.strategy}")
+
+    def _try_reconnect_exchanges(self):
+        """v5: Try to reconnect exchanges that failed"""
+        if not CCXT_AVAILABLE or not hasattr(self.market, 'real_fetcher'):
+            return
+        fetcher = self.market.real_fetcher
+        if not hasattr(fetcher, 'exchanges'):
+            return
+        for ex_id in LIVE_EXCHANGES:
+            if ex_id not in fetcher.exchanges:
+                try:
+                    ex_class = getattr(__import__('ccxt'), ex_id, None)
+                    if ex_class:
+                        creds = EXCHANGE_CREDENTIALS.get(ex_id, {})
+                        ex = ex_class({**creds, "timeout": 10000, "enableRateLimit": True})
+                        ex.load_markets()
+                        fetcher.exchanges[ex_id] = ex
+                        log.info(f"[v5] Reconnected to {ex_id}")
+                        self.notifier.send(f"Reconnected to {ex_id}")
+                except Exception as e:
+                    log.debug(f"[v5] Reconnect {ex_id} failed: {e}")
+
+    def _graceful_shutdown(self):
+        """v5: Close all open positions before shutting down"""
+        open_trades = [t for t in self.portfolio.trades if t.status == "open"]
+        if not open_trades:
+            log.info("[v5] No open positions to close on shutdown")
+            return
+        log.info(f"[v5] Graceful shutdown: closing {len(open_trades)} open positions...")
+        closed = 0
+        for t in open_trades:
+            try:
+                ticker = self.market.get_ticker(t.pair, t.exchange)
+                if ticker:
+                    exit_price = ticker["bid"] if t.side == "buy" else ticker["ask"]
+                    fee_usd = exit_price * t.amount * 0.001
+                    self.portfolio.close_trade(t.id, exit_price, fee_usd=fee_usd)
+                    closed += 1
+            except Exception:
+                pass
+        log.info(f"[v5] Shutdown: closed {closed}/{len(open_trades)} positions")
+        self.notifier.send(f"Bot shutting down. Closed {closed}/{len(open_trades)} positions. Final balance: ${self.portfolio.balance:,.2f}")
+        # Final backup
+        try:
+            self.backup_mgr.do_backup()
+        except Exception:
+            pass
+
     def _engine_loop(self):
         loop_count = 0
+        reconnect_counter = 0
         while self.running:
             try:
                 tick_count = 5 if AGGRESSIVE else 3
@@ -2152,10 +2524,28 @@ class BotServer:
                         engine._add_event("error", {"error": str(e)})
                         log.error(f"Engine {engine.name} error: {e}")
 
+                # v5: Check SL/TP on every tick
+                self._check_sl_tp()
+
                 loop_count += 1
+                reconnect_counter += 1
+
                 if loop_count % 30 == 0:
                     total_trades = self.portfolio.get_stats()["total_trades"]
                     log.info(f"[LOOP {loop_count}] trades={total_trades} balance=${self.portfolio.balance:,.2f} open={self.portfolio.open_positions}")
+
+                # v5: Auto-reconnect check every ~60s
+                if RECONNECT_CONFIG["enabled"] and reconnect_counter >= int(RECONNECT_CONFIG["health_check_interval_sec"] / max(SCAN_INTERVAL, 0.1)):
+                    reconnect_counter = 0
+                    self._try_reconnect_exchanges()
+
+                # v5: Notify on significant trades
+                if NOTIFY_CONFIG["notify_on_trade"]:
+                    recent = self.portfolio.trades[-3:]
+                    for t in recent:
+                        if t.status == "closed" and abs(t.pnl) >= NOTIFY_CONFIG["min_pnl_notify"] and (time.time() - t.closed_at) < 2:
+                            emoji = "🟢" if t.pnl > 0 else "🔴"
+                            self.notifier.send(f"{emoji} Trade: {t.pair} | {t.strategy} | PnL: ${t.pnl:.2f}")
 
                 state = json.dumps({"type": "update", "data": self.get_state()})
                 dead = []
@@ -2166,7 +2556,7 @@ class BotServer:
                     if ws in self.ws_clients:
                         self.ws_clients.remove(ws)
 
-                time.sleep(SCAN_INTERVAL)
+                time.sleep(self.runtime_config.get("scan_interval", SCAN_INTERVAL))
             except Exception as e:
                 log.error(f"Engine loop error: {e}")
                 time.sleep(1)
@@ -2176,10 +2566,14 @@ class BotServer:
         mode_str = "AGGRESSIVE" if AGGRESSIVE else "NORMAL"
         live_exs = ", ".join(LIVE_EXCHANGES) if LIVE_EXCHANGES else "none"
         exec_mode = "LIVE (REAL ORDERS)" if self.market.is_live else "PAPER (simulated)"
+        notify_str = "Telegram" if NOTIFY_CONFIG["telegram_token"] else ""
+        if NOTIFY_CONFIG["discord_webhook"]:
+            notify_str = f"{notify_str}+Discord" if notify_str else "Discord"
+        notify_str = notify_str or "OFF"
 
         print(f"""
 ╔══════════════════════════════════════════════════════════════╗
-║          ARBITRAGE NEXUS v4 — LIVE EXECUTION ENGINE          ║
+║          ARBITRAGE NEXUS v5 — SMART EXECUTION ENGINE         ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Execution: {exec_mode:<46s} ║
 ║  Balance:   ${INITIAL_BALANCE:>10,.0f}                                 ║
@@ -2188,19 +2582,20 @@ class BotServer:
 ║  Pairs:     {len(ALL_PAIRS)} tracked across {len(EXCHANGES)} exchanges            ║
 ║  Scan:      Every {SCAN_INTERVAL}s · {mode_str:10s}                     ║
 ╠══════════════════════════════════════════════════════════════╣
-║  v4 — LIVE EXECUTION:                                        ║
-║   + Paper/Live mode switch via TRADING_MODE env var          ║
-║   + Real order execution via ccxt create_order               ║
-║   + Authenticated exchanges: {live_exs:<30s} ║
-║   + Kill switch: /api/kill (emergency stop)                  ║
-║   + Daily loss limit: ${LIVE_SAFETY['max_daily_loss_usd']:<8,.0f}                            ║
-║   + Max order size:   ${LIVE_SAFETY['max_single_order_usd']:<8,.0f}                            ║
-║   + Balance sync every {LIVE_SAFETY['balance_sync_interval_sec']}s                             ║
-║   + Pre-trade safety checks (balance, limits, auth)          ║
-║   + Order log with full execution details                    ║
+║  v5 — SMART FEATURES:                                        ║
+║   + Stop Loss:     {SL_TP_CONFIG['stop_loss_pct']:.1f}% from entry                          ║
+║   + Take Profit:   {SL_TP_CONFIG['take_profit_pct']:.1f}% from entry                          ║
+║   + Max Hold:      {SL_TP_CONFIG['max_hold_ticks']} ticks                                  ║
+║   + Trailing Stop: {'ON' if SL_TP_CONFIG['trailing_stop'] else 'OFF':44s} ║
+║   + Notifications: {notify_str:44s} ║
+║   + DB Backup:     Every {BACKUP_CONFIG['interval_min']}min (max {BACKUP_CONFIG['max_backups']} files)               ║
+║   + Auto-Reconnect: {'ON' if RECONNECT_CONFIG['enabled'] else 'OFF':43s} ║
+║   + Graceful Shutdown: ON (closes positions on Ctrl+C)       ║
+║   + Runtime Config: /api/config?key=value                    ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Dashboard:   http://localhost:{self.port}                        ║
 ║  API:         http://localhost:{self.port}/api/status              ║
+║  Config:      http://localhost:{self.port}/api/config              ║
 ║  Kill Switch: http://localhost:{self.port}/api/kill               ║
 ╚══════════════════════════════════════════════════════════════╝
 """)
@@ -2208,7 +2603,6 @@ class BotServer:
         if self.market.is_live:
             print("  ⚠️  WARNING: LIVE MODE ACTIVE — REAL MONEY WILL BE USED")
             print(f"  ⚠️  Exchanges: {live_exs}")
-            print(f"  ⚠️  Daily loss limit: ${LIVE_SAFETY['max_daily_loss_usd']:.0f}")
             print(f"  ⚠️  Kill switch: http://localhost:{self.port}/api/kill")
             print()
 
@@ -2223,6 +2617,13 @@ class BotServer:
 
         log.info(f"Server listening on port {self.port}")
 
+        # v5: Register signal handler for graceful shutdown
+        def _signal_handler(sig, frame):
+            log.info("Signal received, initiating graceful shutdown...")
+            self.running = False
+        signal.signal(signal.SIGINT, _signal_handler)
+        signal.signal(signal.SIGTERM, _signal_handler)
+
         try:
             while self.running:
                 try:
@@ -2232,10 +2633,13 @@ class BotServer:
                 except socket.timeout:
                     continue
         except KeyboardInterrupt:
-            log.info("Shutting down...")
+            pass
         finally:
+            log.info("Initiating v5 graceful shutdown...")
+            self._graceful_shutdown()
             self.running = False
             server.close()
+            log.info("Server stopped.")
 
 
 if __name__ == "__main__":

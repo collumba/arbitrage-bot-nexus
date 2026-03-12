@@ -1,0 +1,8 @@
+2026-03-11 20:38:55,356 [INFO] Database initialized: /sessions/stoic-loving-wozniak/tmp/arbitrage_nexus.db
+2026-03-11 20:38:55,358 [INFO] [v4] PAPER MODE — Simulated execution
+2026-03-11 20:38:55,369 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-11 20:38:55,378 [INFO] Server listening on port 8888
+2026-03-11 20:39:03,215 [INFO] Signal received, initiating graceful shutdown...
+2026-03-11 20:39:03,388 [INFO] Initiating v5 graceful shutdown...
+2026-03-11 20:39:03,389 [INFO] [v5] No open positions to close on shutdown
+2026-03-11 20:39:03,390 [INFO] Server stopped.

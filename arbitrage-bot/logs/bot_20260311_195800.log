@@ -10,3 +10,7 @@
 2026-03-11 19:58:27,738 [INFO] Server listening on port 8888
 2026-03-11 20:12:28,823 [INFO] [LOOP 30] trades=108 balance=$66.59 open=0
 2026-03-11 20:26:21,615 [INFO] [LOOP 60] trades=222 balance=$384.35 open=2
+2026-03-11 20:40:14,300 [INFO] [LOOP 90] trades=350 balance=$2,245.62 open=3
+2026-03-11 20:40:37,591 [WARNING] Order execution failed on okx (MATIC/USDT)
+2026-03-11 20:41:35,975 [WARNING] Order execution failed on binance (MATIC/USDT)
+2026-03-11 20:42:13,036 [INFO] Shutting down...
