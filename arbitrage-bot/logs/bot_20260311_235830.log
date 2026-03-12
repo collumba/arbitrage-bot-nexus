@@ -1,0 +1,21 @@
+2026-03-11 23:58:30,798 [INFO] Database initialized: C:\Users\Admin\claude-bots\arbitrage-bot\arbitrage.db
+2026-03-11 23:58:34,412 [INFO] [REAL] binance: connected, 20 pairs available
+2026-03-11 23:58:38,780 [INFO] [REAL] bybit: connected, 19 pairs available
+2026-03-11 23:58:41,235 [INFO] [REAL] okx: connected, 19 pairs available
+2026-03-11 23:58:43,475 [INFO] [REAL] kucoin: connected, 19 pairs available
+2026-03-11 23:58:55,538 [INFO] [REAL] gate: connected, 19 pairs available
+2026-03-11 23:58:58,435 [INFO] [REAL] mexc: connected, 19 pairs available
+2026-03-11 23:58:58,435 [INFO] [REAL] 6/6 exchanges connected
+2026-03-11 23:59:03,114 [INFO] [LIVE] binance: AUTHENTICATED — USDT balance: $19.88
+2026-03-11 23:59:03,115 [INFO] [LIVE] 1 exchange(s) authenticated: ['binance']
+2026-03-11 23:59:03,115 [INFO] [v4] LIVE MODE — Real orders will be placed on exchanges
+2026-03-11 23:59:03,133 [INFO] [v5] DB backup enabled: every 30min, max 10 files
+2026-03-11 23:59:03,142 [INFO] Server listening on port 8888
+2026-03-11 23:59:33,135 [INFO] [v5] DB backed up to nexus_backup_20260311_235933.db
+2026-03-11 23:59:33,137 [INFO] [v5] Removed old backup: nexus_backup_20260311_204334.db
+2026-03-12 00:00:21,558 [INFO] [HTTP] Engine funding_rate -> OFF
+2026-03-12 00:00:22,734 [INFO] [HTTP] Engine statistical -> OFF
+2026-03-12 00:01:07,151 [INFO] Signal received, initiating graceful shutdown...
+2026-03-12 00:01:07,152 [INFO] Initiating v5 graceful shutdown...
+2026-03-12 00:01:07,152 [INFO] [v5] No open positions to close on shutdown
+2026-03-12 00:01:07,153 [INFO] Server stopped.
